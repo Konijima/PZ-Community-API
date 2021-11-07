@@ -1,1 +1,4 @@
-# PZ-Community-API
+# ItemTweaker API
+**Developer:** Tchernobill  
+**Contributors:**  
+  

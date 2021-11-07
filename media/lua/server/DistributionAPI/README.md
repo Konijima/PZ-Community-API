@@ -1,1 +1,4 @@
-# PZ-Community-API
+# Distribution API
+**Developer:** Konijima  
+**Contributors:**  
+  

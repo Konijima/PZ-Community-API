@@ -1,1 +1,4 @@
-# PZ-Community-API
+# ItemTooltip API
+**Developer:** Konijima  
+**Contributors:**  
+  
