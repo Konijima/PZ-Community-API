@@ -2,6 +2,7 @@ require("CommunityAPIShared")
 
 CommunityAPI.Client = {
     ItemTooltip = require("ItemTooltipAPI/Client"),
+    Spawner = require("SpawnerAPI/Client"),
 }
 
 -----------------------------------------------------------------------------------
