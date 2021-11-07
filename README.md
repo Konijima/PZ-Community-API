@@ -15,10 +15,13 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 - Co ([Steam](https://steamcommunity.com/profiles/76561198056536755/myworkshopfiles/?appid=108600) | [Github](https://github.com/quarantin))  
   
 ## API List
+### Shared
 - [BodyLocationsAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/BodyLocationsAPI)  
 Tweak body locations without overwritting BodyLocations.lua.  
+### Server
 - [DistributionAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/DistributionAPI)  
 Easly add multiple items to the distribution tables.  
+### Client
 - [ItemTooltipAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI)  
 Make complex custom item tooltip for your new items.  
   
