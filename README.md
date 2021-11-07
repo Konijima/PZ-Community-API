@@ -3,7 +3,7 @@
 **Developers:** Konijima, Yuhiko, Star, Tchernobill, ...  
 **Contributors:** ...  
 **Game Version:** 41.56-IWBUMS  
-**Workshop Link:** [Subscribe]()  
+**Links:** [Wiki](https://github.com/Konijima/PZ-Community-API/wiki) | [Projects](https://github.com/Konijima/PZ-Community-API/projects) | [Workshop](https://github.com/Konijima/PZ-Community-API)  
   
 ## API List
 - [BodyLocationsAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/BodyLocationsAPI)
