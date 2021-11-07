@@ -18,6 +18,7 @@ Tooltip can be reloaded via your file `ItemTooltips/<itemModule>_<itemName>.lua`
 **Methods**
 ```lua
 --- ItemTooltipAPI
+
 ItemTooltipAPI.GetRGB(numberCurrent, numberMax) -- Get a color from Red to Green
 ItemTooltipAPI.GetReversedRGB(numberCurrent, numberMax) -- Get a color from Green to Red
 ItemTooltipAPI.GetFloatString(number) -- Return a decimal number as a string
@@ -58,8 +59,7 @@ end
 local color = { r=1.0, g=1.0, b=1.0, a=1.0 }
 ```
 
-**Example**  
-`media/lua/client/ItemTooltips/Base_tooltiptest.lua`
+**Example**
 ```lua
 require("ItemTooltipAPI/Main")
 
@@ -95,7 +95,7 @@ end
 
 -- Create the new Tooltip
 
-local ItemTooltip = ItemTooltipAPI.CreateToolTip("Base.tooltiptest")
+local ItemTooltip = ItemTooltipAPI.CreateToolTip("Base.Axe")
 
 -- Add the field, progress, label or spacer
 
