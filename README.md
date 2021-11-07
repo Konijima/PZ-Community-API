@@ -9,10 +9,10 @@ Project Zomboid Community API is a team effort to centralize & give mod creators
   
 ## Team
 **Developers:** 
-- [Konijima](https://github.com/Konijima)  
-- [Shurutsue](https://github.com/Shurutsue)  
-- [Chuck](https://github.com/ChuckTheSheep)  
-- [Co](https://github.com/quarantin)  
+- Konijima ([Steam](https://steamcommunity.com/id/konijima/myworkshopfiles/?appid=108600) | [Github](https://github.com/Konijima))  
+- Shurutsue ([Steam](https://steamcommunity.com/id/Shurutsue/myworkshopfiles/?appid=108600) | [Github](https://github.com/Shurutsue))  
+- Chuck ([Steam](https://steamcommunity.com/id/Chuckleberry_Finn/myworkshopfiles/?appid=108600) | [Github](https://github.com/ChuckTheSheep))  
+- Co ([Steam]() | [Github](https://github.com/quarantin))  
   
 ## API List
 - [BodyLocationsAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/BodyLocationsAPI)  
