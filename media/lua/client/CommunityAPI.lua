@@ -1,12 +1,12 @@
 require("CommunityAPIShared")
 
--- Add Client APIs
-
-CommunityAPI.ItemTooltip = require("ItemTooltipAPI/Client")
+CommunityAPI.Client = {
+    ItemTooltip = require("ItemTooltipAPI/Client"),
+}
 
 -----------------------------------------------------------------------------------
 
 print("Loading CommunityAPI [Client] =================================================")
-for k, v in pairs(CommunityAPI) do
-    print("CommunityAPI."..k, v)
+for k, v in pairs(CommunityAPI.Client) do
+    print("CommunityAPI.Client."..k, v)
 end

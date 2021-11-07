@@ -1,13 +1,13 @@
 ---@class CommunityAPI
 CommunityAPI = CommunityAPI or {}
 
--- Add Shared APIs
-
-CommunityAPI.BodyLocations = require("BodyLocationsAPI/Shared")
+CommunityAPI.Shared = {
+    BodyLocations = require("BodyLocationsAPI/Shared")
+}
 
 -----------------------------------------------------------------------------------
 
 print("Loading CommunityAPIShared =================================================")
-for k, v in pairs(CommunityAPI) do
-    print("CommunityAPI."..k, v)
+for k, v in pairs(CommunityAPI.Shared) do
+    print("CommunityAPI.Shared."..k, v)
 end

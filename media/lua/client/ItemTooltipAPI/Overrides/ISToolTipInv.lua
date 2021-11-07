@@ -1,7 +1,7 @@
 require("ISUI/ISToolTipInv")
 require("CommunityAPI")
 
-local ItemTooltipAPI = CommunityAPI.ItemTooltip
+local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
 
 ---@param tooltip ObjectTooltip
 ---@param item InventoryItem
