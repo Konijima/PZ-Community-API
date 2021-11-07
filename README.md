@@ -1,5 +1,9 @@
 ![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/banner.png?raw=true)
   
+## Description
+Project Zomboid Community API is a team effort to centralize & give mod creators optimized tools for creating quality content modification.  
+  
+## Team
 **Developers:** Konijima, Yuhiko, Star, Tchernobill, ...  
 **Contributors:** ...  
 **Game Version:** 41.56-IWBUMS  
