@@ -41,4 +41,4 @@ Make complex custom item tooltip for your new items.
 - API Developers must agree together to work on someone else API.  
 - Each API must be annoted and optimized.  
 - API classes return itself at the end of the file.  
-- API is required by `media/shared/CommunityAPI.lua`.  
+- API classes are required by the global CommunityAPI class in `media/shared/CommunityAPI.lua`.  
