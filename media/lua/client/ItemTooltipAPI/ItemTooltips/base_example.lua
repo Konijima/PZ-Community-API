@@ -1,4 +1,6 @@
-require("ItemTooltipAPI/Main")
+require("CommunityAPI")
+
+local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
 
 local function typeField(result, item)
     result.value = item:getType()
