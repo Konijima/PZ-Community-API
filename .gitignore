@@ -1,0 +1,17 @@
+.vs/
+.gradle/
+.idea/
+build/
+gradle/
+images/
+lib/
+logs/
+src/
+local.properties
+version.properties
+gradlew
+gradlew.bat
+Gemfile
+*.blend
+*.blend1
+*.sqlite
