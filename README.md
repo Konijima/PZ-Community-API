@@ -1,7 +1,6 @@
 ![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/banner.png?raw=true)
   
 ## Description
-**(Demo repository to show an example of how this could be organized for teamwork)**  
 Project Zomboid Community API is a team effort to centralize & give mod creators optimized tools for creating quality content modification.  
   
 **Game Version:** 41.56-IWBUMS  
@@ -21,19 +20,25 @@ Tweak body locations without overwritting BodyLocations.lua.
 Make it safe and easy to add item to the distribution tables.  
 - [ItemTooltipAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI)  
 Make complex custom item tooltip for your new items.  
-- [ItemTweakerAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTweakerAPI)  
-Tweak items properties without overwritting items.  
-- [ModOptionAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ModOptionAPI)  
-Create custom options for your mods.  
-
-## Guideline
-- Each API create new branch for new update.
-- When an update is ready we create a pull request to merge it with master.
-- Commits should be prefixed with the API name.
-- Each API have a Project to organize itself.
-- Each API have a Wiki section for instruction on how to use the API.
-- Workshop update weekly or daily if hotfix are required.
-- Developer need to talk to each other to push changes into someone else API.
-- Each API must be well written and optimized.
-- Proper usage of `require("the_api_directory/api")`.
   
+## Workflow
+- Create/Publish a new branch named `<api_name> - <feature>`.  
+- Do your work on that branch.  
+- Commit your changes by prefixing your API name in the title.  
+*Example -> `DistributionAPI: Added new feature`*  
+- When you are ready to release an update create a **Pull Request**.  
+- Assign the Pull Request to your project and assignees.  
+- After quality control the merge will be completed.  
+- The branch will be deleted.  
+- Repeat the same process.  
+  
+## Guideline
+- Commits should be prefixed with the API name.  
+- Each API have a Project to organize itself.  
+- Each API have a Wiki section for instruction on how to use the API.  
+- Workshop update weekly or daily if hotfix are required.  
+- API Developers must agree together to work on someone else API.  
+- Each API must be well written and optimized.  
+- Proper usage of `require("<API_DIRECTORY>/Main")`.  
+- API code that must not be overwritten but be `local`.
+- Add exposed methods to the API `Main.lua`.
