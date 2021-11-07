@@ -4,11 +4,15 @@
 **(Demo repository to show an example of how this could be organized for teamwork)**  
 Project Zomboid Community API is a team effort to centralize & give mod creators optimized tools for creating quality content modification.  
   
-## Team
-**Developers:** Konijima, Yuhiko, Star, Tchernobill, ...  
-**Contributors:** ...  
 **Game Version:** 41.56-IWBUMS  
 **Links:** [Wiki](https://github.com/Konijima/PZ-Community-API/wiki) | [Projects](https://github.com/Konijima/PZ-Community-API/projects) | [Workshop](https://github.com/Konijima/PZ-Community-API) | [Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/) | [Emmylua](https://emmylua.github.io/)
+  
+## Team
+**Developers:** 
+- [Konijima](https://github.com/Konijima)  
+- [Shurutsue](https://github.com/Shurutsue)  
+- [Chuck](https://github.com/ChuckTheSheep)  
+- [Co](https://github.com/quarantin)  
   
 ## API List
 - [BodyLocationsAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/BodyLocationsAPI)  
