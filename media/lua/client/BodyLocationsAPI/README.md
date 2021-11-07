@@ -1,4 +1,4 @@
 # BodyLocations API
-**Developer:** Yuhiko  
+**Developer:** Shurutsue  
 **Contributors:**  
   
