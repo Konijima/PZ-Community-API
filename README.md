@@ -1,7 +1,8 @@
 ![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/banner.png?raw=true)
   
 ## Description
-Project Zomboid Community API is a team effort to centralize & give mod creators optimized tools for creating quality content modification.  
+Community API is a team effort to centralize & give mod creators optimized tools for creating quality mods.  
+For mod compatibility and efficiency, working as a team ensure that the API is updated and optimized.  
   
 **Game Version:** 41.56-IWBUMS  
 **Links:** [Wiki](https://github.com/Konijima/PZ-Community-API/wiki) | [Projects](https://github.com/Konijima/PZ-Community-API/projects) | [Workshop](https://github.com/Konijima/PZ-Community-API) | [Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/) | [Emmylua](https://emmylua.github.io/)
@@ -17,7 +18,7 @@ Project Zomboid Community API is a team effort to centralize & give mod creators
 - [BodyLocationsAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/BodyLocationsAPI)  
 Tweak body locations without overwritting BodyLocations.lua.  
 - [DistributionAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/DistributionAPI)  
-Make it safe and easy to add item to the distribution tables.  
+Easly add multiple items to the distribution tables.  
 - [ItemTooltipAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI)  
 Make complex custom item tooltip for your new items.  
   
