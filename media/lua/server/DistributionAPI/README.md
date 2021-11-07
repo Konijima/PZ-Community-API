@@ -25,11 +25,11 @@ require("DistributionAPI/Main")
 local modName = "My_Mod_Name"
 local distributionTable = {}
 
-local CrateCompactDiscs = CreateDistributionLocation("ProceduralDistributions.list.CrateCompactDiscs.items", distributionTable)
+local CrateCompactDiscs = DistributionAPI.Create("ProceduralDistributions.list.CrateCompactDiscs.items", distributionTable)
 CrateCompactDiscs:AddItem("Base.Screwdriver", 6)
 CrateCompactDiscs:AddItem("Base.Disc", 4)
 
-AddDistributionTable(modName, distributionTable)
+DistributionAPI.Add(modName, distributionTable)
 ```
 
 **Example 2**
@@ -49,7 +49,7 @@ local distributionTable = {
 
 }
 
-AddDistributionTable(modName, distributionTable)
+DistributionAPI.Add(modName, distributionTable)
 ```
 
 **Example of Logs Output**
