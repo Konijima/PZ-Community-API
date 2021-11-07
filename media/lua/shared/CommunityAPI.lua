@@ -6,6 +6,7 @@ CommunityAPI.Client = CommunityAPI.Client or {
 }
 
 CommunityAPI.Shared = CommunityAPI.Shared or {
+    BodyLocations = require("BodyLocationsAPI/Shared"),
 }
 
 CommunityAPI.Server = CommunityAPI.Server or {
