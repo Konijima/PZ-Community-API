@@ -40,5 +40,5 @@ Make complex custom item tooltip for your new items.
 - API Developers must agree together to work on someone else API.  
 - Each API must be well written and optimized.  
 - Proper usage of `require("<API_DIRECTORY>/Main")`.  
-- API code that must not be overwritten but be `local`.
-- Add exposed methods to the API `Main.lua`.
+- Codes that must not be overwritten must be set to `local`.
+- Expose API methods in `<API_DIRECTORY>/Main.lua`.
