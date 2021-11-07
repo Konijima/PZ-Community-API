@@ -1,6 +1,7 @@
 ![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/banner.png?raw=true)
   
 ## Description
+**(Demo repository to show an example of how this could be organized for teamwork)**  
 Project Zomboid Community API is a team effort to centralize & give mod creators optimized tools for creating quality content modification.  
   
 ## Team
