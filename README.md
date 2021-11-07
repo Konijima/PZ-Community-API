@@ -38,7 +38,6 @@ Make complex custom item tooltip for your new items.
 - Each API have a Wiki section for instruction on how to use the API.  
 - Workshop update weekly or daily if hotfix are required.  
 - API Developers must agree together to work on someone else API.  
-- Each API must be well written and optimized.  
-- Proper usage of `require("<API_DIRECTORY>/Main")`.  
-- Codes that must not be overwritten must be set to `local`.
-- Expose API methods in `<API_DIRECTORY>/Main.lua`.
+- Each API must be annoted and optimized.  
+- API classes return itself at the end of the file.  
+- API is required by `media/shared/CommunityAPI.lua`.  
