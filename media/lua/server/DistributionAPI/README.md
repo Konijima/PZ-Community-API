@@ -20,7 +20,7 @@ Only paths to `SuburbsDistributions` and `ProceduralDistributions` works and mus
   
 **Example 1**
 ```lua
-require("CommunityMod")
+require("CommunityAPI")
 
 local modName = "My_Mod_Name"
 local distributionTable = {}
@@ -29,12 +29,12 @@ local CrateCompactDiscs = CommunityAPI.Server.Distribution.CreateLocation("Proce
 CrateCompactDiscs:AddItem("Base.Screwdriver", 6)
 CrateCompactDiscs:AddItem("Base.Disc", 4)
 
-CommunityAPI.Server.Distribution.Add(modName, distributionTable)
+CommunityAPI.Distribution.Add(modName, distributionTable)
 ```
 
 **Example 2**
 ```lua
-require("CommunityMod")
+require("CommunityAPI")
 
 local modName = "My_Mod_Name"
 local distributionTable = {
@@ -49,7 +49,7 @@ local distributionTable = {
 
 }
 
-CommunityAPI.Server.Distribution.AddAdd(modName, distributionTable)
+CommunityAPI.Distribution.AddAdd(modName, distributionTable)
 ```
 
 **Example of Logs Output**

@@ -1,4 +1,4 @@
-require "NPCs/BodyLocations"
+require("NPCs/BodyLocations")
 
 local BodyLocationsAPI = {};
 local function customGetVal(obj, int) return getClassFieldVal(obj, getClassField(obj, int)); end

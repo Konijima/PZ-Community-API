@@ -63,7 +63,7 @@ local color = { r=1.0, g=1.0, b=1.0, a=1.0 }
 ```lua
 require("CommunityAPI")
 
-local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
+local ItemTooltipAPI = CommunityAPI.ItemTooltip
 
 local function typeField(result, item)
     result.value = item:getType()
