@@ -4,9 +4,12 @@
 **Game Version:** 41.56-IWBUMS  
   
 ## API List
-- [BodyLocationsAPI]()
-- [DistributionAPI]()
-- [ItemTooltipAPI]()
-- [ItemTweakerAPI]()
-- [ModOptionAPI]()
+- [BodyLocationsAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/BodyLocationsAPI)
+- [DistributionAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/DistributionAPI)
+- [ItemTooltipAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI)
+- [ItemTweakerAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTweakerAPI)
+- [ModOptionAPI](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ModOptionAPI)
+
+## Guideline
+- 
   
