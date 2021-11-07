@@ -1,4 +1,5 @@
-# Project Zomboid Community API (Example Only)
+![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/banner.png?raw=true)
+  
 **Developers:** Konijima, Yuhiko, Star, Tchernobill, ...  
 **Contributors:** ...  
 **Game Version:** 41.56-IWBUMS  
