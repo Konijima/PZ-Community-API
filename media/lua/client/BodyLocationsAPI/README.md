@@ -1,4 +1,4 @@
 # BodyLocations API
-**Developer:** [兵器] - Yuhiko  
+**Developer:** Yuhiko  
 **Contributors:**  
   
