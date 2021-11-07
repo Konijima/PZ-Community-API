@@ -128,10 +128,13 @@ local function addLocations(modName, locationsTable)
     end
 end
 
+---@class DistributionAPI
+local DistributionAPI = {}
+
 --- Add locations table
 ---@param modName string
 ---@param locationsTable table
-local function AddDistributionTable(modName, locationsTable)
+function DistributionAPI.Add(modName, locationsTable)
     if type(modName) ~= "string" then
         print("Distribution API: An addon didn't specify a name using the method ComputerAddDistributionLocations!")
         return
@@ -155,7 +158,7 @@ end
 
 ---@param locationPath string
 ---@param distributionTable table
-local function CreateDistributionLocation(locationPath, distributionTable)
+function DistributionAPI.CreateLocation(locationPath, distributionTable)
     local location = {
         location = locationPath,
         items = {},
@@ -169,7 +172,4 @@ local function CreateDistributionLocation(locationPath, distributionTable)
     return location
 end
 
----@public
-DistributionAPI = {}
-DistributionAPI.Create = CreateDistributionLocation
-DistributionAPI.Add = AddDistributionTable
+return DistributionAPI

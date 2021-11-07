@@ -102,15 +102,17 @@ end
 
 ---------------------------------------------------------------------------------
 
+---@class ItemTooltipAPI
+local ItemTooltipAPI = {}
 local Tooltips = {}
 
 ---@return table<string, InventoryTooltipInstance>
-local function GetTooltip(itemFullType)
+function ItemTooltipAPI.GetTooltip(itemFullType)
     return Tooltips[itemFullType]
 end
 
 ---@return InventoryTooltipInstance
-local function CreateToolTip(itemFullType)
+function ItemTooltipAPI.CreateToolTip(itemFullType)
     local newTooltip = InventoryTooltipInstance:new(itemFullType)
     Tooltips[itemFullType] = newTooltip
     return newTooltip
@@ -118,7 +120,7 @@ end
 
 ---@param current number
 ---@param max number
-local function GetRGB(current, max)
+function ItemTooltipAPI.GetRGB(current, max)
     if current < 1 and current > 0 then
         current = current * 100
         max = max * 100
@@ -130,7 +132,7 @@ end
 
 ---@param current number
 ---@param max number
-local function GetReversedRGB(current, max)
+function ItemTooltipAPI.GetReversedRGB(current, max)
     if current < 1 and current > 0 then
         current = current * 100
         max = max * 100
@@ -142,11 +144,11 @@ end
 
 ---@param floatVal number
 ---@return string
-local function GetFloatString(floatVal)
+function ItemTooltipAPI.GetFloatString(floatVal)
     return string.format("%.2f", floatVal);
 end
 
-local function GetSafeColor(color, default)
+function ItemTooltipAPI.GetSafeColor(color, default)
     if type(color) ~= "table" then color = default; end
     if type(color.r) ~= "number" then color.r = default.r; end
     if type(color.g) ~= "number" then color.g = default.g; end
@@ -155,16 +157,4 @@ local function GetSafeColor(color, default)
     return color
 end
 
----------------------------------------------------------------------------------
-
----@public
----@class ItemTooltipAPI
-ItemTooltipAPI = {}
-ItemTooltipAPI.GetTooltip = GetTooltip
-ItemTooltipAPI.CreateToolTip = CreateToolTip
-ItemTooltipAPI.GetRGB = GetRGB
-ItemTooltipAPI.GetReversedRGB = GetReversedRGB
-ItemTooltipAPI.GetFloatString = GetFloatString
-ItemTooltipAPI.GetSafeColor = GetSafeColor
-
----------------------------------------------------------------------------------
+return ItemTooltipAPI
