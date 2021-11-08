@@ -254,10 +254,11 @@ function Utilities.getIsoRange(center, range, fractalOffset)
     return squares
 end
 
----@param center IsoObject|IsoGridSquare
+--- Get all humanoid in fractal range from a center point
+---@param center IsoObject|IsoGridSquare the center point
 ---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param fractalRange number number of rows, made up of `range`, from the center range
----@param lookForType string
+---@param lookForType string|nil get only a specific type
 ---@return table
 function Utilities.getHumanoidsInFractalRange(center, range, fractalRange, lookForType)
     center = Utilities.recursiveGetSquare(center)
