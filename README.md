@@ -19,12 +19,16 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 Tweak body locations without overwritting BodyLocations.lua.  
 - **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/DistributionAPI))  
 Easly add multiple items to the distribution tables.  
+- **IsoRangeScanAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/IsoRangeScanAPI))  
+Description coming soon!  
 - **ItemTooltipAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI))  
 Make complex custom item tooltip for your new items.  
 - **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/LightAPI))  
 Add persistent light to the world even when out of bound.  
+- **SpawnerAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/SpawnerAPI) | [Server](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/SpawnerAPI))  
+Description coming soon!  
 - **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/WorldSoundAPI))  
-Add persistent sounds to the world even when out of bound.
+Add persistent sounds to the world even when out of bound.  
   
 ## Workflow
 - Create/Publish a new branch named `<api_name> - <feature>`.  
@@ -44,5 +48,3 @@ Add persistent sounds to the world even when out of bound.
 - Workshop update weekly or daily if hotfix are required.  
 - API Developers must agree together to work on someone else API.  
 - Each API must be annoted and optimized.  
-- API classes return itself at the end of the file.  
-- API classes are required by the global CommunityAPI class in `media/shared/CommunityAPI.lua`.  

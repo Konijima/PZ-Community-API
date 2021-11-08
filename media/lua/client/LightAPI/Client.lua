@@ -1,5 +1,0 @@
-local LightAPI = {}
-
-
-
-return LightAPI

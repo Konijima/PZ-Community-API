@@ -1,7 +1,7 @@
 require("CommunityAPIShared")
 
 CommunityAPI.Server = {
-    Distribution = require("DistributionAPI/Server"),
+    Distribution = require("DistributionAPI/DistributionAPIServer"),
     Spawner = require("SpawnerAPI/Server"),
 }
 

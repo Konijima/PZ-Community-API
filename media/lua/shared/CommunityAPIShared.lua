@@ -2,7 +2,7 @@
 CommunityAPI = CommunityAPI or {}
 
 CommunityAPI.Shared = {
-    BodyLocations = require("BodyLocationsAPI/Shared")
+    BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared")
 }
 
 -----------------------------------------------------------------------------------

@@ -1,11 +1,11 @@
 require("CommunityAPIShared")
 
 CommunityAPI.Client = {
-    ItemTooltip = require("ItemTooltipAPI/Client"),
+    ItemTooltip = require("ItemTooltipAPI/ItemTooltipAPIClient"),
     IsoRangeScan = require("IsoRangeScanAPI/Client"),
-    Light = require("LightAPI/Client"),
+    Light = require("LightAPI/LightAPIClient"),
     Spawner = require("SpawnerAPI/SpawnerAPIClient"),
-    WorldSound = require("WorldSoundAPI/Client"),
+    WorldSound = require("WorldSoundAPI/WorldSoundAPIClient"),
 }
 
 -----------------------------------------------------------------------------------
