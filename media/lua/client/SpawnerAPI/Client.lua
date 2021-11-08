@@ -97,7 +97,7 @@ end
 ---@param functions table table of functions
 function SpawnerAPI.processExtraFunctionsOnto(spawned,functions)
 	if spawned and functions and (type(functions)=="table") then
-		for k,func in pairs(functions) do
+		for _,func in pairs(functions) do
 			if func then
 				func(spawned)
 			end
