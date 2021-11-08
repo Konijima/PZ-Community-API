@@ -2,6 +2,7 @@ require("CommunityAPIShared")
 
 CommunityAPI.Client = {
     ItemTooltip = require("ItemTooltipAPI/Client"),
+    WorldSound = require("WorldSoundAPI/Client"),
 }
 
 -----------------------------------------------------------------------------------
