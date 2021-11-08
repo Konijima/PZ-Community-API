@@ -1,6 +1,8 @@
 ---@class CommunityAPI
 CommunityAPI = CommunityAPI or {}
 
+CommunityAPI.Utilities = require("CommunityAPI/Utilities")
+
 CommunityAPI.Shared = {
     BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared")
 }
