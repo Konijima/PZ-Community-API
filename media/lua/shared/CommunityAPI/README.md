@@ -84,3 +84,33 @@ getAllBaseClasses(object, excludeCurrent)
 ---@return boolean
 isClassChildOf(object, class)
 ```
+```lua
+--- Safely get the square of an IsoObject recursively
+---@param object IsoObject|IsoGridSquare
+---@return IsoGridSquare
+recursiveGetSquare(object)
+```
+```lua
+---@param center IsoObject|IsoGridSquare
+---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
+---@param fractalOffset number fractal offset - spreads out squares by this number
+---@return table<IsoGridSquare>
+getIsoRange(center, range, fractalOffset)
+```
+```lua
+--- Get all humanoid in fractal range from a center point
+---@param center IsoObject|IsoGridSquare the center point
+---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
+---@param fractalRange number number of rows, made up of `range`, from the center range
+---@param lookForType string|nil get only a specific type
+---@return table
+getHumanoidsInFractalRange(center, range, fractalRange, lookForType)
+```
+```lua
+--- Get all humanoid in range from a center point
+---@param center IsoObject|IsoGridSquare the center point
+---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
+---@param lookForType string|nil get only a specific type
+---@return table
+getHumanoidsInRange(center, range, lookForType)
+```
