@@ -1,9 +1,33 @@
+---@class SpawnerAPI
 local SpawnerAPI = {}
 
-function SpawnerAPI.getOrSetPendingSpawnsList()
+local function getOrSetPendingSpawnsList()
 	return ModData.getOrCreate("farSquarePendingSpawns")
 end
 
+---@param spawned IsoObject | ArrayList
+---@param functions table table of functions
+local function processExtraFunctionsOnto(spawned,functions)
+	if spawned and functions and (type(functions)=="table") then
+		for _,func in pairs(functions) do
+			if func then
+				func(spawned)
+			end
+		end
+	end
+end
+
+---@param spawnFuncType string This string is concated to the end of 'SpawnerAPI.spawn' to run a corresponding function.
+---@param objectType string Module.Type for Items and Vehicles, OutfitID for Zombies
+---@param x number
+---@param y number
+---@param z number
+---@param funcsToApply table Table of functions which gets applied on the results of whatever is spawned.
+local function setToSpawn(spawnFuncType, objectType, x, y, z, funcsToApply, extraParam, processSquare)
+	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
+	table.insert(farSquarePendingSpawns,{ spawnFuncType=spawnFuncType, objectType=objectType, x=x, y=y, z=z,
+										  funcsToApply=funcsToApply, extraParam=extraParam, processSquare=processSquare })
+end
 
 ---@param itemType string
 ---@param x number
@@ -27,10 +51,10 @@ function SpawnerAPI.spawnItem(itemType, x, y, z, extraFunctions, extraParam, pro
 		x, y, z = currentSquare:getX(), currentSquare:getY(), currentSquare:getZ()
 		local item = currentSquare:AddWorldInventoryItem(itemType, x, y, z)
 		if item then
-			SpawnerAPI.processExtraFunctionsOnto(item,extraFunctions)
+			processExtraFunctionsOnto(item,extraFunctions)
 		end
 	else
-		SpawnerAPI.setToSpawn("Item", itemType, x, y, z, extraFunctions, extraParam, processSquare)
+		setToSpawn("Item", itemType, x, y, z, extraFunctions, extraParam, processSquare)
 	end
 end
 
@@ -55,10 +79,10 @@ function SpawnerAPI.spawnVehicle(vehicleType, x, y, z, extraFunctions, extraPara
 	if currentSquare then
 		local vehicle = addVehicleDebug(vehicleType, IsoDirections.getRandom(), nil, currentSquare)
 		if vehicle then
-			SpawnerAPI.processExtraFunctionsOnto(vehicle,extraFunctions)
+			processExtraFunctionsOnto(vehicle,extraFunctions)
 		end
 	else
-		SpawnerAPI.setToSpawn("Vehicle", vehicleType, x, y, z, extraFunctions, extraParam, processSquare)
+		setToSpawn("Vehicle", vehicleType, x, y, z, extraFunctions, extraParam, processSquare)
 	end
 end
 
@@ -84,44 +108,16 @@ function SpawnerAPI.spawnZombie(outfitID, x, y, z, extraFunctions, femaleChance,
 		x, y, z = currentSquare:getX(), currentSquare:getY(), currentSquare:getZ()
 		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, femaleChance)
 		if zombies and zombies:size()>0 then
-			SpawnerAPI.processExtraFunctionsOnto(zombies,extraFunctions)
+			processExtraFunctionsOnto(zombies,extraFunctions)
 		end
 	else
-		SpawnerAPI.setToSpawn("Zombie", outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
+		setToSpawn("Zombie", outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
 	end
 end
-
-
-
----@param spawned IsoObject | ArrayList
----@param functions table table of functions
-function SpawnerAPI.processExtraFunctionsOnto(spawned,functions)
-	if spawned and functions and (type(functions)=="table") then
-		for _,func in pairs(functions) do
-			if func then
-				func(spawned)
-			end
-		end
-	end
-end
-
-
----@param spawnFuncType string This string is concated to the end of 'SpawnerAPI.spawn' to run a corresponding function.
----@param objectType string Module.Type for Items and Vehicles, OutfitID for Zombies
----@param x number
----@param y number
----@param z number
----@param funcsToApply table Table of functions which gets applied on the results of whatever is spawned.
-function SpawnerAPI.setToSpawn(spawnFuncType, objectType, x, y, z, funcsToApply, extraParam, processSquare)
-	local farSquarePendingSpawns = SpawnerAPI.getOrSetPendingSpawnsList()
-	table.insert(farSquarePendingSpawns,{ spawnFuncType=spawnFuncType, objectType=objectType, x=x, y=y, z=z,
-										  funcsToApply=funcsToApply, extraParam=extraParam, processSquare=processSquare })
-end
-
 
 ---@param square IsoGridSquare
-function SpawnerAPI.parseSquare(square)
-	local farSquarePendingSpawns = SpawnerAPI.getOrSetPendingSpawnsList()
+local function parseSquare(square)
+	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
 
 	if #farSquarePendingSpawns < 1 then
 		return
@@ -140,7 +136,7 @@ function SpawnerAPI.parseSquare(square)
 			if shiftedSquare then
 				local spawnFunc = SpawnerAPI["spawn"..entry.spawnFuncType]
 
-				if spawnFunc then
+				if type(spawnFunc) == "function" then
 					local spawnedObject = spawnFunc(entry.objectType, sqX, sqY, sqZ, entry.funcsToApply, entry.extraParam)
 					if not spawnedObject then
 						print("SpawnerAPI: ERR: item not spawned: "..entry.objectType.." ("..sqX..","..sqY..","..sqZ..")")
@@ -151,6 +147,6 @@ function SpawnerAPI.parseSquare(square)
 		end
 	end
 end
-Events.LoadGridsquare.Add(SpawnerAPI.parseSquare)
+Events.LoadGridsquare.Add(parseSquare)
 
 return SpawnerAPI
