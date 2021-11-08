@@ -22,9 +22,10 @@ local privateVariable = {}
 local function privateFunction(param1)
     table.insert(privateVariable, PrivateObject:new(param1))
 end
+Events.OnEvent.Add(privateFunction)
 
-function TemplateAPI.publicFunction(param1)
-    privateFunction(param1)
+function TemplateAPI.publicFunction()
+    return privateVariable
 end
 
 return TemplateAPI
