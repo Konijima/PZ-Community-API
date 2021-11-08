@@ -2,7 +2,9 @@
 local SpawnerAPI = {}
 
 local function getOrSetPendingSpawnsList()
-	return ModData.getOrCreate("farSquarePendingSpawns")
+	local modData = ModData.getOrCreate("CommunityAPI")
+	if not modData.FarSquarePendingSpawns then modData.FarSquarePendingSpawns = {} end
+	return modData.FarSquarePendingSpawns
 end
 
 ---@param spawned IsoObject | ArrayList
