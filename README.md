@@ -48,5 +48,3 @@ Add persistent sounds to the world even when out of bound.
 - Workshop update weekly or daily if hotfix are required.  
 - API Developers must agree together to work on someone else API.  
 - Each API must be annoted and optimized.  
-- API classes return itself at the end of the file.  
-- API classes are required by the global CommunityAPI class in `media/shared/CommunityAPI.lua`.  
