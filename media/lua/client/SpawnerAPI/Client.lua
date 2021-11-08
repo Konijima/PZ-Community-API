@@ -1,5 +1,0 @@
-local SpawnerAPI = {}
-
-
-
-return SpawnerAPI

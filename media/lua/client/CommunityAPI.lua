@@ -4,7 +4,7 @@ CommunityAPI.Client = {
     ItemTooltip = require("ItemTooltipAPI/ItemTooltipAPIClient"),
     IsoRangeScan = require("IsoRangeScanAPI/Client"),
     Light = require("LightAPI/LightAPIClient"),
-    Spawner = require("SpawnerAPI/Client"),
+    Spawner = require("SpawnerAPI/SpawnerAPIClient"),
     WorldSound = require("WorldSoundAPI/WorldSoundAPIClient"),
 }
 
