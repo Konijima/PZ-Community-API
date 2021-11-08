@@ -1,6 +1,6 @@
 # SpawnerAPI [Client]
 **Developer:** Chuck  
-**Contributors:** Konjima, Shurutsue 
+**Contributors:** Konijima, Shurutsue 
 
 ## Description
 Allows for pending the spawns of vehicles, items, zombies (with added functions supported) 
@@ -34,9 +34,9 @@ function SpawnerAPI.spawnZombie(outfitID, x, y, z, extraFunctions, femaleChance,
 --Auto Ages InventoryItems.
 ---@param item InventoryItem
 function ageInventoryItem(item)
-if item then
-item:setAutoAge()
-end
+    if item then
+        item:setAutoAge()
+    end
 end
 
 
@@ -44,9 +44,9 @@ end
 ---@param square IsoGridSquare
 ---@return IsoGridSquare
 function checkIfOutside(square)
-if not square then
-return
-end
+    if not square then
+        return
+    end
 	if square:isOutside() then
 		return square
 	end
