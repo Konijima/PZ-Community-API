@@ -21,6 +21,10 @@ Tweak body locations without overwritting BodyLocations.lua.
 Easly add multiple items to the distribution tables.  
 - **ItemTooltipAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI))  
 Make complex custom item tooltip for your new items.  
+- **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/LightAPI))  
+Add persistent light to the world even when out of bound.  
+- **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/WorldSoundAPI))  
+Add persistent sounds to the world even when out of bound.
   
 ## Workflow
 - Create/Publish a new branch named `<api_name> - <feature>`.  
