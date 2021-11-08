@@ -31,6 +31,10 @@ function SpawnerAPI.spawnZombie(outfitID, x, y, z, extraFunctions, femaleChance,
 
 ## Example
 ```lua
+require("CommunityAPI")
+
+local SpawnerAPI = CommunityAPI.Client.Spawner
+
 --Auto Ages InventoryItems.
 ---@param item InventoryItem
 function ageInventoryItem(item)
