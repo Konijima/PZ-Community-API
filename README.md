@@ -18,7 +18,7 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 - **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/shared/BodyLocationsAPI))  
 Tweak body locations without overwritting BodyLocations.lua.  
 - **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/DistributionAPI))  
-Easly add multiple items to the distribution tables.  
+Easily manage your distribution tables.  
 - **IsoRangeScanAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/IsoRangeScanAPI))  
 Description coming soon!  
 - **ItemTooltipAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI))  
