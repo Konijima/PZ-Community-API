@@ -6,6 +6,7 @@ CommunityAPI.Client = {
     Light = require("LightAPI/LightAPIClient"),
     Spawner = require("SpawnerAPI/SpawnerAPIClient"),
     WorldSound = require("WorldSoundAPI/WorldSoundAPIClient"),
+    Generator = require("GeneratorAPI/GeneratorAPIClient"),
 }
 
 -----------------------------------------------------------------------------------
