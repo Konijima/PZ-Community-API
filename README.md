@@ -43,8 +43,9 @@ Add persistent sounds anywhere in the world.
   
 ## Guideline
 - Commits should be prefixed with the API name.  
-- Each API have a Project to organize itself.  
-- Each API have a Wiki section for instruction on how to use the API.  
+- Each API have a Github [Project](https://github.com/Konijima/PZ-Community-API/projects) to organize itself.  
+- Each API have a Github [Wiki](https://github.com/Konijima/PZ-Community-API/wiki) section for instruction on how to use the API.  
 - Workshop update weekly or daily if hotfix are required.  
 - API Developers must agree together to work on someone else API.  
 - Each API must be annoted and optimized.  
+- Readme can be updated without creating new branches.
