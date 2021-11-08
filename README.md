@@ -14,6 +14,9 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 - Chuck ([Steam](https://steamcommunity.com/id/Chuckleberry_Finn/myworkshopfiles/?appid=108600) | [Github](https://github.com/ChuckTheSheep))  
 - Co ([Steam](https://steamcommunity.com/profiles/76561198056536755/myworkshopfiles/?appid=108600) | [Github](https://github.com/quarantin))  
   
+## Utilities
+[Documentation](https://github.com/Konijima/PZ-Community-API/blob/master/media/lua/shared/CommunityAPI)
+  
 ## API List
 - **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/shared/BodyLocationsAPI))  
 Tweak body locations without overwritting BodyLocations.lua.  
