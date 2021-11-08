@@ -26,7 +26,7 @@ Make complex custom item tooltip for your new items.
 - **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/LightAPI))  
 Add persistent light anywhere in the world.  
 - **SpawnerAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/SpawnerAPI) | [Server](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/SpawnerAPI))  
-Spawns vehicles, items and zombies anywhere in the world.
+Spawn vehicles, items and zombies anywhere in the world.
 - **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/WorldSoundAPI))  
 Add persistent sounds anywhere in the world.  
   
