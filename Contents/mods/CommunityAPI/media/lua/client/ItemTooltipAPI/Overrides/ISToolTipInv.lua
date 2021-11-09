@@ -43,6 +43,31 @@ local function customDoTooltip(tooltip, fields, item)
 
     --endregion Extra
 
+    --region Spices
+
+    ---@type Food
+    local food = item
+    if instanceof(food, "Food") then
+        local spices = food:getSpices()
+        if spices ~= nil then
+            tooltip:DrawText(font, getText("Tooltip_item_Spices"), 5.0, height, 1.0, 1.0, 0.8, 1.0)
+            var7 = 5 + TextManager.instance:MeasureStringX(font, getText("Tooltip_item_Spices")) + 4
+            var8 = (lineSpacing - 10) / 2
+
+            for i=0, spices:size()-1 do
+                local spice = spices:get(i)
+                inventoryItem = InventoryItemFactory.CreateItem(spice)
+                tooltip:DrawTextureScaled(inventoryItem:getTex(), var7, height + var8, 10.0, 10.0, 1.0)
+                var7 = var7 + 11
+
+            end
+
+            height = height + lineSpacing + 5
+        end
+    end
+
+    --endregion Spices
+
     --region Layout
 
     ---@type ObjectTooltip.Layout
