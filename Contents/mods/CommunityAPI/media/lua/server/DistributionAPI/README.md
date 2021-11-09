@@ -20,7 +20,10 @@ Only paths to `SuburbsDistributions` and `ProceduralDistributions` works and mus
   
 ## Methods
 ```lua
-
+CreateLocation(locationPath, distributionTable)
+```
+```lua
+Add(modName, distributionTable)
 ```
 
 ### Example 1
