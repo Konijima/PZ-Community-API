@@ -1,4 +1,7 @@
+require("CommunityAPI")
 require("ISBaseObject")
+
+local StringUtils = CommunityAPI.Utils.String
 
 local DEBUG = getCore():getDebug()
 
@@ -67,17 +70,13 @@ local WorldSoundAPI = {}
 ---@type table<string,table>
 local Sounds = {}
 
-local function positionToId(x, y, z)
-    return tostring(x) .. "|" .. tostring(y) .. "|" .. tostring(z)
-end
-
 ---@param name string
 ---@param x number
 ---@param y number
 ---@param z number
 ---@param soundList string|table<string>
 function WorldSoundAPI.AddSoundAt(name, x, y, z, soundList)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if not Sounds[id] then
         Sounds[id] = {}
     end
@@ -95,7 +94,7 @@ end
 ---@param y number
 ---@param z number
 function WorldSoundAPI.RemoveSoundAt(name, x, y, z)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if Sounds[id] and Sounds[id][name] then
         Sounds[id][name]:destroy()
         Sounds[id][name] = nil
@@ -107,7 +106,7 @@ end
 ---@param y number
 ---@param z number
 function WorldSoundAPI.RemoveAllSoundAt(x, y, z)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if Sounds[id] then
         for name in pairs(Sounds[id]) do
             Sounds[id][name]:destroy()
