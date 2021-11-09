@@ -24,7 +24,7 @@ local function privateFunction(param1)
 end
 Events.OnEvent.Add(privateFunction)
 
-function TemplateAPI.publicFunction()
+function TemplateAPI.PublicFunction()
     return privateVariable
 end
 
