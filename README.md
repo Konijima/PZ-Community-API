@@ -1,4 +1,4 @@
-![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/banner.png?raw=true)
+![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/Images/banner.png?raw=true)
   
 ## Description
 Community API is a team effort to centralize & give mod creators optimized tools for creating quality mods.  
@@ -15,22 +15,22 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 - Co ([Steam](https://steamcommunity.com/profiles/76561198056536755/myworkshopfiles/?appid=108600) | [Github](https://github.com/quarantin))  
   
 ## Utilities
-[Documentation](https://github.com/Konijima/PZ-Community-API/blob/master/media/lua/shared/CommunityAPI)
+[Documentation](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)
   
 ## API List
-- **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/shared/BodyLocationsAPI))  
+- **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/shared/BodyLocationsAPI))  
 Tweak body locations without overwritting BodyLocations.lua.  
-- **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/DistributionAPI))  
+- **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/DistributionAPI))  
 Easily manage your distribution tables.  
-- **IsoRangeScanAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/IsoRangeScanAPI))  
+- **IsoRangeScanAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/IsoRangeScanAPI))  
 Description coming soon!  
-- **ItemTooltipAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/ItemTooltipAPI))  
+- **ItemTooltipAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/ItemTooltipAPI))  
 Make complex custom item tooltip for your new items.  
-- **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/LightAPI))  
+- **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/LightAPI))  
 Add persistent light anywhere in the world.  
-- **SpawnerAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/SpawnerAPI) | [Server](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/server/SpawnerAPI))  
+- **SpawnerAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/SpawnerAPI) | [Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/SpawnerAPI))  
 Spawn vehicles, items and zombies anywhere in the world.
-- **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/media/lua/client/WorldSoundAPI))  
+- **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/WorldSoundAPI))  
 Add persistent sounds anywhere in the world.  
   
 ## Workflow
