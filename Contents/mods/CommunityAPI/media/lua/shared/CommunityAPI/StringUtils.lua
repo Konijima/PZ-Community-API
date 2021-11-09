@@ -4,9 +4,7 @@ local StringUtils = {}
 ---@param square IsoGridSquare
 ---@return string
 function StringUtils.SquareToId(square)
-    if instanceof(square, "IsoGridSquare") then
-        return square:getX() .. "|" .. square:getY() .. "|" .. square:getZ()
-    end
+    return square:getX() .. "|" .. square:getY() .. "|" .. square:getZ()
 end
 
 --- Transform a position into a unique string
@@ -15,7 +13,7 @@ end
 ---@param z number
 ---@return string
 function StringUtils.PositionToId(x, y ,z)
-    return tostring(x) .. "|" .. tostring(y) .. "|" .. tostring(z)
+    return x .. "|" .. y .. "|" .. z
 end
 
 --- Split a string by a delimiter string
