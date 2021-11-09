@@ -1,4 +1,8 @@
+require("CommunityAPI")
 require("ISBaseObject")
+
+local ColorUtils = CommunityAPI.Utils.Color
+local StringUtils = CommunityAPI.Utils.String
 
 local DEBUG = getCore():getDebug()
 
@@ -44,9 +48,7 @@ end
 
 function LightObject:setColor(color)
     if type(color) == "table" then
-        if type(color.r) == "number" then self.color.r = color.r end
-        if type(color.g) == "number" then self.color.g = color.g end
-        if type(color.b) == "number" then self.color.b = color.b end
+        self.color = ColorUtils.GetColorOrDefault(color, { r=1, g=1, b=1, a=1 })
         self:update()
     end
 end
@@ -77,17 +79,13 @@ local LightAPI = {}
 ---@type table<string,table>
 local Lights = {}
 
-local function positionToId(x, y, z)
-    return tostring(x) .. "|" .. tostring(y) .. "|" .. tostring(z)
-end
-
 ---@param name string
 ---@param x number
 ---@param y number
 ---@param z number
 ---@param newColor table
 function LightAPI.SetLightColorAt(name, x, y, z, newColor)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if Lights[id] and Lights[id][name] then
         Lights[id][name]:setColor(newColor)
     end
@@ -99,7 +97,7 @@ end
 ---@param z number
 ---@param newRadius number
 function LightAPI.SetLightRadiusAt(name, x, y, z, newRadius)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if Lights[id] and Lights[id][name] then
         Lights[id][name]:setRadius(newRadius)
     end
@@ -112,7 +110,7 @@ end
 ---@param radius number
 ---@param color table
 function LightAPI.AddLightAt(name, x, y, z, radius, color)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if not Lights[id] then
         Lights[id] = {}
     end
@@ -130,7 +128,7 @@ end
 ---@param y number
 ---@param z number
 function LightAPI.RemoveLightAt(name, x, y, z)
-    local id = positionToId(x, y, z)
+    local id = StringUtils.PositionToId(x, y, z)
     if Lights[id] and Lights[id][name] then
         Lights[id][name]:destroy()
         Lights[id][name] = nil
@@ -140,7 +138,7 @@ end
 
 ---@param square IsoGridSquare
 local function onLoadGridsquare(square)
-    local id = positionToId(square:getX(), square:getY(), square:getZ())
+    local id = StringUtils.SquareToId(square)
     if Lights[id] then
         ---@param v LightObject
         for k, v in pairs(Lights[id]) do
