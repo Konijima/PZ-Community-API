@@ -3,7 +3,7 @@ local IsoUtils = {}
 --- Safely get the square of an IsoObject recursively
 ---@param object IsoObject|IsoGridSquare
 ---@return IsoGridSquare
-function IsoUtils.recursiveGetSquare(object)
+function IsoUtils.RecursiveGetSquare(object)
     if instanceof(object, "IsoGridSquare") then
         return object
     end
@@ -28,8 +28,8 @@ end
 ---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param fractalOffset number fractal offset - spreads out squares by this number
 ---@return table<IsoGridSquare>
-function IsoUtils.getIsoRange(center, range, fractalOffset)
-    center = IsoUtils.recursiveGetSquare(center)
+function IsoUtils.GetIsoRange(center, range, fractalOffset)
+    center = IsoUtils.RecursiveGetSquare(center)
     if not center then
         return {}
     end
@@ -99,21 +99,21 @@ end
 ---@param fractalRange number number of rows, made up of `range`, from the center range
 ---@param lookForType string|nil get only a specific type
 ---@param addedBooleanFunctions table table of function(s) must return true to pass
----@return table IsoGameCharacter
-function IsoUtils.getIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
-    center = IsoUtils.recursiveGetSquare(center)
+---@return table<IsoGameCharacter>
+function IsoUtils.GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
+    center = IsoUtils.RecursiveGetSquare(center)
     if not center then
         return {}
     end
 
     --range and fractalRange are flipped in the parameters here because:
     -- "fractalRange" represents the number of rows from center out but with an offset of "range" instead
-    local fractalCenters = IsoUtils.getIsoRange(center, fractalRange, range)
+    local fractalCenters = IsoUtils.GetIsoRange(center, fractalRange, range)
     local fractalObjectsFound = {}
     ---print("getHumanoidsInFractalRange: centers found: "..#fractalCenters)
     --pass through each "center square" found
     for i=1, #fractalCenters do
-        local objectsFound = IsoUtils.getIsoGameCharactersInRange(fractalCenters[i], range, lookForType, addedBooleanFunctions)
+        local objectsFound = IsoUtils.GetIsoGameCharactersInRange(fractalCenters[i], range, lookForType, addedBooleanFunctions)
         ---print(" fractal center "..i..":  "..#objectsFound)
         --store a list of objectsFound within the fractalObjectsFound list
         table.insert(fractalObjectsFound, objectsFound)
@@ -127,14 +127,14 @@ end
 ---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param lookForType string|nil get only a specific type
 ---@param addedBooleanFunctions table table of function(s) must return true to pass
----@return table IsoGameCharacter
-function IsoUtils.getIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
-    center = IsoUtils.recursiveGetSquare(center)
+---@return table<IsoGameCharacter>
+function IsoUtils.GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
+    center = IsoUtils.RecursiveGetSquare(center)
     if not center then
         return {}
     end
 
-    local squaresInRange = IsoUtils.getIsoRange(center, range)
+    local squaresInRange = IsoUtils.GetIsoRange(center, range)
     local objectsFound = {}
 
     for sq=1, #squaresInRange do

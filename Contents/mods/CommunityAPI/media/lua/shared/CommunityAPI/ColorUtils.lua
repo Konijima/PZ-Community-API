@@ -32,7 +32,7 @@ end
 ---@param b number Blue
 ---@param _a number|nil Alpha
 ---@return table
-function ColorUtils.RGBA2Color(r, g, b, _a)
+function ColorUtils.RgbaToColor(r, g, b, _a)
     local color = { r=r, g=g, b=b, a=_a }
     if type(color.a) ~= "number" then color.a = 1; end
     return color

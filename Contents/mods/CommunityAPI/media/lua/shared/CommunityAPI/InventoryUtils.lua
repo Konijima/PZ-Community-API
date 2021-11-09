@@ -4,7 +4,7 @@ local InventoryUtils = {}
 ---@param inventory ItemContainer
 ---@param tag string
 ---@return ArrayList|nil
-function InventoryUtils.findAllItemInInventoryByTag(inventory, tag)
+function InventoryUtils.FindAllItemInInventoryByTag(inventory, tag)
     if instanceof(inventory, "ItemContainer") and type(tag) == "string" then
         local foundItems = ArrayList.new();
         local validItems = getScriptManager():getItemsTag(tag);
