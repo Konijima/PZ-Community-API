@@ -14,8 +14,8 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 - Chuck ([Steam](https://steamcommunity.com/id/Chuckleberry_Finn/myworkshopfiles/?appid=108600) | [Github](https://github.com/ChuckTheSheep))  
 - Co ([Steam](https://steamcommunity.com/profiles/76561198056536755/myworkshopfiles/?appid=108600) | [Github](https://github.com/quarantin))  
   
-## Utilities
-[Documentation](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)
+## Informations
+[Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md) | [Template API](https://github.com/Konijima/PZ-Community-API/blob/master/TemplateAPI.lua.md) | [Utilities](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)
   
 ## API List
 - **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/shared/BodyLocationsAPI))  
