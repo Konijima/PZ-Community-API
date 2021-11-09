@@ -1,4 +1,3 @@
----@class TableUtils
 local TableUtils = {}
 
 --- Get the total count of entry in a table

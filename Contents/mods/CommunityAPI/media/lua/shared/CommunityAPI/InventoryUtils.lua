@@ -1,4 +1,3 @@
----@class InventoryUtils
 local InventoryUtils = {}
 
 --- Find all item in an inventory by tag

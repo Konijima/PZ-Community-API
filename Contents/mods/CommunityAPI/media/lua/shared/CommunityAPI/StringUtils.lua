@@ -1,4 +1,3 @@
----@class StringUtils
 local StringUtils = {}
 
 --- Transform a square position into a unique string

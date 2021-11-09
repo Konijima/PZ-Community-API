@@ -1,4 +1,3 @@
----@class IsoUtils
 local IsoUtils = {}
 
 --- Safely get the square of an IsoObject recursively

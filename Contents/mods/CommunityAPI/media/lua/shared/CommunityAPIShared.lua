@@ -16,6 +16,9 @@ CommunityAPI.Shared = {
 -----------------------------------------------------------------------------------
 
 print("Loading CommunityAPIShared =================================================")
+for k, v in pairs(CommunityAPI.Utils) do
+    print("CommunityAPI.Utils."..k, v)
+end
 for k, v in pairs(CommunityAPI.Shared) do
     print("CommunityAPI.Shared."..k, v)
 end

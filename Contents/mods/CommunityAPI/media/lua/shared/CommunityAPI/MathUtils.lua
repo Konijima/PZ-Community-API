@@ -1,4 +1,3 @@
----@class MathUtils
 local MathUtils = {}
 
 --- Get the distance between two point
