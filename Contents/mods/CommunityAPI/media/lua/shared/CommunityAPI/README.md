@@ -5,51 +5,52 @@ Utility packages to use in API and Mods.
 ```lua
 require("CommunityAPI")
 
-CommunityAPI.Utils
+local StringUtils = CommunityAPI.Utils.String
+StringUtils.SplitString("Hello world", " ")
 ```
   
 ### CommunityAPI.Utils.Inventory
 ```lua
-findAllItemInInventoryByTag(inventory, tag)
+FindAllItemInInventoryByTag(inventory, tag)
 ```
   
 ### CommunityAPI.Utils.Iso
 ```lua
-recursiveGetSquare(object)
+RecursiveGetSquare(object)
 
-getIsoRange(center, range, fractalOffset)
+GetIsoRange(center, range, fractalOffset)
 
-getIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
+GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
 
-getIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
+GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
 ```
   
 ### CommunityAPI.Utils.Math
 ```lua
-getDistance(x1, y1, x2, y2)
+GetDistance(x1, y1, x2, y2)
 ```
   
 ### CommunityAPI.Utils.String
 ```lua
-squareToId(square)
+SquareToId(square)
 
-positionToId(x, y ,z)
+PositionToId(x, y ,z)
 
-splitString(str, delimiter)
+SplitString(str, delimiter)
 ```
   
 ### CommunityAPI.Utils.Table
 ```lua
-countTableEntries(targetTable)
+CountTableEntries(targetTable)
 
-getTableKeys(targetTable)
+GetTableKeys(targetTable)
 
-tableContains(table, value)
+TableContains(table, value)
 
-getBaseClass(object, level)
+GetBaseClass(object, level)
 
-getAllBaseClasses(object, excludeCurrent)
+GetAllBaseClasses(object, excludeCurrent)
 
-isClassChildOf(object, class)
+IsClassChildOf(object, class)
 ```
   

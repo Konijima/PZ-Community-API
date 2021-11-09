@@ -20,16 +20,17 @@ in order to spawn things anywhere in the world. Upon loading the cell in questio
 
 ## Methods
 ```lua
-function SpawnerAPI.spawnItem(itemType, x, y, z, extraFunctions, extraParam, processSquare)
+SpawnItem(itemType, x, y, z, extraFunctions, extraParam, processSquare)
 ```
 ```lua
-function SpawnerAPI.spawnVehicle(vehicleType, x, y, z, extraFunctions, extraParam, processSquare)
+SpawnVehicle(vehicleType, x, y, z, extraFunctions, extraParam, processSquare)
 ```
 ```lua
-function SpawnerAPI.spawnZombie(outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
+SpawnZombie(outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
 ```
 
 ## Example
+
 ```lua
 require("CommunityAPI")
 
@@ -51,30 +52,30 @@ function checkIfOutside(square)
     if not square then
         return
     end
-	if square:isOutside() then
-		return square
-	end
+    if square:isOutside() then
+        return square
+    end
 end
 
 
---Example of SpawnerAPI.spawn- use.
+--Example of SpawnItem
 ---@param player IsoPlayer | IsoGameCharacter | IsoMovingObject | IsoObject
 function dropTrash(player)
 
-	local X, Y, Z = player:getX(), player:getY(), player:getZ()
-	local trashItems = {"MayonnaiseEmpty","SmashedBottle","Pop3Empty","PopEmpty","Pop2Empty","WhiskeyEmpty","BeerCanEmpty","BeerEmpty"}
-	local iterations = 10
+    local X, Y, Z = player:getX(), player:getY(), player:getZ()
+    local trashItems = { "MayonnaiseEmpty", "SmashedBottle", "Pop3Empty", "PopEmpty", "Pop2Empty", "WhiskeyEmpty", "BeerCanEmpty", "BeerEmpty" }
+    local iterations = 10
 
-	for i=1, iterations do
+    for i = 1, iterations do
 
-		X = X+ZombRand(-2,3)
-		Y = Y+ZombRand(-2,3)
+        X = X + ZombRand(-2, 3)
+        Y = Y + ZombRand(-2, 3)
 
-		local trashType = trashItems[(ZombRand(#trashItems)+1)]
-		--more likely to drop the same thing
-		table.insert(trashItems, trashType)
+        local trashType = trashItems[(ZombRand(#trashItems) + 1)]
+        --more likely to drop the same thing
+        table.insert(trashItems, trashType)
 
-		SpawnerAPI.spawnItem(trashType, X, Y, Z, {ageInventoryItem}, nil, checkIfOutside)
-	end
+        SpawnerAPI.SpawnItem(trashType, X, Y, Z, { ageInventoryItem }, nil, checkIfOutside)
+    end
 end
 ```
