@@ -19,6 +19,30 @@ local function customDoTooltip(tooltip, fields, item)
 
     local height = y + lineSpacing + 5
 
+    local var7
+    local var8
+    local inventoryItem
+
+    --region Extra
+
+    local extraItems = item:getExtraItems()
+    if extraItems ~= nil then
+        tooltip:DrawText(font, getText("Tooltip_item_Contains"), 5.0, height, 1.0, 1.0, 0.8, 1.0)
+        var7 = 5 + TextManager.instance:MeasureStringX(font, getText("Tooltip_item_Contains")) + 4
+        var8 = (lineSpacing - 10) / 2
+
+        for i=0, extraItems:size()-1 do
+            local extraItem = extraItems:get(i)
+            inventoryItem = InventoryItemFactory.CreateItem(extraItem)
+            tooltip:DrawTextureScaled(inventoryItem:getTex(), var7, height + var8, 10.0, 10.0, 1.0)
+            var7 = var7 + 11
+        end
+
+        height = height + lineSpacing + 5
+    end
+
+    --endregion Extra
+
     --region Layout
 
     ---@type ObjectTooltip.Layout
