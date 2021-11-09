@@ -42,13 +42,13 @@ end
 
 --- Get the base class of object, optionally choose how deep you want to check.
 ---@param object table Will return nil if the object is not a table.
----@param level  number Will return the deepest found if level is higher than the actual amount of base classes.
-function TableUtils.getBaseClass(object, level)
-    if not level or level < 1 then level = 1; end
+---@param _level  number Will return the deepest found if level is higher than the actual amount of base classes.
+function TableUtils.getBaseClass(object, _level)
+    if not _level or _level < 1 then _level = 1; end
 
     if type(object) == "table" then
         local baseClass = getmetatable(object)
-        for i=2, level do
+        for i=2, _level do
             if type(baseClass) == "table" then
                 local class = getmetatable(baseClass)
                 if class then
@@ -62,9 +62,9 @@ end
 
 --- Get a table containing all the base class from the current to the deepest.
 ---@param object table Will return nil if the object is not a table.
----@param excludeCurrent boolean optionally exclude the current object class from the list
+---@param _excludeCurrent boolean optionally exclude the current object class from the list
 ---@return table|nil
-function TableUtils.getAllBaseClasses(object, excludeCurrent)
+function TableUtils.getAllBaseClasses(object, _excludeCurrent)
     if type(object) == "table" then
         local baseClasses = {}
         local current = getmetatable(object)
@@ -73,7 +73,7 @@ function TableUtils.getAllBaseClasses(object, excludeCurrent)
         for i=1, 10 do
             local baseClass = TableUtils.getBaseClass(object, i)
             if baseClass ~= nil and lastBaseClass ~= baseClass then
-                if not exludeCurrent or exludeCurrent and current ~= baseClass then
+                if not _excludeCurrent or _excludeCurrent and current ~= baseClass then
                     table.insert(baseClasses, baseClass)
                 end
                 lastBaseClass = baseClass
