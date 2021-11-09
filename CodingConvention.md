@@ -40,4 +40,6 @@ function MyClass:setName(param1)
     return param1
 end
 ```
+*View [Emmylua docs](https://emmylua.github.io/) for more information about annotations.*
+
   
