@@ -259,8 +259,9 @@ end
 ---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param fractalRange number number of rows, made up of `range`, from the center range
 ---@param lookForType string|nil get only a specific type
----@return table
-function Utilities.getHumanoidsInFractalRange(center, range, fractalRange, lookForType)
+---@param addedBooleanFunctions table table of function(s) must return true to pass
+---@return table IsoGameCharacter
+function Utilities.getIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
     center = Utilities.recursiveGetSquare(center)
     if not center then
         return {}
@@ -273,7 +274,7 @@ function Utilities.getHumanoidsInFractalRange(center, range, fractalRange, lookF
     ---print("getHumanoidsInFractalRange: centers found: "..#fractalCenters)
     --pass through each "center square" found
     for i=1, #fractalCenters do
-        local objectsFound = Utilities.getHumanoidsInRange(fractalCenters[i], range, lookForType)
+        local objectsFound = Utilities.getIsoGameCharactersInRange(fractalCenters[i], range, lookForType, addedBooleanFunctions)
         ---print(" fractal center "..i..":  "..#objectsFound)
         --store a list of objectsFound within the fractalObjectsFound list
         table.insert(fractalObjectsFound, objectsFound)
@@ -286,8 +287,9 @@ end
 ---@param center IsoObject|IsoGridSquare the center point
 ---@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param lookForType string|nil get only a specific type
----@return table
-function Utilities.getHumanoidsInRange(center, range, lookForType)
+---@param addedBooleanFunctions table table of function(s) must return true to pass
+---@return table IsoGameCharacter
+function Utilities.getIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
     center = Utilities.recursiveGetSquare(center)
     if not center then
         return {}
@@ -307,8 +309,19 @@ function Utilities.getHumanoidsInRange(center, range, lookForType)
             local foundObj = squareContents[i]
 
             if instanceof(foundObj, "IsoGameCharacter") and (not lookForType or instanceof(foundObj, lookForType)) then
-                if foundObj:isOutside() then
+
+                local booleanPass = true
+                if addedBooleanFunctions and (#addedBooleanFunctions > 0) then
+                    for k,func in pairs(addedBooleanFunctions) do
+                        if not func(foundObj) then
+                            booleanPass = false
+                        end
+                    end
+                end
+
+                if booleanPass then
                     table.insert(objectsFound, foundObj)
+
                 end
             end
         end
