@@ -1,7 +1,9 @@
-require("ISUI/ISToolTipInv")
 require("CommunityAPI")
+require("ISUI/ISToolTipInv")
 
 local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
+local StringUtils = CommunityAPI.Utils.String
+local ColorUtils = CommunityAPI.Utils.Color
 
 ---@param tooltip ObjectTooltip
 ---@param item InventoryItem
@@ -35,13 +37,13 @@ local function customDoTooltip(tooltip, fields, item)
         end
         weightItem:setValueRightNoPlus(weight)
     elseif item:isEquipped() then
-        cleanString = ItemTooltipAPI.GetFloatString(item:getEquippedWeight())
+        cleanString = StringUtils.NumberToDecimalString(item:getEquippedWeight(), 2)
         weightItem:setValue(cleanString .. "    (" .. ItemTooltipAPI.GetFloatString(item:getUnequippedWeight()) .. " " .. getText("Tooltip_item_Unequipped") .. ")", 1.0, 1.0, 1.0, 1.0)
     elseif item:getAttachedSlot() > -1 then
-        cleanString = ItemTooltipAPI.GetFloatString(item:getHotbarEquippedWeight())
+        cleanString = StringUtils.NumberToDecimalString(item:getHotbarEquippedWeight(), 2)
         weightItem:setValue(cleanString .. "    (" .. ItemTooltipAPI.GetFloatString(item:getUnequippedWeight()) .. " " .. getText("Tooltip_item_Unequipped") .. ")", 1.0, 1.0, 1.0, 1.0)
     else
-        cleanString = ItemTooltipAPI.GetFloatString(item:getUnequippedWeight())
+        cleanString = StringUtils.NumberToDecimalString(item:getUnequippedWeight(), 2)
         weightItem:setValue(cleanString .. "    (" .. ItemTooltipAPI.GetFloatString(item:getUnequippedWeight()) .. " " .. getText("Tooltip_item_Equipped") .. ")", 1.0, 1.0, 1.0, 1.0)
     end
 
@@ -68,18 +70,18 @@ local function customDoTooltip(tooltip, fields, item)
                 layoutItem:setLabel("spacer", 0, 0, 0, 0)
 
             elseif field.fieldType == "label" then
-                labelColor = ItemTooltipAPI.GetSafeColor(field.result.labelColor, { r=1, g=1, b=1, a=1 })
+                labelColor = ColorUtils.GetColorOrDefault(field.result.labelColor, { r=1, g=1, b=1, a=1 })
                 layoutItem:setLabel(field.result.value, labelColor.r, labelColor.g, labelColor.b, labelColor.a)
 
             elseif field.fieldType == "field" then
-                labelColor = ItemTooltipAPI.GetSafeColor(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
-                color = ItemTooltipAPI.GetSafeColor(field.result.color, { r=1, g=1, b=1, a=1 })
+                labelColor = ColorUtils.GetColorOrDefault(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
+                color = ColorUtils.GetColorOrDefault(field.result.color, { r=1, g=1, b=1, a=1 })
                 layoutItem:setLabel(field.name..":", labelColor.r, labelColor.g, labelColor.b, labelColor.a)
                 layoutItem:setValue(field.result.value, color.r, color.g, color.b, color.a)
 
             elseif field.fieldType == "progress" and type(field.result.value) == "number" then
-                labelColor = ItemTooltipAPI.GetSafeColor(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
-                color = ItemTooltipAPI.GetSafeColor(field.result.color, { r=0, g=0.6, b=0, a=0.7 })
+                labelColor = ColorUtils.GetColorOrDefault(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
+                color = ColorUtils.GetColorOrDefault(field.result.color, { r=0, g=0.6, b=0, a=0.7 })
                 layoutItem:setLabel(field.name..":", labelColor.r, labelColor.g, labelColor.b, labelColor.a)
                 layoutItem:setProgress(field.result.value, color.r, color.g, color.b, color.a)
             end
