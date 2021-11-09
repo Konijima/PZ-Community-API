@@ -67,6 +67,48 @@ local function customDoTooltip(tooltip, fields, item)
 
     --endregion Spices
 
+    --region CustomExtra
+
+    local customExtras = {}
+    for _, field in pairs(fields) do
+        if field.fieldType == "extra" then
+            local customExtra = {
+                labelText = field.name,
+                labelColor = field.result.labelColor,
+                items = field.result.value,
+            }
+            if type(field.result.value) == "string" then
+                customExtra.items = {field.result.value}
+            end
+            table.insert(customExtras, customExtra)
+        end
+    end
+
+    local customExtraMaxWidth = 0
+    if #customExtras > 0 then
+        for i=1, #customExtras do
+            local customExtra = customExtras[i]
+            tooltip:DrawText(font, customExtra.labelText .. ":", 5.0, height, customExtra.labelColor.r, customExtra.labelColor.g, customExtra.labelColor.b, customExtra.labelColor.a)
+            extraX = 5 + TextManager.instance:MeasureStringX(font, customExtra.labelText) + 6
+            extraY = (lineSpacing - 10) / 2
+
+            for i=1, #customExtra.items do
+                local extra = customExtra.items[i]
+                inventoryItem = InventoryItemFactory.CreateItem(extra)
+                tooltip:DrawTextureScaled(inventoryItem:getTex(), extraX, height + extraY, 10.0, 10.0, 1.0)
+                extraX = extraX + 11
+                customExtraMaxWidth = math.max(customExtraMaxWidth, extraX)
+            end
+
+            height = height + lineSpacing + 5
+        end
+        customExtraMaxWidth = customExtraMaxWidth + 10
+    end
+
+    tooltip:setWidth(customExtraMaxWidth)
+
+    --endregion
+
     --region Layout
 
     ---@type ObjectTooltip.Layout
@@ -108,7 +150,7 @@ local function customDoTooltip(tooltip, fields, item)
 
     -- Custom Fields
     for _, field in pairs(fields) do
-        if field.result then
+        if field.fieldType ~= "extra" and field.result then
             ---@type ObjectTooltip.LayoutItem
             local layoutItem = layout:addItem()
 

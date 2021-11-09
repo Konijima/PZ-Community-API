@@ -16,7 +16,7 @@ function InventoryTooltipField:getValue(item)
     end
 end
 
----@param fieldType string field, label, progress, spacer
+---@param fieldType string field, label, progress, spacer, extra
 ---@param name string
 ---@param param string|number|boolean|function
 function InventoryTooltipField:new(fieldType, name, getValueFunc, labelColor)
@@ -31,7 +31,7 @@ function InventoryTooltipField:new(fieldType, name, getValueFunc, labelColor)
         labelColor = nil,
     }
     o.getValueFunc = getValueFunc
-    o.result.labelColor = CommunityAPI.Utils.Color.GetColorOrDefault(labelColor, { r=1, g=1, b=1, a=1 })
+    o.result.labelColor = CommunityAPI.Utils.Color.GetColorOrDefault(labelColor, { r=1, g=1, b=0.8, a=1 })
 
     return o
 end
@@ -65,6 +65,15 @@ end
 ---@return InventoryTooltipField
 function InventoryTooltipInstance:addProgress(name, getValueFunc, labelColor)
     self.fields[name] = InventoryTooltipField:new("progress", name, getValueFunc, labelColor)
+    return self.fields[name]
+end
+
+--- Add a extra item icons
+---@param name string
+---@param getValueFunc number|function
+---@return InventoryTooltipField
+function InventoryTooltipInstance:addExtraItems(name, getValueFunc, labelColor)
+    self.fields[name] = InventoryTooltipField:new("extra", name, getValueFunc, labelColor)
     return self.fields[name]
 end
 
