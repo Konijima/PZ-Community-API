@@ -2,6 +2,7 @@
 CommunityAPI = CommunityAPI or {}
 
 CommunityAPI.Utils = {
+    Color = require("CommunityAPI/ColorUtils"),
     Inventory = require("CommunityAPI/InventoryUtils"),
     Iso = require("CommunityAPI/IsoUtils"),
     Math = require("CommunityAPI/MathUtils"),
