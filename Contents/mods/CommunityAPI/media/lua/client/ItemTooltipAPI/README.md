@@ -16,34 +16,43 @@ Can be used to override existing vanilla item completely.
 Tooltip can be reloaded via your file `ItemTooltips/<itemModule>_<itemName>.lua`
   
 **Methods**
+## ItemTooltipAPI Methods
 ```lua
---- ItemTooltipAPI
-
 ItemTooltipAPI.GetRGB(numberCurrent, numberMax) -- Get a color from Red to Green
+```
+```lua
 ItemTooltipAPI.GetReversedRGB(numberCurrent, numberMax) -- Get a color from Green to Red
+```
+```lua
 ItemTooltipAPI.GetFloatString(number) -- Return a decimal number as a string
+```
+```lua
 local newTooltip = ItemTooltipAPI.CreateToolTip(itemFullType) -- Returns a tooltip instance
-
---- Tooltip Instance
-
--- addField
+```
+## Tooltip Instance Methods
+### addField
+```lua
 newTooltip:addField(labelText, getValueFunction) -- Dynamic field value
 newTooltip:addField(labelText, valueText, labelColor) -- Fixed field value
-
--- addProgress
+```
+### addProgress
+```lua
 newTooltip:addProgress(labelText, getValueFunction) -- Dynamic progress bar value
 newTooltip:addProgress(labelText, numberValue) -- Fixed progress bar value
-
--- addLabel
+```
+### addLabel
+```lua
 newTooltip:addLabel(labelText) -- Fixed label text
 newTooltip:addLabel(getValueFunction) -- Dynamic label text
 newTooltip:addLabel(labelText, labelColor) -- Fixed label text with fixed label color
-
--- addSpacer
+```
+### addSpacer
+```lua
 newTooltip:addSpacer() -- Add some space in between lines
 ```
 
-**Get Value Function**
+### Dynamic value parameter 'getValueFunction'
+Set the result of this field with this function that your define.  
 ```lua
 local function myGetValueFunction(result, item)
   result.value = 1 -- Set the value
@@ -52,18 +61,19 @@ local function myGetValueFunction(result, item)
   item:getModData() -- Use the InventoryItem to check data 
   if instanceof(item, "HandWeapon") then end -- Verify if its the right item type
 end
+newTooltip:addField("New Field", myGetValueFunction)
 ```
 
-**Color Format**
+### Color Format
 ```lua
 local color = { r=1.0, g=1.0, b=1.0, a=1.0 }
 ```
 
-**Example**
+## Example
 ```lua
 require("CommunityAPI")
 
-local ItemTooltipAPI = CommunityAPI.ItemTooltip
+local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
 
 local function typeField(result, item)
     result.value = item:getType()

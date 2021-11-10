@@ -1,8 +1,8 @@
+require("CommunityAPI")
 require("ISBaseObject")
 
 ---------------------------------------------------------------------------------
 
----@private
 ---@class InventoryTooltipField
 local InventoryTooltipField = ISBaseObject:derive("InventoryTooltipField")
 
@@ -16,7 +16,7 @@ function InventoryTooltipField:getValue(item)
     end
 end
 
----@param fieldType string field, label, progress, spacer
+---@param fieldType string field, label, progress, spacer, extra
 ---@param name string
 ---@param param string|number|boolean|function
 function InventoryTooltipField:new(fieldType, name, getValueFunc, labelColor)
@@ -31,24 +31,17 @@ function InventoryTooltipField:new(fieldType, name, getValueFunc, labelColor)
         labelColor = nil,
     }
     o.getValueFunc = getValueFunc
-
-    if type(labelColor) == "table" then
-        if type(o.result.labelColor) ~= "table" then o.result.labelColor = {}; end
-        if type(labelColor.r) == "number" then o.result.labelColor.r = labelColor.r; end
-        if type(labelColor.g) == "number" then o.result.labelColor.g = labelColor.g; end
-        if type(labelColor.b) == "number" then o.result.labelColor.b = labelColor.b; end
-        if type(labelColor.a) == "number" then o.result.labelColor.a = labelColor.a; end
-    end
+    o.result.labelColor = CommunityAPI.Utils.Color.GetColorOrDefault(labelColor, { r=1, g=1, b=0.8, a=1 })
 
     return o
 end
 
 ---------------------------------------------------------------------------------
 
----@private
 ---@class InventoryTooltipInstance
 local InventoryTooltipInstance = ISBaseObject:derive("InventoryTooltipInstance")
 
+--- Add a text field
 ---@param name string
 ---@param getValueFunc string|number|boolean|function
 ---@return InventoryTooltipField
@@ -57,14 +50,16 @@ function InventoryTooltipInstance:addField(name, getValueFunc, labelColor)
     return self.fields[name]
 end
 
+--- Add a label
 ---@param getValueFunc string|function
 ---@return InventoryTooltipField
 function InventoryTooltipInstance:addLabel(getValueFunc, labelColor)
-    local name = "label_" .. self:fieldCount()
+    local name = "label_" .. self:getFieldCount()
     self.fields[name] = InventoryTooltipField:new("label", name, getValueFunc, labelColor)
     return self.fields[name]
 end
 
+--- Add a progress bar
 ---@param name string
 ---@param getValueFunc number|function
 ---@return InventoryTooltipField
@@ -73,16 +68,26 @@ function InventoryTooltipInstance:addProgress(name, getValueFunc, labelColor)
     return self.fields[name]
 end
 
----@param getValueFunc string|number|boolean|function
+--- Add a extra item icons
+---@param name string
+---@param getValueFunc number|function
+---@return InventoryTooltipField
+function InventoryTooltipInstance:addExtraItems(name, getValueFunc, labelColor)
+    self.fields[name] = InventoryTooltipField:new("extra", name, getValueFunc, labelColor)
+    return self.fields[name]
+end
+
+--- Add a spacer
 ---@return InventoryTooltipField
 function InventoryTooltipInstance:addSpacer()
-    local name = "spacer_" .. self:fieldCount()
+    local name = "spacer_" .. self:getFieldCount()
     self.fields[name] = InventoryTooltipField:new("spacer", name)
     return self.fields[name]
 end
 
+--- Get the total amount of field added to this tooltip
 ---@return number
-function InventoryTooltipInstance:fieldCount()
+function InventoryTooltipInstance:getFieldCount()
     local count = 0
     for _ in pairs(self.fields) do count = count + 1 end
     return count
@@ -111,50 +116,13 @@ function ItemTooltipAPI.GetTooltip(itemFullType)
     return Tooltips[itemFullType]
 end
 
+--- Create a new Tooltip for a specific Item
+---@param itemFullType string Item to create the tooltip for e.g: "Base.Axe"
 ---@return InventoryTooltipInstance
 function ItemTooltipAPI.CreateToolTip(itemFullType)
     local newTooltip = InventoryTooltipInstance:new(itemFullType)
     Tooltips[itemFullType] = newTooltip
     return newTooltip
-end
-
----@param current number
----@param max number
-function ItemTooltipAPI.GetRGB(current, max)
-    if current < 1 and current > 0 then
-        current = current * 100
-        max = max * 100
-    end
-    local r = ((max - current) / max)
-    local g = (current / max)
-    return {r = r, g = g, b = 0}
-end
-
----@param current number
----@param max number
-function ItemTooltipAPI.GetReversedRGB(current, max)
-    if current < 1 and current > 0 then
-        current = current * 100
-        max = max * 100
-    end
-    local g = ((max - current) / max)
-    local r = (current / max)
-    return {r = r, g = g, b = 0}
-end
-
----@param floatVal number
----@return string
-function ItemTooltipAPI.GetFloatString(floatVal)
-    return string.format("%.2f", floatVal);
-end
-
-function ItemTooltipAPI.GetSafeColor(color, default)
-    if type(color) ~= "table" then color = default; end
-    if type(color.r) ~= "number" then color.r = default.r; end
-    if type(color.g) ~= "number" then color.g = default.g; end
-    if type(color.b) ~= "number" then color.b = default.b; end
-    if type(color.a) ~= "number" then color.a = default.a; end
-    return color
 end
 
 return ItemTooltipAPI

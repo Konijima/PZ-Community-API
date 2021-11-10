@@ -18,21 +18,31 @@ Also help the users to know which mod adds what to each tables.
   
 Only paths to `SuburbsDistributions` and `ProceduralDistributions` works and must be written with dots in between.  
   
-**Example 1**
+## Methods
+```lua
+CreateLocation(locationPath, distributionTable)
+```
+```lua
+Add(modName, distributionTable)
+```
+
+### Example 1
 ```lua
 require("CommunityAPI")
+
+local DistributionAPI = CommunityAPI.Server.Distribution
 
 local modName = "My_Mod_Name"
 local distributionTable = {}
 
-local CrateCompactDiscs = CommunityAPI.Server.Distribution.CreateLocation("ProceduralDistributions.list.CrateCompactDiscs.items", distributionTable)
+local CrateCompactDiscs = DistributionAPI.CreateLocation("ProceduralDistributions.list.CrateCompactDiscs.items", distributionTable)
 CrateCompactDiscs:AddItem("Base.Screwdriver", 6)
 CrateCompactDiscs:AddItem("Base.Disc", 4)
 
-CommunityAPI.Distribution.Add(modName, distributionTable)
+DistributionAPI.Add(modName, distributionTable)
 ```
 
-**Example 2**
+### Example 2
 ```lua
 require("CommunityAPI")
 
@@ -49,7 +59,7 @@ local distributionTable = {
 
 }
 
-CommunityAPI.Distribution.AddAdd(modName, distributionTable)
+CommunityAPI.Server.Distribution.Add(modName, distributionTable)
 ```
 
 **Example of Logs Output**

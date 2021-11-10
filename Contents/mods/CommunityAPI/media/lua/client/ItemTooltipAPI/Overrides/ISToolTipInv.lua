@@ -1,7 +1,9 @@
-require("ISUI/ISToolTipInv")
 require("CommunityAPI")
+require("ISUI/ISToolTipInv")
 
 local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
+local StringUtils = CommunityAPI.Utils.String
+local ColorUtils = CommunityAPI.Utils.Color
 
 ---@param tooltip ObjectTooltip
 ---@param item InventoryItem
@@ -16,6 +18,96 @@ local function customDoTooltip(tooltip, fields, item)
     tooltip:adjustWidth(5, itemName)
 
     local height = y + lineSpacing + 5
+
+    local extraX
+    local extraY
+    local inventoryItem
+
+    --region Extra
+
+    local extraItems = item:getExtraItems()
+    if extraItems ~= nil then
+        tooltip:DrawText(font, getText("Tooltip_item_Contains"), 5.0, height, 1.0, 1.0, 0.8, 1.0)
+        extraX = 5 + TextManager.instance:MeasureStringX(font, getText("Tooltip_item_Contains")) + 4
+        extraY = (lineSpacing - 10) / 2
+
+        for i=0, extraItems:size()-1 do
+            local extraItem = extraItems:get(i)
+            inventoryItem = InventoryItemFactory.CreateItem(extraItem)
+            tooltip:DrawTextureScaled(inventoryItem:getTex(), extraX, height + extraY, 10.0, 10.0, 1.0)
+            extraX = extraX + 11
+        end
+
+        height = height + lineSpacing + 5
+    end
+
+    --endregion Extra
+
+    --region Spices
+
+    ---@type Food
+    local food = item
+    if instanceof(food, "Food") then
+        local spices = food:getSpices()
+        if spices ~= nil then
+            tooltip:DrawText(font, getText("Tooltip_item_Spices"), 5.0, height, 1.0, 1.0, 0.8, 1.0)
+            extraX = 5 + TextManager.instance:MeasureStringX(font, getText("Tooltip_item_Spices")) + 4
+            extraY = (lineSpacing - 10) / 2
+
+            for i=0, spices:size()-1 do
+                local spice = spices:get(i)
+                inventoryItem = InventoryItemFactory.CreateItem(spice)
+                tooltip:DrawTextureScaled(inventoryItem:getTex(), extraX, height + extraY, 10.0, 10.0, 1.0)
+                extraX = extraX + 11
+            end
+
+            height = height + lineSpacing + 5
+        end
+    end
+
+    --endregion Spices
+
+    --region CustomExtra
+
+    local customExtras = {}
+    for _, field in pairs(fields) do
+        if field.fieldType == "extra" then
+            local customExtra = {
+                labelText = field.name,
+                labelColor = field.result.labelColor,
+                items = field.result.value,
+            }
+            if type(field.result.value) == "string" then
+                customExtra.items = {field.result.value}
+            end
+            table.insert(customExtras, customExtra)
+        end
+    end
+
+    local customExtraMaxWidth = 0
+    if #customExtras > 0 then
+        for i=1, #customExtras do
+            local customExtra = customExtras[i]
+            tooltip:DrawText(font, customExtra.labelText .. ":", 5.0, height, customExtra.labelColor.r, customExtra.labelColor.g, customExtra.labelColor.b, customExtra.labelColor.a)
+            extraX = 5 + TextManager.instance:MeasureStringX(font, customExtra.labelText) + 6
+            extraY = (lineSpacing - 10) / 2
+
+            for i=1, #customExtra.items do
+                local extra = customExtra.items[i]
+                inventoryItem = InventoryItemFactory.CreateItem(extra)
+                tooltip:DrawTextureScaled(inventoryItem:getTex(), extraX, height + extraY, 10.0, 10.0, 1.0)
+                extraX = extraX + 11
+                customExtraMaxWidth = math.max(customExtraMaxWidth, extraX)
+            end
+
+            height = height + lineSpacing + 5
+        end
+        customExtraMaxWidth = customExtraMaxWidth + 10
+    end
+
+    tooltip:setWidth(customExtraMaxWidth)
+
+    --endregion
 
     --region Layout
 
@@ -35,13 +127,13 @@ local function customDoTooltip(tooltip, fields, item)
         end
         weightItem:setValueRightNoPlus(weight)
     elseif item:isEquipped() then
-        cleanString = ItemTooltipAPI.GetFloatString(item:getEquippedWeight())
+        cleanString = StringUtils.NumberToDecimalString(item:getEquippedWeight(), 2)
         weightItem:setValue(cleanString .. "    (" .. ItemTooltipAPI.GetFloatString(item:getUnequippedWeight()) .. " " .. getText("Tooltip_item_Unequipped") .. ")", 1.0, 1.0, 1.0, 1.0)
     elseif item:getAttachedSlot() > -1 then
-        cleanString = ItemTooltipAPI.GetFloatString(item:getHotbarEquippedWeight())
+        cleanString = StringUtils.NumberToDecimalString(item:getHotbarEquippedWeight(), 2)
         weightItem:setValue(cleanString .. "    (" .. ItemTooltipAPI.GetFloatString(item:getUnequippedWeight()) .. " " .. getText("Tooltip_item_Unequipped") .. ")", 1.0, 1.0, 1.0, 1.0)
     else
-        cleanString = ItemTooltipAPI.GetFloatString(item:getUnequippedWeight())
+        cleanString = StringUtils.NumberToDecimalString(item:getUnequippedWeight(), 2)
         weightItem:setValue(cleanString .. "    (" .. ItemTooltipAPI.GetFloatString(item:getUnequippedWeight()) .. " " .. getText("Tooltip_item_Equipped") .. ")", 1.0, 1.0, 1.0, 1.0)
     end
 
@@ -58,7 +150,7 @@ local function customDoTooltip(tooltip, fields, item)
 
     -- Custom Fields
     for _, field in pairs(fields) do
-        if field.result then
+        if field.fieldType ~= "extra" and field.result then
             ---@type ObjectTooltip.LayoutItem
             local layoutItem = layout:addItem()
 
@@ -68,18 +160,18 @@ local function customDoTooltip(tooltip, fields, item)
                 layoutItem:setLabel("spacer", 0, 0, 0, 0)
 
             elseif field.fieldType == "label" then
-                labelColor = ItemTooltipAPI.GetSafeColor(field.result.labelColor, { r=1, g=1, b=1, a=1 })
+                labelColor = ColorUtils.GetColorOrDefault(field.result.labelColor, { r=1, g=1, b=1, a=1 })
                 layoutItem:setLabel(field.result.value, labelColor.r, labelColor.g, labelColor.b, labelColor.a)
 
             elseif field.fieldType == "field" then
-                labelColor = ItemTooltipAPI.GetSafeColor(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
-                color = ItemTooltipAPI.GetSafeColor(field.result.color, { r=1, g=1, b=1, a=1 })
+                labelColor = ColorUtils.GetColorOrDefault(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
+                color = ColorUtils.GetColorOrDefault(field.result.color, { r=1, g=1, b=1, a=1 })
                 layoutItem:setLabel(field.name..":", labelColor.r, labelColor.g, labelColor.b, labelColor.a)
                 layoutItem:setValue(field.result.value, color.r, color.g, color.b, color.a)
 
             elseif field.fieldType == "progress" and type(field.result.value) == "number" then
-                labelColor = ItemTooltipAPI.GetSafeColor(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
-                color = ItemTooltipAPI.GetSafeColor(field.result.color, { r=0, g=0.6, b=0, a=0.7 })
+                labelColor = ColorUtils.GetColorOrDefault(field.result.labelColor, { r=1, g=1, b=0.8, a=1 })
+                color = ColorUtils.GetColorOrDefault(field.result.color, { r=0, g=0.6, b=0, a=0.7 })
                 layoutItem:setLabel(field.name..":", labelColor.r, labelColor.g, labelColor.b, labelColor.a)
                 layoutItem:setProgress(field.result.value, color.r, color.g, color.b, color.a)
             end

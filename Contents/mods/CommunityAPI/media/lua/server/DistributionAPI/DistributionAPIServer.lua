@@ -1,18 +1,8 @@
-require "Items/SuburbsDistributions"
-require "Items/ProceduralDistributions"
+require("CommunityAPI")
+require("Items/SuburbsDistributions")
+require("Items/ProceduralDistributions")
 
 local MainDistributionTable = {}
-
----@param s string
-local function split(s)
-    if type(s) == "string" then
-        local result = {}
-        for i in string.gmatch(s, "[^%.]+") do
-            table.insert(result, i)
-        end
-        return result
-    end
-end
 
 ---@param locationParts table<string>
 local function getLocation(locationParts)
@@ -84,7 +74,8 @@ local function process(modName)
     local errorCount = 0
     for t=1, #MainDistributionTable do
         local table = MainDistributionTable[t]
-        local locationParts = split(table.location)
+        local locationParts = CommunityAPI.Utils.String.SplitString(table.location, ".")
+        --print("##### locationParts : ", locationParts, " = ",#locationParts)
         local location = getLocation(locationParts)
 
         if not pcall(process_location, modName, table, location) then
