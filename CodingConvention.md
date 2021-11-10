@@ -28,6 +28,15 @@ local function func(requiredParam) end -- camelCase
 local function func(_optionalParam) end -- camelCase prefixed with underscore
 ```
   
+### MULTI PARAMETERS
+*Separate parameters with a space after the comma.*
+```lua
+-- Wrong
+function(param1,param2)
+-- Good
+function(param1, param2)
+```
+  
 ### ANNOTATIONS
 ```lua
 ---@class MyClass Description of the class
