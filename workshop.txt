@@ -1,6 +1,6 @@
 version=1
 id=2650538172
 title=CommunityAPI
-description=Coming soon!
+description=Coming Soon!
 tags=Build 41;Framework;Misc
 visibility=friendsOnly
