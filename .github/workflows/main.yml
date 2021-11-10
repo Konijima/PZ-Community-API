@@ -5,7 +5,7 @@ on:
   # but only for the main branch
   push:
     branches:
-      - main
+      - master
 
 jobs:
   upload:
@@ -16,6 +16,7 @@ jobs:
         with:
           appID: 108600
           publishedFileID: 2650538172
+          #changelog: 'log of changes'
         env:
           STEAM_ACCOUNT_NAME: ${{ secrets.STEAM_USERNAME }}
           STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD  }}
