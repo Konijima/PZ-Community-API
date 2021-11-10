@@ -8,7 +8,11 @@ For mod compatibility and efficiency, working as a team ensure that the API is u
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Percentage of issues still open")
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Average time to resolve an issue")
   
-**Support Project Zomboid:** ```41.56-IWBUMS```
+**Project Zomboid Version Support:**
+```
+master  41.56-IWBUMS
+dev     41.56-IWBUMS
+```
   
 ### Usefull Links:
 [Our Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md)  
@@ -40,7 +44,7 @@ ___
 
 ## Available API
 - **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/shared/BodyLocationsAPI))  
-Tweak body locations without overwritting BodyLocations.lua.
+Tweak body locations without overwriting BodyLocations.lua.
 
 
 - **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/DistributionAPI))  
@@ -65,8 +69,8 @@ Add persistent sounds anywhere in the world.
 ___
 
 ## Git Guideline
-- Commits must describe correctly the changes pushed.
-- Commits that fix an `issue` must contain the number of the issue in the comment. *e.g: #13*
+- Commit title must describe correctly the changes being pushed.  
+- Commit that fixes an `issue` must contain the number of the issue in the comment. e.g: ```#13```
 - **Pull Request** to `master` and `dev` must be reviewed by at least one contributor to be merged.
 - Workshop update are automated when a `release` is merged into `master`.
 - Each feature must be properly annotated and optimized as well.
