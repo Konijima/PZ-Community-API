@@ -33,11 +33,10 @@ function EventAPI.Trigger(modName, eventName, ...)
     if events[modName] and events[modName][eventName] then
         for i=0, events[modName][eventName]:size()-1 do
             local handler = events[modName][eventName]:get(i)
+            if DEBUG then print("CommunityAPI: Event [", eventName,"] triggered from mod [", modName, "]") end
             if not pcall(handler, ...) then
-                if DEBUG then print("CommunityAPI: Error in triggering Event [", eventName,"] from mod [", modName, "]") end
+                if DEBUG then print("CommunityAPI: Error in triggered Event [", eventName,"] from mod [", modName, "]") end
                 EventAPI.Remove(modName, eventName, handler)
-            else
-                if DEBUG then print("CommunityAPI: Event [", eventName,"] triggered from mod [", modName, "]") end
             end
         end
     end
