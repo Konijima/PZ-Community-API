@@ -4,18 +4,17 @@
 # CommunityAPI
 Community API is a team effort to centralize & give mod creators optimized tools for creating quality mods.  
 For mod compatibility and efficiency, working as a team ensure that the API is updated and optimized for the long term.  
-  
+
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Percentage of issues still open")
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Average time to resolve an issue")
-  
+
 **Project Zomboid Version Support:**
 ```
 master  41.56-IWBUMS
 dev     41.56-IWBUMS
 ```
-  
-[![Discord](https://github.com/Konijima/PZ-Community-API/blob/dev/Images/discord.png?raw=true)](https://discord.gg/3rjszKXQ)  
-  
+
+
 ### Usefull Links:
 [Our Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md)  
 [CommunityAPI Wiki](https://github.com/Konijima/PZ-Community-API/wiki)  
@@ -25,6 +24,8 @@ dev     41.56-IWBUMS
 [Annotation with Emmylua](https://emmylua.github.io/)  
 [PZ Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/)
 [Template API](https://github.com/Konijima/PZ-Community-API/blob/master/TemplateAPI.lua.md)  
+  
+[![Discord](https://github.com/Konijima/PZ-Community-API/blob/Readme-update/Images/discord.png?raw=true)](https://discord.gg/3rjszKXQ)
   
 ___
   
