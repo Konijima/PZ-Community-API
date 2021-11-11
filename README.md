@@ -14,8 +14,9 @@ master  41.56-IWBUMS
 dev     41.56-IWBUMS
 ```
   
+[![Discord](https://github.com/Konijima/PZ-Community-API/blob/dev/Images/discord.png?raw=true)](https://discord.gg/3rjszKXQ)  
+  
 ### Usefull Links:
-[Discord Server](https://discord.gg/3rjszKXQ)  
 [Our Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md)  
 [CommunityAPI Wiki](https://github.com/Konijima/PZ-Community-API/wiki)  
 [CommunityAPI Utilities](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)  
