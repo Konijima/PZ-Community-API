@@ -47,6 +47,10 @@ ___
 Tweak body locations without overwriting BodyLocations.lua.
 
 
+- **EventAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/shared/EventAPI))  
+Add, remove and trigger custom events for your API and Mods.
+
+
 - **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/DistributionAPI))  
 Easily manage your distribution tables.
 
