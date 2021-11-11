@@ -11,7 +11,8 @@ CommunityAPI.Utils = {
 }
 
 CommunityAPI.Shared = {
-    BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared")
+    BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared"),
+    Event = require("EventAPI/EventAPIShared"),
 }
 
 -----------------------------------------------------------------------------------
