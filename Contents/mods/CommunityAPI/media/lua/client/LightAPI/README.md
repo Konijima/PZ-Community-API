@@ -42,7 +42,7 @@ The API take care of disposing and recreating the light source if the square is 
     z : number : the z position
 ```
 
-## Example
+## Usage
 ```lua
 require("CommunityAPI")
 
@@ -52,4 +52,29 @@ LightAPI.AddLightAt("computer_screen", x, y, z, 1, { r=0.20, g=0.30, b=0.20 })
 LightAPI.SetLightColorAt("computer_screen", x, y, z, { r=1, g=1, b=1 })
 LightAPI.SetLightRadiusAt("computer_screen", x, y, z, 3)
 LightAPI.RemoveLightAt("computer_screen", x, y, z)
+```
+
+## Example
+```lua
+require("CommunityAPI")
+
+local LightAPI = CommunityAPI.Client.Light
+
+local obj = {
+    name = "Computer",
+    state = false,
+    position = { x=10000, y=2000, z=0 },
+}
+
+function obj:toggle()
+    if self.state then
+        self.state = false
+        LightAPI.RemoveLightAt(self.name, self.position.x, self.position.y, self.position.z)
+    else
+        self.state = true
+        LightAPI.AddLightAt(self.name, self.position.x, self.position.y, self.position.z, 1, { r=0.20, g=0.30, b=0.20 })
+    end
+end
+
+obj:toggle()
 ```
