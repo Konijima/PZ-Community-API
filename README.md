@@ -15,14 +15,14 @@ dev     41.56-IWBUMS
 ```
   
 ### Usefull Links:
+[Discord Server](https://discord.gg/3rjszKXQ)  
 [Our Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md)  
 [CommunityAPI Wiki](https://github.com/Konijima/PZ-Community-API/wiki)  
 [CommunityAPI Utilities](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)  
 [Git Projects](https://github.com/Konijima/PZ-Community-API/projects)  
 [Our Steam Workshop](https://steamcommunity.com/profiles/76561199220019224/myworkshopfiles/?appid=108600)  
 [Annotation with Emmylua](https://emmylua.github.io/)  
-[PZ Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/)  
-[PZ Discord Server](https://discord.gg/GbKTNbgf)  
+[PZ Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/)
 [Template API](https://github.com/Konijima/PZ-Community-API/blob/master/TemplateAPI.lua.md)  
   
 ___
