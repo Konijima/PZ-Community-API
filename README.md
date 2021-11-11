@@ -22,6 +22,7 @@ dev     41.56-IWBUMS
 [Our Steam Workshop](https://steamcommunity.com/profiles/76561199220019224/myworkshopfiles/?appid=108600)  
 [Annotation with Emmylua](https://emmylua.github.io/)  
 [PZ Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/)  
+[PZ Discord Server](https://discord.gg/GbKTNbgf)  
 [Template API](https://github.com/Konijima/PZ-Community-API/blob/master/TemplateAPI.lua.md)  
   
 ___
@@ -34,12 +35,10 @@ ___
 - co ([Steam](https://steamcommunity.com/profiles/76561198056536755/myworkshopfiles/?appid=108600) | [Github](https://github.com/quarantin))  
 - Aiteron ([Steam](https://steamcommunity.com/profiles/76561198211669377/myworkshopfiles/?appid=108600) | [Github](https://github.com/aiteron))
   
-**3D Modeling**  
+**3D Modeling & Animations**  
 - shark ([Steam](https://steamcommunity.com/profiles/76561198004947199/myworkshopfiles/?appid=108600) | [Github](https://github.com/sharkster91))  
-
-**Animations**  
-- AuthenticPeach ([Steam](https://steamcommunity.com/id/authentic_peach/myworkshopfiles/?appid=108600))  
-
+- AuthenticPeach ([Steam](https://steamcommunity.com/id/authentic_peach/myworkshopfiles/?appid=108600) | [Github](https://github.com/AuthenticPeach))
+  
 ___
 
 ## Available API
