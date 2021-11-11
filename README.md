@@ -6,26 +6,24 @@ Community API is a team effort to centralize & give mod creators optimized tools
 For mod compatibility and efficiency, working as a team ensure that the API is updated and optimized for the long term.  
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Percentage of issues still open")
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Average time to resolve an issue")
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Average time to resolve an issue")  
+[![Upload to Workshop](https://github.com/Konijima/PZ-Community-API/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/Konijima/PZ-Community-API/actions/workflows/main.yml)  
 
 **Project Zomboid Version Support:**
 ```
-master  41.56-IWBUMS
-dev     41.56-IWBUMS
+CommunityAPI v0.0.1 -> 41.56-IWBUMS
 ```
 
 
 ### Usefull Links:
-[Our Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md)  
-[CommunityAPI Wiki](https://github.com/Konijima/PZ-Community-API/wiki)  
-[CommunityAPI Utilities](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)  
-[Git Projects](https://github.com/Konijima/PZ-Community-API/projects)  
-[Our Steam Workshop](https://steamcommunity.com/profiles/76561199220019224/myworkshopfiles/?appid=108600)  
-[Annotation with Emmylua](https://emmylua.github.io/)  
-[PZ Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/)
+[Wiki](https://github.com/Konijima/PZ-Community-API/wiki) | [Utilities](https://github.com/Konijima/PZ-Community-API/blob/master/Contents/mods/CommunityAPI/media/lua/shared/CommunityAPI)  
+[Coding Convention](https://github.com/Konijima/PZ-Community-API/blob/master/CodingConvention.md)  
+[Emmylua Annotations](https://emmylua.github.io/)  
+[PZ Documentation](https://quarantin.github.io/zomboid-javadoc/41.56/)  
 [Template API](https://github.com/Konijima/PZ-Community-API/blob/master/TemplateAPI.lua.md)  
   
-[![Discord](https://github.com/Konijima/PZ-Community-API/blob/Readme-update/Images/discord.png?raw=true)](https://discord.gg/3rjszKXQ)
+[![Discord](https://github.com/Konijima/PZ-Community-API/blob/master/Images/discord.png?raw=true)](https://discord.gg/3rjszKXQ)  
+[![Workshop](https://github.com/Konijima/PZ-Community-API/blob/master/Images/workshop.png?raw=true)](https://steamcommunity.com/profiles/76561199220019224/myworkshopfiles/?appid=108600)  
   
 ___
   
