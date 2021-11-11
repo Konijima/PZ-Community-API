@@ -1,10 +1,10 @@
 ![Banner](https://github.com/Konijima/PZ-Community-API/blob/master/Images/banner.png?raw=true)
-
-
+  
+  
 # CommunityAPI
 Community API is a team effort to centralize & give mod creators optimized tools for creating quality mods.  
 For mod compatibility and efficiency, working as a team ensure that the API is updated and optimized for the long term.  
-
+  
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Percentage of issues still open")
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Konijima/PZ-Community-API.svg)](http://isitmaintained.com/project/Konijima/PZ-Community-API "Average time to resolve an issue")
   
@@ -26,7 +26,7 @@ dev     41.56-IWBUMS
 [Template API](https://github.com/Konijima/PZ-Community-API/blob/master/TemplateAPI.lua.md)  
   
 ___
-
+  
 ## Modders Team
 **Developers:** 
 - Konijima ([Steam](https://steamcommunity.com/id/konijima/myworkshopfiles/?appid=108600) | [Github](https://github.com/Konijima))  
@@ -40,33 +40,33 @@ ___
 - AuthenticPeach ([Steam](https://steamcommunity.com/id/authentic_peach/myworkshopfiles/?appid=108600) | [Github](https://github.com/AuthenticPeach))
   
 ___
-
+  
 ## Available API
 - **BodyLocationsAPI** ([Shared](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/shared/BodyLocationsAPI))  
 Tweak body locations without overwriting BodyLocations.lua.
-
-
+  
+  
 - **DistributionAPI** ([Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/DistributionAPI))  
 Easily manage your distribution tables.
-
-
+  
+  
 - **ItemTooltipAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/ItemTooltipAPI))  
 Make complex custom item tooltip for your new items. 
-
-
+  
+  
 - **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/LightAPI))  
 Add persistent light anywhere in the world.  
-
-
+  
+  
 - **SpawnerAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/SpawnerAPI) | [Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/SpawnerAPI))  
 Spawn vehicles, items and zombies anywhere in the world.
-
-
+  
+  
 - **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/WorldSoundAPI))  
 Add persistent sounds anywhere in the world.  
-  
-___
 
+___
+  
 ## Git Guideline
 - Commit title must describe correctly the changes being pushed.  
 - Commit that fixes an `issue` must contain the number of the issue in the comment. e.g: ```#13```
@@ -76,24 +76,24 @@ ___
 - Documentation must be kept up-to-date with the features.
 - Each feature have a  [Git Project](https://github.com/Konijima/PZ-Community-API/projects) page to keep track of `Todo`, `In progress`, `Completed` pull requests.
 - Every feature **Pull Request** must be assigned with appropriated `label`, `assignee`, `project`.
-
+  
 ### Main Branches:
 - `master`  = Stable released version.
 - `dev` = Development version.
-
+  
 ### Temporary Branches:
 - `feature` = Created from `dev` branch when creating or developing a feature.
 - `release` = Created from `dev` branch target features are ready for an update.
 - `hotfix`  = Created from `master` branch when a hotfix need to be done.
-
+  
 ### Feature branches:
 May **branch off from**: `dev`  
 Must **merge back into**: `dev`
-
+  
 ### Release branches:
 May **branch off from**: `dev`  
 Must **merge back into**: `dev` & `master`
-
+  
 ### Hotfix branches:
 May **branch off from**: `master`  
 Must **merge back into**: `dev` & `master`
