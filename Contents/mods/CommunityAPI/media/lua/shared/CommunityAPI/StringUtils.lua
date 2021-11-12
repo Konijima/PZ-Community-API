@@ -19,7 +19,7 @@ end
 --- Split a string by a delimiter string
 ---@param str string the string to split
 ---@param delimiter string the string to split with
----@return table<string>
+---@return table<number, string>
 function StringUtils.SplitString(str, delimiter)
     local result = {}
     for match in (str..delimiter):gmatch("(.-)%"..delimiter) do
