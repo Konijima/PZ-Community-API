@@ -1,8 +1,6 @@
 # Coding Convention
 **This is the convention that we agreed to use on this project.**  
 *This is not yet fixed, it may change if we see fit until the first release.*  
-  
-  
 
 ### LUA FILE RETURN
 _**Not everything is global**, your file can return an object and be required into a variable where it is needed._
@@ -28,26 +26,26 @@ local required_object = require("path_to_required_object")
 GLOBAL_VAR = "" -- UpperCase
 function GlobalFunc() end -- PascalCase
 ```
-  
+
 ### LOCAL
 ```lua
 local someVariable = "" -- camelCase
 local function someFunction() end -- camelCase
 ```
-  
+
 ### OBJECT
 ```lua
 local MyObject = {} -- PascalCase
 function MyObject.StaticMethod() end -- PascalCase 
 function MyObject:instanceMethod() end -- camelCase
 ```
-  
+
 ### PARAMETERS
 ```lua
 local function func(requiredParam) end -- camelCase
 local function func(_optionalParam) end -- camelCase prefixed with underscore
 ```
-  
+
 ### MULTI PARAMETERS
 *Separate parameters with a space after the comma.*
 ```lua
@@ -56,7 +54,7 @@ function(param1,param2)
 -- Good
 function(param1, param2)
 ```
-  
+
 ### ANNOTATIONS
 _Annotations are important for making your code understandable, it also allows **IDE intelisense** with **Emmylua plugin** to auto-complete and visualize globals, locals, functions and parameters._
 ```lua
@@ -71,5 +69,3 @@ function MyClass:setName(param1)
 end
 ```
 *View [Emmylua docs](https://emmylua.github.io/) for more information about annotations.*
-
-  
