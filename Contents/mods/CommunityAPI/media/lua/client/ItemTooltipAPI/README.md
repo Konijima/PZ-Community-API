@@ -1,73 +1,111 @@
 # ItemTooltipAPI
 **Developer:** Konijima  
 **Contributors:**  -  
+**Package:** CommunityAPI.Client.ItemTooltip
   
 ## Description
 Make complex custom item tooltip for your new items.  
 Can be used to override existing vanilla item completely.  
   
+___
+
 ## How to use
   
-1) Create a directory `ItemTooltips` in your mod directory `media/lua/client`.
-2) Create a file per item named `<itemModule>_<itemName>.lua` inside `ItemTooltips` directory.
+1) Create a directory `ItemTooltips` in your mod directory `media/lua/client/`.
+2) Create a file per item named `<itemModule>_<itemName>.lua` inside `media/lua/client/ItemTooltips/`.
 3) Use `require("ItemTooltipAPI/Main")` in the scripts that use it.
 4) Adding `require=CommunityAPI` to your `mod.info` to make sure the API is enabled as well.
   
 Tooltip can be reloaded via your file `ItemTooltips/<itemModule>_<itemName>.lua`
-  
-**Methods**
-## ItemTooltipAPI Methods
-```lua
-ItemTooltipAPI.GetRGB(numberCurrent, numberMax) -- Get a color from Red to Green
+
+___
+
+## API Methods
+
+### GetRGB(numberCurrent, numberMax)
 ```
-```lua
-ItemTooltipAPI.GetReversedRGB(numberCurrent, numberMax) -- Get a color from Green to Red
+    numberCurrent : number : The current value
+    numberMax     : number : The the maximum value
+    
+    return : table : { r=number, g=number, b=0 } : A color between Red and Green
 ```
-```lua
-ItemTooltipAPI.GetFloatString(number) -- Return a decimal number as a string
+### GetReversedRGB(numberCurrent, numberMax)
 ```
-```lua
-local newTooltip = ItemTooltipAPI.CreateToolTip(itemFullType) -- Returns a tooltip instance
+    numberCurrent : number : The current value
+    numberMax     : number : The the maximum value
+    
+    return : table : { r=number, g=number, b=0 } : A color between Green and Red
 ```
-## Tooltip Instance Methods
-### addField
-```lua
-newTooltip:addField(labelText, getValueFunction) -- Dynamic field value
-newTooltip:addField(labelText, valueText, labelColor) -- Fixed field value
+### GetFloatString(value)
 ```
-### addProgress
-```lua
-newTooltip:addProgress(labelText, getValueFunction) -- Dynamic progress bar value
-newTooltip:addProgress(labelText, numberValue) -- Fixed progress bar value
+    value : number : The value to transform
+    
+    return : string : The string result
 ```
-### addLabel
-```lua
-newTooltip:addLabel(labelText) -- Fixed label text
-newTooltip:addLabel(getValueFunction) -- Dynamic label text
-newTooltip:addLabel(labelText, labelColor) -- Fixed label text with fixed label color
+### CreateToolTip(itemFullType)
 ```
-### addSpacer
-```lua
-newTooltip:addSpacer() -- Add some space in between lines
+    itemFullType : string : The item full type e.g: Base.Axe
+    
+    return : InventoryTooltipField : The tooltip object used to add fields
 ```
 
-### Dynamic value parameter 'getValueFunction'
-Set the result of this field with this function that your define.  
+___
+
+## InventoryTooltipField Instance Methods
+
+### addField(labelText, getValueFunction, _labelColor)
+```
+    labelText        : string   : The label text for this field
+    getValueFunction : function : The function to dynamicaly set values
+    _labelColor      : table    : { r=number, g=number, b=number, a=number }
+```
+
+### addProgress(labelText, value)
+```
+    labelText : string   : The label text for this field
+    value     : number   : The number current progress value from 0.0 to 1.0
+    or
+    value     : function : The function to dynamicaly set values
+```
+
+### addLabel(labelText, _labelColor)
+```
+    labelText   : string   : The label text for this field
+    or
+    labelText   : function : The function to dynamicaly set values
+    
+    _labelColor : table    : { r=number, g=number, b=number, a=number }
+```
+
+### addExtraItems(labelText, getValueFunc, _labelColor)
+```
+    labelText    : string   : The label text for this field
+    getValueFunc : function : The function to dynamicaly set values
+    _labelColor  : table    : { r=number, g=number, b=number, a=number }
+```
+
+### addSpacer()
+```
+    no param
+```
+
+___
+
+## Example of `getValueFunction`
+Set the result of this field with the function that your define.  
 ```lua
+---@param result table
+---@param item InventoryItem
 local function myGetValueFunction(result, item)
-  result.value = 1 -- Set the value
-  result.color = { r=1.0, g=1.0, b=1.0, a=1.0 } -- Set the value color
-  result.labelColor = { r=1.0, g=1.0, b=1.0, a=1.0 } -- Set the label color
-  item:getModData() -- Use the InventoryItem to check data 
-  if instanceof(item, "HandWeapon") then end -- Verify if its the right item type
+    local itemModData = item:getModData()
+    result.value = itemModData.currentValue or 0 -- Set the value
+    result.color = { r=1.0, g=1.0, b=1.0, a=1.0 } -- Set the value color
+    result.labelColor = { r=1.0, g=1.0, b=1.0, a=1.0 } -- Set the label color
 end
 newTooltip:addField("New Field", myGetValueFunction)
 ```
 
-### Color Format
-```lua
-local color = { r=1.0, g=1.0, b=1.0, a=1.0 }
-```
+___
 
 ## Example
 ```lua
@@ -75,52 +113,35 @@ require("CommunityAPI")
 
 local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
 
-local function typeField(result, item)
-    result.value = item:getType()
-end
-
-local function dynamicField(result, item)
-    local usedDelta = item:getUsedDelta()
-    result.value = ItemTooltipAPI.GetFloatString(usedDelta)
-    result.color = ItemTooltipAPI.GetRGB(usedDelta, 1)
-end
-
-local function conditionProgress(result, item)
-    result.value = 0.33
-    result.color = ItemTooltipAPI.GetRGB(result.value, 1)
-end
-
-local function capacityProgress(result, item)
-    result.value = 0.85
-    result.color = ItemTooltipAPI.GetReversedRGB(result.value, 1)
-end
-
-local function customColorProgress(result, item)
-    result.value = 0.75
-    result.color = { r=0, g=0, b=0.6, a=0.8 }
-end
-
-local function dynamicLabel(result, item)
-    result.value = "This is a very long dynamic label that can change\ndepending of the items state or what ever you need!"
-    result.labelColor = { r=1, g=0, b=0.5, a=1 }
-end
-
 -- Create the new Tooltip
+local baseAxeTooltip = ItemTooltipAPI.CreateToolTip("Base.Axe")
 
-local ItemTooltip = ItemTooltipAPI.CreateToolTip("Base.Axe")
+-- Add extra items
+function extraItems(result, item)
+    result.value = { "Base.Axe", "Base.Disc" }
+end
+baseAxeTooltip:addExtraItems("Contains", extraItems)
 
--- Add the field, progress, label or spacer
+-- Add regular field
+local function damageField(result, item)
+    result.value = "+10"
+    result.color = { r=0, g=1, b=0, a=1 }
+end
+baseAxeTooltip:addField("Damage", damageField)
 
-ItemTooltip:addField("Type field", typeField)
-ItemTooltip:addField("Dynamic field", dynamicField)
-ItemTooltip:addField("Fixed Text field", "Some text", { r=0, g=1, b=0, a=1 }) -- Fixed label with custom label color
-ItemTooltip:addProgress("Progress", conditionProgress)
-ItemTooltip:addProgress("Reversed Progress", capacityProgress)
-ItemTooltip:addProgress("Fixed Progress", 0.5)
-ItemTooltip:addProgress("Custom Color Progress", customColorProgress)
-ItemTooltip:addSpacer()
-ItemTooltip:addLabel("This is some label between spacers!", { r=1, g=0, b=0, a=1 }) -- Fixed label with custom color
-ItemTooltip:addSpacer()
-ItemTooltip:addLabel(dynamicLabel) -- Dynamic label
-ItemTooltip:addSpacer()
+-- Add progress field
+local function durabilityProgress(result, item)
+    result.value = ItemTooltipAPI.GetRGB(0.5, 1.0)
+end
+baseAxeTooltip:addProgress("Durability", durabilityProgress)
+
+-- Add spacer
+baseAxeTooltip:addSpacer()
+
+-- Add a text label
+local function textLabel(result, item)
+    result.value = "Some text label!"
+    result.labelColor = { r=0, g=0, b=1, a=1 }
+end
+baseAxeTooltip:addLabel(textLabel)
 ```
