@@ -1,3 +1,5 @@
+require("OptionsScreens/ModSelector")
+
 local FONT_HGT_TITLE = getTextManager():getFontHeight(UIFont.Title)
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)

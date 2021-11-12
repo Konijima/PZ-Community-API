@@ -1,3 +1,4 @@
+require("OptionsScreens/ModSelector")
 
 ModThumbnailPanel = ISPanelJoypad:derive("ModThumbnailPanel")
 

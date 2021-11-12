@@ -1,3 +1,5 @@
+require("OptionsScreens/ModSelector")
+
 ModPosterPanel = ISPanelJoypad:derive("ModPosterPanel")
 
 function ModPosterPanel:render()
