@@ -3,6 +3,15 @@
 *This is not yet fixed, it may change if we see fit until the first release.*  
   
   
+
+### LUA FILE RETURN
+_**Not everything is global**, your file can return an object and be required into a variable where it is needed._
+```lua
+local obj = {}
+function obj.DoSomething() end
+return obj
+```
+
 ### GLOBAL
 ```lua
 GLOBAL_VAR = "" -- UpperCase
