@@ -58,6 +58,7 @@ function(param1, param2)
 ```
   
 ### ANNOTATIONS
+_Annotations are important for making your code understandable, it also allows **IDE intelisense** with **Emmylua plugin** to auto-complete and visualize globals, locals, functions and parameters._
 ```lua
 ---@class MyClass Description of the class
 local MyClass = {}
