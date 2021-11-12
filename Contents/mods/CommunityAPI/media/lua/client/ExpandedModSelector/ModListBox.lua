@@ -5,8 +5,8 @@ local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 
-local MAP_ICON = getTexture("media/ui/MapIcon.png")
-local DEFAULT_ICON = getTexture("media/ui/DefaultIcon.png")
+local MAP_ICON = getTexture("media/ui/ExpandedModSelector/MapIcon.png")
+local DEFAULT_ICON = getTexture("media/ui/ExpandedModSelector/DefaultIcon.png")
 
 ModListBox = ISScrollingListBox:derive("ModListbox")
 
