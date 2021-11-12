@@ -12,6 +12,17 @@ function obj.DoSomething() end
 return obj
 ```
 
+### REQUIRE
+_Usage of **require** in LUA scripts to ensure dependency is loaded first or to get an object returned by an other file._
+```lua
+require("path_to_required_file")
+local required_object = require("path_to_required_object")
+-- path start after 'media/lua/client/'
+-- path start after 'media/lua/server/'
+-- path start after 'media/lua/shared/'
+-- path end without file extention
+```
+
 ### GLOBAL
 ```lua
 GLOBAL_VAR = "" -- UpperCase
