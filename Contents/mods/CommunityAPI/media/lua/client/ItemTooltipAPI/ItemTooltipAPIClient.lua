@@ -42,47 +42,41 @@ end
 local InventoryTooltipInstance = ISBaseObject:derive("InventoryTooltipInstance")
 
 --- Add a text field
----@param name string
----@param getValueFunc string|number|boolean|function
----@return InventoryTooltipField
-function InventoryTooltipInstance:addField(name, getValueFunc, labelColor)
-    self.fields[name] = InventoryTooltipField:new("field", name, getValueFunc, labelColor)
-    return self.fields[name]
+---@param name string The field name to appear on the left
+---@param getValueFunc string|number|boolean|function Set the field value directly or using a function
+---@param _labelColor Color Optionally set the label color
+function InventoryTooltipInstance:addField(name, getValueFunc, _labelColor)
+    self.fields[name] = InventoryTooltipField:new("field", name, getValueFunc, _labelColor)
 end
 
 --- Add a label
----@param getValueFunc string|function
----@return InventoryTooltipField
-function InventoryTooltipInstance:addLabel(getValueFunc, labelColor)
+---@param getValueFunc string|function Set the label text value directly or using a function
+---@param _labelColor Color Optionally set the label color
+function InventoryTooltipInstance:addLabel(getValueFunc, _labelColor)
     local name = "label_" .. self:getFieldCount()
-    self.fields[name] = InventoryTooltipField:new("label", name, getValueFunc, labelColor)
-    return self.fields[name]
+    self.fields[name] = InventoryTooltipField:new("label", name, getValueFunc, _labelColor)
 end
 
 --- Add a progress bar
----@param name string
----@param getValueFunc number|function
----@return InventoryTooltipField
-function InventoryTooltipInstance:addProgress(name, getValueFunc, labelColor)
-    self.fields[name] = InventoryTooltipField:new("progress", name, getValueFunc, labelColor)
-    return self.fields[name]
+---@param name string The field name to appear on the left
+---@param getValueFunc number|function Set the progress bar value directly or using a function
+---@param _labelColor Color Optionally set the label color
+function InventoryTooltipInstance:addProgress(name, getValueFunc, _labelColor)
+    self.fields[name] = InventoryTooltipField:new("progress", name, getValueFunc, _labelColor)
 end
 
---- Add a extra item icons
----@param name string
----@param getValueFunc number|function
----@return InventoryTooltipField
-function InventoryTooltipInstance:addExtraItems(name, getValueFunc, labelColor)
-    self.fields[name] = InventoryTooltipField:new("extra", name, getValueFunc, labelColor)
-    return self.fields[name]
+--- Add extra item icons
+---@param name string The field name to appear on the left
+---@param getValueFunc function Set the extra items using a function
+---@param _labelColor Color Optionally set the label color
+function InventoryTooltipInstance:addExtraItems(name, getValueFunc, _labelColor)
+    self.fields[name] = InventoryTooltipField:new("extra", name, getValueFunc, _labelColor)
 end
 
 --- Add a spacer
----@return InventoryTooltipField
 function InventoryTooltipInstance:addSpacer()
     local name = "spacer_" .. self:getFieldCount()
     self.fields[name] = InventoryTooltipField:new("spacer", name)
-    return self.fields[name]
 end
 
 --- Get the total amount of field added to this tooltip
