@@ -51,7 +51,7 @@ local function parseSquare(square)
 
 	if #spawns > 0 then
 
-		for key, spawn in pairs(spawns) do
+		for _, spawn in pairs(spawns) do
 			local spawnFunc = SpawnerAPI["spawn"..spawn.spawnFuncType]
 
 			if type(spawnFunc) == "function" then
@@ -128,7 +128,6 @@ function SpawnerAPI.SpawnZombie(outfitID, x, y, z, _extraData, _femaleChance)
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
 		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, _femaleChance)
-		print(type(zombies), zombies:size())
 		if zombies and zombies:size() > 0 then
 			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, _extraData)
 		end
