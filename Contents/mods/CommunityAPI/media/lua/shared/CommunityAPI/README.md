@@ -24,13 +24,15 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-### FindAllItemInInventoryByTag(inventory, tag)
+### FindAllItemInInventoryByTag(container, tag)
+Retrieve all items in a container from a tag
+
 | Param     | Type                                                                                                   | Description                     |
 |-----------|--------------------------------------------------------------------------------------------------------|---------------------------------|
-| inventory | [ItemContainer](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/ItemContainer.html) | The item container to search in |
+| container | [ItemContainer](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/ItemContainer.html) | The item container to search in |
 | tag       | string                                                                                                 | The tag to search for           |
 
-**return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
+**return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)<[InventoryItem](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/InventoryItem.html)>
 
 </details>
 
@@ -43,9 +45,9 @@ Utility packages to use in your API and Mods.
 ### RecursiveGetSquare(object)
 Safely get the square of an IsoObject recursively
 
-| Param  | Type                                                                                                                                                                                        | Description                     |
-|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) |   |
+| Param  | Type                                                                                                                                                                                         | Description                       |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The object to get the square from |
 
 **return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
 
