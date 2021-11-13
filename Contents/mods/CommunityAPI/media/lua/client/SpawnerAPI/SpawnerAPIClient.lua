@@ -46,23 +46,24 @@ end
 local function parseSquare(square)
 	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
 
-	local squareId = StringUtils.SquareToId(square)
-	local spawns = farSquarePendingSpawns[squareId]
+	if farSquarePendingSpawns then
 
-	if #spawns > 0 then
+		local squareId = StringUtils.SquareToId(square)
+		local spawns = farSquarePendingSpawns[squareId]
 
-		for _, spawn in pairs(spawns) do
-			local spawnFunc = SpawnerAPI["Spawn" .. spawn.spawnFuncType]
+		if spawns and #spawns > 0 then
+			for _, spawn in pairs(spawns) do
+				local spawnFunc = SpawnerAPI["Spawn" .. spawn.spawnFuncType]
 
-			if type(spawnFunc) == "function" then
-				if not pcall(spawnFunc, spawn.objectType, spawn.x, spawn.y, spawn.z, spawn.extraData, spawn.femaleChance) then
-					print("SpawnerAPI: Error spawning ["..spawn.objectType.."] at ("..spawn.x..", "..spawn.y..", "..spawn.z..")")
+				if type(spawnFunc) == "function" then
+					if not pcall(spawnFunc, spawn.objectType, spawn.x, spawn.y, spawn.z, spawn.extraData, spawn.femaleChance) then
+						print("SpawnerAPI: Error spawning ["..spawn.objectType.."] at ("..spawn.x..", "..spawn.y..", "..spawn.z..")")
+					end
 				end
+
 			end
-
+			farSquarePendingSpawns[squareId] = nil
 		end
-		farSquarePendingSpawns[squareId] = nil
-
 	end
 end
 Events.LoadGridsquare.Add(parseSquare)
