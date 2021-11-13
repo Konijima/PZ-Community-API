@@ -146,35 +146,50 @@ ________________________________________________________________________________
 <details><summary>Click to expand!</summary><br>
   
 ### SquareToId(square)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Transform a square position into a unique string
 
-**return:** nil
+| Param  | Type                                                                                             | Description                         |
+|--------|--------------------------------------------------------------------------------------------------|-------------------------------------|
+| square | [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The square to get the position from |
+
+**return:** string
 
 <br>
 
 ### PositionToId(x, y ,z)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Transform a position into a unique string
 
-**return:** nil
+| Param | Type   | Description |
+|-------|--------|-------------|
+| x     | number | X position  |
+| y     | number | Y position  |
+| z     | number | Z position  |
+
+**return:** string
 
 <br>
 
 ### SplitString(str, delimiter)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Split a string by a delimiter string
 
-**return:** nil
+| Param     | Type   | Description              |
+|-----------|--------|--------------------------|
+| str       | string | The string to split      |
+| delimiter | string | The string to split with |
+
+**return:** table<string>
+
+<br>
+
+### NumberToDecimalString(value, _decimal)
+Format a number into string with decimal
+
+| Param    | Type        | Description                   |
+|----------|-------------|-------------------------------|
+| value    | number      | The number value to format    |
+| _decimal | number\|nil | Amount of decimal, default: 2 |
+
+**return:** string
 
 <br></details>
 
