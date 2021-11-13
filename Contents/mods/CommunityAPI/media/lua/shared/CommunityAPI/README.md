@@ -8,24 +8,31 @@
 - [CommunityAPI.Utils.String](#communityapiutilsstring)  
 - [CommunityAPI.Utils.Table](#communityapiutilstable)  
 
-
-
 ## Description
 
 Utility packages to use in your API and Mods.
 
+<p>&nbsp;</p>
+
+# Packages
+
 ## CommunityAPI.Utils.Color
 <details>
 <summary>Click to expand!</summary>
-
+<p>&nbsp;</p>
+  
+<p>&nbsp;</p>
 </details>
 
+
+________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.Inventory
 <details>
 <summary>Click to expand!</summary>
-
+<p>&nbsp;</p>
+  
 ### FindAllItemInInventoryByTag(container, tag)
 Retrieve all items in a container from a tag
 
@@ -36,14 +43,18 @@ Retrieve all items in a container from a tag
 
 **return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)<[InventoryItem](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/InventoryItem.html)>
 
+<p>&nbsp;</p>
 </details>
 
+  
+________________________________________________________________________________________________________________________
 
-
+  
 ## CommunityAPI.Utils.Iso
 <details>
 <summary>Click to expand!</summary>
-
+<p>&nbsp;</p>
+  
 ### RecursiveGetSquare(object)
 Safely get the square of an IsoObject recursively
 
@@ -53,7 +64,7 @@ Safely get the square of an IsoObject recursively
 
 **return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
 
----
+<p>&nbsp;</p>
 
 ### GetIsoRange(center, range, fractalOffset)
 Description here
@@ -66,7 +77,7 @@ Description here
 
 **return:** table<[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)>
 
----
+<p>&nbsp;</p>
 
 ### GetIsoGameCharactersInFractalRange(center, range, fractalRange, _lookForType, _addedBooleanFunctions)
 Get all humanoid in fractal range from a center point
@@ -81,7 +92,7 @@ Get all humanoid in fractal range from a center point
 
 **return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
----
+<p>&nbsp;</p>
 
 ### GetIsoGameCharactersInRange(center, range, _lookForType, _addedBooleanFunctions)
 Get all humanoid in range from a center point
@@ -96,14 +107,18 @@ Get all humanoid in range from a center point
 
 **return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
+<p>&nbsp;</p>
 </details>
 
+
+________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.Math
 <details>
 <summary>Click to expand!</summary>
-
+<p>&nbsp;</p>
+  
 ### GetDistance(x1, y1, x2, y2)
 | Param | Type | Description |
 |-------|------|-------------|
@@ -113,14 +128,18 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
+<p>&nbsp;</p>
 </details>
 
+
+________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.String
 <details>
 <summary>Click to expand!</summary>
-
+<p>&nbsp;</p>
+  
 ### SquareToId(square)
 | Param | Type | Description |
 |-------|------|-------------|
@@ -130,7 +149,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### PositionToId(x, y ,z)
 | Param | Type | Description |
@@ -141,7 +160,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### SplitString(str, delimiter)
 | Param | Type | Description |
@@ -152,13 +171,17 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
+<p>&nbsp;</p>
 </details>
 
+
+________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.Table
 <details>
 <summary>Click to expand!</summary>
+<p>&nbsp;</p>
 
 ### CountTableEntries(targetTable)
 | Param | Type | Description |
@@ -169,7 +192,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### GetTableKeys(targetTable)
 | Param | Type | Description |
@@ -180,7 +203,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### TableContains(table, value)
 | Param | Type | Description |
@@ -191,7 +214,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### GetBaseClass(object, level)
 | Param | Type | Description |
@@ -202,7 +225,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### GetAllBaseClasses(object, excludeCurrent)
 | Param | Type | Description |
@@ -213,7 +236,7 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
----
+<p>&nbsp;</p>
 
 ### IsClassChildOf(object, class)
 | Param | Type | Description |
@@ -224,4 +247,5 @@ Get all humanoid in range from a center point
 
 **return:** nil
 
+<p>&nbsp;</p>
 </details>
