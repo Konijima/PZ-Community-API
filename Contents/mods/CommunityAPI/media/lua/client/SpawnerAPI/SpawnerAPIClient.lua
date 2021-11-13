@@ -55,7 +55,7 @@ local function parseSquare(square)
 			local spawnFunc = SpawnerAPI["spawn"..spawn.spawnFuncType]
 
 			if type(spawnFunc) == "function" then
-				if not pcall(spawnFunc, spawn.objectType, spawn.x, spawn.y, spawn.z, spawn.extraData) then
+				if not pcall(spawnFunc, spawn.objectType, spawn.x, spawn.y, spawn.z, spawn.extraData, spawn.femaleChance) then
 					print("SpawnerAPI: Error spawning ["..spawn.objectType.."] at ("..spawn.x..", "..spawn.y..", "..spawn.z..")")
 				end
 			end
