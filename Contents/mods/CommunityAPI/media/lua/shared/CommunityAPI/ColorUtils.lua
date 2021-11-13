@@ -53,4 +53,4 @@ function ColorUtils.GetColorOrDefault(color, defaultColor)
     return color
 end
 
-return ColorUtils
+return require("CommunityAPI/TableProtection")(ColorUtils)
