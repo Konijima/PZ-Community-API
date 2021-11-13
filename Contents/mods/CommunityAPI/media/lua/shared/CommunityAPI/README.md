@@ -113,8 +113,8 @@ ________________________________________________________________________________
 <details>
 <summary>Click to expand!</summary><br>
 
-### GetDistance2DBetweenPoints(x1, y1, x2, y2)
-Get the 2D distance between two point
+### GetDistanceFromTo(x1, y1, x2, y2)
+Get the distance between two point
 
 | Param | Type   | Description                  |
 |-------|--------|------------------------------|
@@ -127,13 +127,41 @@ Get the 2D distance between two point
 
 <br>
 
-### GetDistance2DBetweenSquares(square1, square2)
-Get the 2D distance between two squares
+### GetDistance3DFromTo(x1, y1, z1, x2, y2, z2)
+Get the distance including height between two point
 
-| Param   | Type                                                                                             | Description       |
-|---------|--------------------------------------------------------------------------------------------------|-------------------|
-| square1 | [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The first square  |
-| square2 | [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The second square |
+| Param | Type   | Description                  |
+|-------|--------|------------------------------|
+| x1    | number | X coordinate of first point  |
+| y1    | number | Y coordinate of first point  |
+| z1    | number | Z coordinate of first point  |
+| x2    | number | X coordinate of second point |
+| y2    | number | Y coordinate of second point |
+| z2    | number | Z coordinate of second point |
+
+**return:** number
+
+<br>
+
+### GetDistanceBetweenObjects(object1, object2)
+Get the distance between two objects
+
+| Param   | Type                                                                                                                                                                                         | Description                 |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| object1 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The first object or square  |
+| object2 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The second object or square |
+
+**return:** number
+
+<br>
+
+### GetDistance3DBetweenObjects(object1, object2)
+Get the distance including height between two objects
+
+| Param   | Type                                                                                                                                                                                         | Description                 |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| object1 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The first object or square  |
+| object2 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The second object or square |
 
 **return:** number
 
