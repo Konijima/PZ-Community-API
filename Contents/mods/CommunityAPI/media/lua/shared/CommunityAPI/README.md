@@ -254,7 +254,7 @@ Get list of all derived class from the current to the deepest level
 | tableObject     | table   | The table object to get all base class from               |
 | _excludeCurrent | boolean | Optionally exclude the current object class from the list |
 
-**return:** table<table>|nil
+**return:** table|nil
 
 <br>
 
