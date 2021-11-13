@@ -81,7 +81,6 @@ function SpawnerAPI.SpawnItem(itemType, x, y, z, extraData)
 
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
-		x, y, z = square:getX(), square:getY(), square:getZ()
 		local item = square:AddWorldInventoryItem(itemType, x, y, z)
 		if item then
 			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, square, extraData)
@@ -129,7 +128,6 @@ function SpawnerAPI.SpawnZombie(outfitID, x, y, z, extraData, _femaleChance)
 
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
-		x, y, z = square:getX(), square:getY(), square:getZ()
 		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, _femaleChance)
 		if zombies and zombies:size() > 0 then
 			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, extraData)
