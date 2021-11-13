@@ -201,67 +201,71 @@ ________________________________________________________________________________
 <details><summary>Click to expand!</summary><br>
 
 ### CountTableEntries(targetTable)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Get the total count of entry in a table
 
-**return:** nil
+| Param       | Type   | Description                         |
+|-------------|--------|-------------------------------------|
+| targetTable | number | The table to count total of entries |
+
+**return:** number
 
 <br>
 
 ### GetTableKeys(targetTable)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Get all the keys of a lua table
 
-**return:** nil
+| Param       | Type  | Description                    |
+|-------------|-------|--------------------------------|
+| targetTable | table | The table to get the keys from |
+
+**return:** table<string>
 
 <br>
 
 ### TableContains(table, value)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Check if a value is found in a table
 
-**return:** nil
+| Param       | Type  | Description                 |
+|-------------|-------|-----------------------------|
+| targetTable | table | The table to search in      |
+| targetValue | any   | The value to find the table |
+
+**return:** boolean
 
 <br>
 
 ### GetBaseClass(object, level)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Get the base class of an object, optionally choose how deep you want to check
 
-**return:** nil
+| Param       | Type   | Description                                                                        |
+|-------------|--------|------------------------------------------------------------------------------------|
+| tableObject | table  | The table object to get the base class from                                        |
+| _level      | number | Get the deepest base class found if level is higher than the total of base classes |
+
+**return:** table | nil
 
 <br>
 
 ### GetAllBaseClasses(object, excludeCurrent)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Get list of all derived class from the current to the deepest level
 
-**return:** nil
+| Param           | Type    | Description                                               |
+|-----------------|---------|-----------------------------------------------------------|
+| tableObject     | table   | The table object to get all base class from               |
+| _excludeCurrent | boolean | Optionally exclude the current object class from the list |
+
+**return:** table<table> | nil
 
 <br>
 
 ### IsClassChildOf(object, class)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Check if table object derive from this class
 
-**return:** nil
+| Param       | Type          | Description               |
+|-------------|---------------|---------------------------|
+| tableObject | table         | The table object to check |
+| tableClass  | table\|string | The class to compare with |
+
+**return:** boolean
 
 <br></details>
