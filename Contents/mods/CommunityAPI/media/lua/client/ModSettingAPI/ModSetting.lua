@@ -1,3 +1,5 @@
+local jsonUtils = require("CommunityAPI/JsonUtils")
+
 -- Constants
 local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 
@@ -51,9 +53,14 @@ function ModSetting:saveValues()
         local settDataFromTab = viewObject.view:getSettingValues()
         for settingName, value in pairs(settDataFromTab) do
             ModSetting.SettingValues[viewObject.view.modID][settingName] = value
-            print(viewObject.view.modID, settingName, value)
+            print(settingName, value, "HERE")
         end        
 	end
+    for modID, data in pairs(ModSetting.SettingValues) do
+        local saved_presets = getFileWriter("cAPI_ModSettings_" .. modID .. ".txt", true, false)
+        saved_presets:write(jsonUtils.Encode(data))
+        saved_presets:close()
+    end
 end
 
 function ModSetting:loadModSettingPanel(panel)
@@ -80,13 +87,15 @@ function ModSetting:loadModSettingPanel(panel)
 	self.tabs:setCenterTabs(false)
     self.tabs.render = ModSetting.tabContainerRender
 	self.panel:addChild(self.tabs);  
-    
-
-    -- Load settings TODO
 
     -- Add mod settings
     for modID, _ in pairs(ModSetting.Data) do
-        self.listbox:addItem(getModInfoByID(modID), modID);
+        local modInfo = getModInfoByID(modID)
+        if modInfo == nil then
+            self.listbox:addItem("IncorrectModID", modID);
+        else
+            self.listbox:addItem(modInfo:getName(), modID);
+        end
     end
     if self.listbox.items[self.listbox.selected] ~= nil then
         ModSetting:updateSettings(self.listbox.items[self.listbox.selected].item)    
@@ -118,6 +127,7 @@ function ModSetting:updateSettings(modID)
 	end
 	self.tabs.viewList = {}
 
+    -- load new tabs
     if ModSetting.Data[modID] ~= nil then
         for tabName, tab in pairs(ModSetting.Data[modID]) do
             tab:setWidth(self.tabs:getWidth())

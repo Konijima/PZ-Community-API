@@ -1,5 +1,6 @@
 require("ModSettingAPI/ModSetting")
 require("ModSettingAPI/ModSettingTab")
+local jsonUtils = require("CommunityAPI/JsonUtils")
 
 ---@class ModSettingAPI
 ModSettingAPI = {}
@@ -20,6 +21,27 @@ function ModSettingAPI:createTab(modID, tabName)
         ModSetting.Data[modID] = {}
     end
     ModSetting.Data[modID][tabName] = tab
+
+    local configFile = getFileReader("cAPI_ModSettings_" .. modID .. ".txt", true, false)
+    if configFile ~= nil then
+        local line = configFile:readLine()
+        local config = nil
+        if line ~= nil then
+            config = jsonUtils.Decode(line)    
+        end
+        configFile:close()
+        
+        if ModSetting.SettingValues[modID] == nil then
+            ModSetting.SettingValues[modID] = {}
+        end
+        if config ~= nil then
+            for settName, value in pairs(config) do
+                ModSetting.SettingValues[modID][settName] = value
+                print("HERE 2", settName, value)
+            end
+        end
+        configFile:close()
+    end
 
     return tab
 end

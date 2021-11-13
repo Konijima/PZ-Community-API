@@ -13,7 +13,7 @@ end
 
 --- Get all the keys of a lua table
 ---@param targetTable table The table to get the keys from
----@return table<string>
+---@return table<number, string>
 function TableUtils.GetTableKeys(targetTable)
     local keys = {}
     for key in pairs(targetTable) do
@@ -66,7 +66,7 @@ end
 --- Get list of all derived class from the current to the deepest level
 ---@param tableObject table The table object to get all base class from
 ---@param _excludeCurrent boolean Optionally exclude the current object class from the list, default: false
----@return table<table>|nil
+---@return table<number, table>|nil
 function TableUtils.GetAllBaseClasses(tableObject, _excludeCurrent)
     if type(tableObject) == "table" then
         local baseClasses = {}
