@@ -1,11 +1,11 @@
 # Utils
 **Contributors:** Shurutsue, Konijima, Chuck, Aiteron  
 **Packages:**  
-- CommunityAPI.Utils.Inventory  
-- CommunityAPI.Utils.Iso  
-- CommunityAPI.Utils.Math  
-- CommunityAPI.Utils.String  
-- CommunityAPI.Utils.Table  
+- [CommunityAPI.Utils.Inventory](#communityapiutilsinventory)  
+- [CommunityAPI.Utils.Iso](#communityapiutilsiso)  
+- [CommunityAPI.Utils.Math](#communityapiutilsmath)  
+- [CommunityAPI.Utils.String](#communityapiutilsstring)  
+- [CommunityAPI.Utils.Table](#communityapiutilstable)  
 
 ## Description
 
