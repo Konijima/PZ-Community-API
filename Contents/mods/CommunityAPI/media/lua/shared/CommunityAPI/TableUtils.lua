@@ -44,7 +44,7 @@ end
 
 --- Get the base class of an object, optionally choose how deep you want to check
 ---@param tableObject table The table object to get the base class from
----@param _level number Get the deepest base class found if level is higher than the total of base classes
+---@param _level number Get the deepest base class found, default: 1
 ---@return table|nil
 function TableUtils.GetBaseClass(tableObject, _level)
     if not _level or _level < 1 then _level = 1; end
@@ -65,7 +65,7 @@ end
 
 --- Get list of all derived class from the current to the deepest level
 ---@param tableObject table The table object to get all base class from
----@param _excludeCurrent boolean Optionally exclude the current object class from the list
+---@param _excludeCurrent boolean Optionally exclude the current object class from the list, default: false
 ---@return table<table>|nil
 function TableUtils.GetAllBaseClasses(tableObject, _excludeCurrent)
     if type(tableObject) == "table" then
