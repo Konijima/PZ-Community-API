@@ -2,12 +2,14 @@
 **Developer:** Konijima  
 **Contributors:**  -  
 **Package:** CommunityAPI.Client.ItemTooltip
-  
+
+<br>
+
 ## Description
 Make complex custom item tooltip for your new items.  
 Can be used to override existing vanilla item completely.  
   
-___
+<br>
 
 ## How to use
   
@@ -18,9 +20,9 @@ ___
   
 Tooltip can be reloaded via your file `ItemTooltips/<itemModule>_<itemName>.lua`
 
-___
+<br>
 
-## API Methods
+# Methods
 
 ### CreateToolTip(itemFullType)
 Create a new Tooltip for a specific Item
@@ -31,9 +33,9 @@ Create a new Tooltip for a specific Item
 
 **return:** InventoryTooltipField
 
-___
+<br>
 
-## InventoryTooltipField Methods
+# InventoryTooltipField Methods
 
 ### addField(name, getValueFunc, _labelColor)
 Add a text field
@@ -46,6 +48,8 @@ Add a text field
 
 **return:** nil
 
+<br>
+
 ### addLabel(getValueFunc, _labelColor)
 Add a label
 
@@ -55,6 +59,8 @@ Add a label
 | _labelColor  | [Color](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/core/Color.html) | Optionally set the label color                        |
 
 **return:** nil
+
+<br>
 
 ### addProgress(name, getValueFunc)
 Add a progress bar
@@ -67,6 +73,8 @@ Add a progress bar
 
 **return:** nil
 
+<br>
+
 ### addExtraItems(name, getValueFunc, _labelColor)
 Add extra item icons
 
@@ -78,11 +86,13 @@ Add extra item icons
 
 **return:** nil
 
+<br>
+
 ### addSpacer()
 No parameter  
 **return:** nil
 
-___
+<br>
 
 ## Example of `getValueFunction`
 Set the result of this field with the function that your define.  
@@ -98,9 +108,9 @@ end
 newTooltip:addField("New Field Label", myGetValueFunction)
 ```
 
-___
+<br>
 
-## Example
+## Example of Item Tooltip
 ```lua
 require("CommunityAPI")
 
