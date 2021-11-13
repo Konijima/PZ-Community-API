@@ -30,7 +30,7 @@ On Windows found at : `C:\Users\<Username>\Zomboid\console.txt`
 
 To quickly go to that location, you can copy `%UserProfile%\Zomboid\` into the address bar on the top of the file explorer.
 
-Note: The file is reset during game launch - in order for your error to have been recorded you need to retrieve the file before relaunching the game.
+Note: The file is reset during game launch - you need to retrieve the file before relaunching the game.
 ```
 Paste console.txt content here
 ```
