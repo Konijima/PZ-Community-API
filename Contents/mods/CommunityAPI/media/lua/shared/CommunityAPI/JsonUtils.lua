@@ -65,7 +65,14 @@ local function encode_table(val, stack)
 
     stack[val] = true
 
-    if rawget(val, 1) ~= nil or next(val) == nil then
+    -- Koni: Quick Patch for next() which is missing in PZ
+    -- We just want to know if val is empty or not
+    function empty(tab)
+        for _, _ in pairs(tab) do return false; end
+        return true
+    end
+
+    if rawget(val, 1) ~= nil or empty(val) == true then
         -- Treat as array -- check keys are valid and it is not sparse
         local n = 0
         for k in pairs(val) do
