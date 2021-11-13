@@ -1,3 +1,5 @@
+require("CommunityAPI")
+
 ---@class SpawnerAPI
 local SpawnerAPI = {}
 
