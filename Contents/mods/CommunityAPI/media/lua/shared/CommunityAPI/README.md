@@ -8,6 +8,8 @@
 - [CommunityAPI.Utils.String](#communityapiutilsstring)  
 - [CommunityAPI.Utils.Table](#communityapiutilstable)  
 
+
+
 ## Description
 
 Utility packages to use in your API and Mods.
@@ -16,9 +18,9 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-
-
 </details>
+
+
 
 ## CommunityAPI.Utils.Inventory
 <details>
@@ -47,20 +49,22 @@ Safely get the square of an IsoObject recursively
 
 | Param  | Type                                                                                                                                                                                         | Description                       |
 |--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html)\|[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The object to get the square from |
+| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The object to get the square from |
 
 **return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
 
 ---
 
 ### GetIsoRange(center, range, fractalOffset)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Description here
 
-**return:** nil
+| Param         | Type                                                                                                                                                                                            | Description                                                           |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center        | [IsoObject] (https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare] ( https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center object                                                     |
+| range         | number                                                                                                                                                                                          | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset | number                                                                                                                                                                                          | Fractal offset - spreads out squares by this number                   |
+
+**return:** table<[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)>
 
 ---
 
