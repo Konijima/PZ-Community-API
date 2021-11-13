@@ -31,7 +31,7 @@ Create a new Tooltip for a specific Item
 |--------------|--------|------------------------------------------------|
 | itemFullType | string | Item to create the tooltip for e.g: "Base.Axe" |
 
-**return:** InventoryTooltipField
+**return:** [InventoryTooltipField](#inventorytooltipfield-methods)
 
 <br>
 
