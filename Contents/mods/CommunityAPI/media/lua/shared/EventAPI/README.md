@@ -4,33 +4,42 @@
 **Package:** CommunityAPI.Shared.Event  
 
 ## Description
-Add, remove and trigger custom events for your API and Mods.
+Add, remove and trigger custom events in your API and Mods.
 
 ## Methods
 
-### `Add(modName, eventName, eventFunc)`
-```
-    - modName : string : the mod name
-    - eventName : string : the event name
-    - eventFunc : function : the function to add
-```
-___
+### `CommunityAPI.Shared.Event.Add(modName, eventName, eventFunc)`
+| Param     | Type     | Description         |
+|-----------|----------|---------------------|
+| modName   | string   | The mod name        |
+| eventName | string   | The event name      |
+| eventFunc | function | The handler to add  |
 
-### `Remove(modName, eventName, eventFunc)`
-```
-    - modName : string : the mod name
-    - eventName : string : the event name
-    - eventFunc : function : the function to remove
-```
+**return:** nil
 
-___
+---
 
-### `Trigger(modName, eventName, ...)`
-```
-    - modName : string : the mod name
-    - eventName : string : the event name
-    - ... : any : one or multiple parameter of any types
-```
+### `CommunityAPI.Shared.Event.Remove(modName, eventName, eventFunc)`
+| Param     | Type     | Description           |
+|-----------|----------|-----------------------|
+| modName   | string   | The mod name          |
+| eventName | string   | The event name        |
+| eventFunc | function | The handler to remove |
+
+**return:** nil
+
+---
+
+### `CommunityAPI.Shared.Event.Trigger(modName, eventName, ...)`
+| Param     | Type   | Description                                       |
+|-----------|--------|---------------------------------------------------|
+| modName   | string | The mod name                                      |
+| eventName | string | The event name                                    |
+| varargs   | any    | Any parameters to call the handlers handlers with |
+
+**return:** nil
+
+---
 
 ## Example of usage in an API
 ```lua
