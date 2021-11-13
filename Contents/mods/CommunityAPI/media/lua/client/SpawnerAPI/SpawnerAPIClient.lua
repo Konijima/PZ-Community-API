@@ -32,14 +32,25 @@ end
 local function setToSpawn(spawnFuncType, objectType, x, y, z, funcsToApply, extraParam, processSquare)
 	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
 
-	local positionID = StringUtilis.PositionToId(x, y, z)
-	local positionList = farSquarePendingSpawns[positionID]
-	if not positionList then
+	local positionID = StringUtils.PositionToId(x, y, z)
+
+	if not farSquarePendingSpawns[positionID] then
 		farSquarePendingSpawns[positionID] = {}
 	end
 
-	table.insert(positionList,{ spawnFuncType=spawnFuncType, objectType=objectType, x=x, y=y, z=z,
-								funcsToApply=funcsToApply, extraParam=extraParam, processSquare=processSquare })
+	local objToAdd = {
+		spawnFuncType = spawnFuncType,
+		objectType = objectType,
+		x = x,
+		y = y,
+		z = z,
+		funcsToApply = funcsToApply,
+		extraParam = extraParam,
+		processSquare = processSquare
+	}
+
+	table.insert(farSquarePendingSpawns[positionID], objToAdd)
+end
 end
 
 ---@param itemType string
