@@ -25,7 +25,7 @@ Utility packages to use in your API and Mods.
 
 </details>
 
----
+
 
 ## CommunityAPI.Utils.Iso
 <details>
@@ -75,7 +75,7 @@ Utility packages to use in your API and Mods.
 
 </details>
 
----
+
 
 ## CommunityAPI.Utils.Math
 <details>
@@ -92,7 +92,7 @@ Utility packages to use in your API and Mods.
 
 </details>
 
----
+
 
 ## CommunityAPI.Utils.String
 <details>
@@ -131,7 +131,7 @@ Utility packages to use in your API and Mods.
 
 </details>
 
----
+
 
 ## CommunityAPI.Utils.Table
 <details>
