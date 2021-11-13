@@ -1,6 +1,7 @@
 # Utils
 **Contributors:** Shurutsue, Konijima, Chuck, Aiteron  
 **Packages:**  
+- [CommunityAPI.Utils.Color](#communityapiutilscolor)  
 - [CommunityAPI.Utils.Inventory](#communityapiutilsinventory)  
 - [CommunityAPI.Utils.Iso](#communityapiutilsiso)  
 - [CommunityAPI.Utils.Math](#communityapiutilsmath)  
@@ -10,6 +11,14 @@
 ## Description
 
 Utility packages to use in your API and Mods.
+
+## CommunityAPI.Utils.Color
+<details>
+<summary>Click to expand!</summary>
+
+
+
+</details>
 
 ## CommunityAPI.Utils.Inventory
 <details>
@@ -32,13 +41,13 @@ Utility packages to use in your API and Mods.
 <summary>Click to expand!</summary>
 
 ### RecursiveGetSquare(object)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Safely get the square of an IsoObject recursively
 
-**return:** nil
+| Param  | Type                                                                                                                                                                                        | Description                     |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) |   |
+
+**return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
 
 ---
 
