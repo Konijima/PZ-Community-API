@@ -1,5 +1,7 @@
 require("CommunityAPI")
 
+local StringUtils = CommunityAPI.Utils.String
+
 ---@class SpawnerAPI
 local SpawnerAPI = {}
 
