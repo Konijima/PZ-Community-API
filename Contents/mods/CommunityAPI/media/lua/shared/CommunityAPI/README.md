@@ -1,56 +1,166 @@
-# Utilities
-Utility packages to use in API and Mods.
-  
-## How to use
-```lua
-require("CommunityAPI")
+# Utils
+**Contributors:** Shurutsue, Konijima, Chuck, Aiteron  
+**Packages:**  
+- CommunityAPI.Utils.Inventory  
+- CommunityAPI.Utils.Iso  
+- CommunityAPI.Utils.Math  
+- CommunityAPI.Utils.String  
+- CommunityAPI.Utils.Table  
 
-local StringUtils = CommunityAPI.Utils.String
-StringUtils.SplitString("Hello world", " ")
-```
-  
-### CommunityAPI.Utils.Inventory
-```lua
-FindAllItemInInventoryByTag(inventory, tag)
-```
-  
-### CommunityAPI.Utils.Iso
-```lua
-RecursiveGetSquare(object)
+## Description
 
-GetIsoRange(center, range, fractalOffset)
+Utility packages to use in your API and Mods.
 
-GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
+## CommunityAPI.Utils.Inventory
 
-GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
-```
-  
-### CommunityAPI.Utils.Math
-```lua
-GetDistance(x1, y1, x2, y2)
-```
-  
-### CommunityAPI.Utils.String
-```lua
-SquareToId(square)
+### `CommunityAPI.Utils.Inventory.FindAllItemInInventoryByTag(inventory, tag)`
+| Param     | Type                                                                                                   | Description                     |
+|-----------|--------------------------------------------------------------------------------------------------------|---------------------------------|
+| inventory | [ItemContainer](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/ItemContainer.html) | The item container to search in |
+| tag       | string                                                                                                 | The tag to search for           |
 
-PositionToId(x, y ,z)
+**return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
 
-SplitString(str, delimiter)
-```
-  
-### CommunityAPI.Utils.Table
-```lua
-CountTableEntries(targetTable)
+---
 
-GetTableKeys(targetTable)
+## CommunityAPI.Utils.Iso
 
-TableContains(table, value)
+### `CommunityAPI.Utils.Iso.RecursiveGetSquare(object)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
 
-GetBaseClass(object, level)
+**return:** nil
 
-GetAllBaseClasses(object, excludeCurrent)
+### `CommunityAPI.Utils.Iso.GetIsoRange(center, range, fractalOffset)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
 
-IsClassChildOf(object, class)
-```
+**return:** nil
+
+### `CommunityAPI.Utils.Iso.GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.Iso.GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+---
+
+## CommunityAPI.Utils.Math
+
+### `CommunityAPI.Utils.Math.GetDistance(x1, y1, x2, y2)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+
+---
+
+## CommunityAPI.Utils.String
+
+### `CommunityAPI.Utils.String.SquareToId(square)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.String.PositionToId(x, y ,z)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.String.SplitString(str, delimiter)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+---
+
+## CommunityAPI.Utils.Table
+
+### `CommunityAPI.Utils.Table.CountTableEntries(targetTable)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.Table.GetTableKeys(targetTable)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.Table.TableContains(table, value)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.Table.GetBaseClass(object, level)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.Table.GetAllBaseClasses(object, excludeCurrent)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
+
+### `CommunityAPI.Utils.Table.IsClassChildOf(object, class)`
+| Param | Type | Description |
+|-------|------|-------------|
+|       |      |             |
+|       |      |             |
+|       |      |             |
+
+**return:** nil
   
