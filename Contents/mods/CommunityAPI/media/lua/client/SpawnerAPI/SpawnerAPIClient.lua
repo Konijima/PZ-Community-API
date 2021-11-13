@@ -52,7 +52,7 @@ local function parseSquare(square)
 	if #spawns > 0 then
 
 		for _, spawn in pairs(spawns) do
-			local spawnFunc = SpawnerAPI["spawn"..spawn.spawnFuncType]
+			local spawnFunc = SpawnerAPI["Spawn" .. spawn.spawnFuncType]
 
 			if type(spawnFunc) == "function" then
 				if not pcall(spawnFunc, spawn.objectType, spawn.x, spawn.y, spawn.z, spawn.extraData, spawn.femaleChance) then
