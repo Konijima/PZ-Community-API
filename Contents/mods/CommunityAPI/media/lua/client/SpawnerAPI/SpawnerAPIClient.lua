@@ -73,20 +73,20 @@ Events.LoadGridsquare.Add(parseSquare)
 ---@param x number The X coordinate to spawn the object at
 ---@param y number The Y coordinate to spawn the object at
 ---@param z number The Z coordinate to spawn the object at
----@param extraData table Table of extra data returned in the spawned event for custom handling
-function SpawnerAPI.SpawnItem(itemType, x, y, z, extraData)
+---@param _extraData table|nil Table of extra data returned in the spawned event for custom handling
+function SpawnerAPI.SpawnItem(itemType, x, y, z, _extraData)
 	if not itemType then return; end
 
-	if not extraData then extraData = {} end
+	if not _extraData then _extraData = {} end
 
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
 		local item = square:AddWorldInventoryItem(itemType, x, y, z)
 		if item then
-			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, square, extraData)
+			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, square, _extraData)
 		end
 	else
-		setToSpawn("Item", itemType, x, y, z, extraData)
+		setToSpawn("Item", itemType, x, y, z, _extraData)
 	end
 end
 
@@ -95,20 +95,20 @@ end
 ---@param x number The X coordinate to spawn the object at
 ---@param y number The Y coordinate to spawn the object at
 ---@param z number The Z coordinate to spawn the object at
----@param extraData table Table of extra data returned in the spawned event for custom handling
-function SpawnerAPI.SpawnVehicle(vehicleType, x, y, z, extraData)
+---@param _extraData table|nil Table of extra data returned in the spawned event for custom handling
+function SpawnerAPI.SpawnVehicle(vehicleType, x, y, z, _extraData)
 	if not vehicleType then return; end
 
-	if not extraData then extraData = {} end
+	if not _extraData then _extraData = {} end
 
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
 		local vehicle = addVehicleDebug(vehicleType, IsoDirections.getRandom(), nil, square)
 		if vehicle then
-			EventAPI.Trigger("SpawnerAPI", "OnVehicleSpawned", vehicle, square, extraData)
+			EventAPI.Trigger("SpawnerAPI", "OnVehicleSpawned", vehicle, square, _extraData)
 		end
 	else
-		setToSpawn("Vehicle", vehicleType, x, y, z, extraData)
+		setToSpawn("Vehicle", vehicleType, x, y, z, _extraData)
 	end
 end
 
@@ -117,12 +117,12 @@ end
 ---@param x number The X coordinate to spawn the object at
 ---@param y number The Y coordinate to spawn the object at
 ---@param z number The Z coordinate to spawn the object at
----@param extraData table Table of extra data returned in the spawned event for custom handling
+---@param _extraData table|nil Table of extra data returned in the spawned event for custom handling
 ---@param _femaleChance number|nil The chance the zombie will be a female between 0 to 100, default: 50
-function SpawnerAPI.SpawnZombie(outfitID, x, y, z, extraData, _femaleChance)
+function SpawnerAPI.SpawnZombie(outfitID, x, y, z, _extraData, _femaleChance)
 	if not outfitID then return; end
 
-	if not extraData then extraData = {} end
+	if not _extraData then _extraData = {} end
 
 	if not _femaleChance then _femaleChance = 50 end
 
@@ -130,10 +130,10 @@ function SpawnerAPI.SpawnZombie(outfitID, x, y, z, extraData, _femaleChance)
 	if square then
 		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, _femaleChance)
 		if zombies and zombies:size() > 0 then
-			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, extraData)
+			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, _extraData)
 		end
 	else
-		setToSpawn("Zombie", outfitID, x, y, z, extraData, _femaleChance)
+		setToSpawn("Zombie", outfitID, x, y, z, _extraData, _femaleChance)
 	end
 end
 
