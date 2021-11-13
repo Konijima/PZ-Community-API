@@ -1,4 +1,5 @@
 # Utils
+
 **Contributors:** Shurutsue, Konijima, Chuck, Aiteron  
 **Packages:**  
 - [CommunityAPI.Utils.Color](#communityapiutilscolor)  
@@ -12,26 +13,23 @@
 
 Utility packages to use in your API and Mods.
 
-<p>&nbsp;</p>
+<br>
 
 # Packages
 
 ## CommunityAPI.Utils.Color
-<details>
-<summary>Click to expand!</summary>
-<p>&nbsp;</p>
-  
-<p>&nbsp;</p>
-</details>
+<details><summary>Click to expand!</summary><br>
+
+
+
+<br></details>
 
 
 ________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.Inventory
-<details>
-<summary>Click to expand!</summary>
-<p>&nbsp;</p>
+<details><summary>Click to expand!</summary><br>
   
 ### FindAllItemInInventoryByTag(container, tag)
 Retrieve all items in a container from a tag
@@ -43,17 +41,14 @@ Retrieve all items in a container from a tag
 
 **return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)<[InventoryItem](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/InventoryItem.html)>
 
-<p>&nbsp;</p>
-</details>
+<br></details>
 
   
 ________________________________________________________________________________________________________________________
 
   
 ## CommunityAPI.Utils.Iso
-<details>
-<summary>Click to expand!</summary>
-<p>&nbsp;</p>
+<details><summary>Click to expand!</summary><br>
   
 ### RecursiveGetSquare(object)
 Safely get the square of an IsoObject recursively
@@ -64,7 +59,7 @@ Safely get the square of an IsoObject recursively
 
 **return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
 
-<p>&nbsp;</p>
+<br>
 
 ### GetIsoRange(center, range, fractalOffset)
 Description here
@@ -77,7 +72,7 @@ Description here
 
 **return:** table<[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)>
 
-<p>&nbsp;</p>
+<br>
 
 ### GetIsoGameCharactersInFractalRange(center, range, fractalRange, _lookForType, _addedBooleanFunctions)
 Get all humanoid in fractal range from a center point
@@ -92,7 +87,7 @@ Get all humanoid in fractal range from a center point
 
 **return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
-<p>&nbsp;</p>
+<br>
 
 ### GetIsoGameCharactersInRange(center, range, _lookForType, _addedBooleanFunctions)
 Get all humanoid in range from a center point
@@ -107,8 +102,7 @@ Get all humanoid in range from a center point
 
 **return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
-<p>&nbsp;</p>
-</details>
+<br></details>
 
 
 ________________________________________________________________________________________________________________________
@@ -116,8 +110,7 @@ ________________________________________________________________________________
 
 ## CommunityAPI.Utils.Math
 <details>
-<summary>Click to expand!</summary>
-<p>&nbsp;</p>
+<summary>Click to expand!</summary><br>
   
 ### GetDistance(x1, y1, x2, y2)
 | Param | Type | Description |
@@ -128,17 +121,14 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
-</details>
+<br></details>
 
 
 ________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.String
-<details>
-<summary>Click to expand!</summary>
-<p>&nbsp;</p>
+<details><summary>Click to expand!</summary><br>
   
 ### SquareToId(square)
 | Param | Type | Description |
@@ -149,7 +139,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### PositionToId(x, y ,z)
 | Param | Type | Description |
@@ -160,7 +150,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### SplitString(str, delimiter)
 | Param | Type | Description |
@@ -171,17 +161,14 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
-</details>
+<br></details>
 
 
 ________________________________________________________________________________________________________________________
 
 
 ## CommunityAPI.Utils.Table
-<details>
-<summary>Click to expand!</summary>
-<p>&nbsp;</p>
+<details><summary>Click to expand!</summary><br>
 
 ### CountTableEntries(targetTable)
 | Param | Type | Description |
@@ -192,7 +179,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### GetTableKeys(targetTable)
 | Param | Type | Description |
@@ -203,7 +190,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### TableContains(table, value)
 | Param | Type | Description |
@@ -214,7 +201,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### GetBaseClass(object, level)
 | Param | Type | Description |
@@ -225,7 +212,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### GetAllBaseClasses(object, excludeCurrent)
 | Param | Type | Description |
@@ -236,7 +223,7 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
+<br>
 
 ### IsClassChildOf(object, class)
 | Param | Type | Description |
@@ -247,5 +234,4 @@ ________________________________________________________________________________
 
 **return:** nil
 
-<p>&nbsp;</p>
-</details>
+<br></details>
