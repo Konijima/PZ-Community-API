@@ -22,72 +22,65 @@ ___
 
 ## API Methods
 
-### GetRGB(numberCurrent, numberMax)
-```
-    numberCurrent : number : The current value
-    numberMax     : number : The the maximum value
-    
-    return : table : { r=number, g=number, b=0 } : A color between Red and Green
-```
-### GetReversedRGB(numberCurrent, numberMax)
-```
-    numberCurrent : number : The current value
-    numberMax     : number : The the maximum value
-    
-    return : table : { r=number, g=number, b=0 } : A color between Green and Red
-```
-### GetFloatString(value)
-```
-    value : number : The value to transform
-    
-    return : string : The string result
-```
 ### CreateToolTip(itemFullType)
-```
-    itemFullType : string : The item full type e.g: Base.Axe
-    
-    return : InventoryTooltipField : The tooltip object used to add fields
-```
+Create a new Tooltip for a specific Item
+
+| Param        | Type   | Description                                    |
+|--------------|--------|------------------------------------------------|
+| itemFullType | string | Item to create the tooltip for e.g: "Base.Axe" |
+
+**return:** InventoryTooltipField
 
 ___
 
-## InventoryTooltipField Instance Methods
+## InventoryTooltipField Methods
 
-### addField(labelText, getValueFunction, _labelColor)
-```
-    labelText        : string   : The label text for this field
-    getValueFunction : function : The function to dynamicaly set values
-    _labelColor      : table    : { r=number, g=number, b=number, a=number }
-```
+### addField(name, getValueFunc, _labelColor)
+Add a text field
 
-### addProgress(labelText, value)
-```
-    labelText : string   : The label text for this field
-    value     : number   : The number current progress value from 0.0 to 1.0
-    or
-    value     : function : The function to dynamicaly set values
-```
+| Param        | Type                                                                              | Description                                      |
+|--------------|-----------------------------------------------------------------------------------|--------------------------------------------------|
+| name         | string                                                                            | The field name to appear on the left             |
+| getValueFunc | string\|number\|boolean\|function                                                 | Set the field value directly or using a function |
+| _labelColor  | [Color](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/core/Color.html) | Optionally set the label color                   |
 
-### addLabel(labelText, _labelColor)
-```
-    labelText   : string   : The label text for this field
-    or
-    labelText   : function : The function to dynamicaly set values
-    
-    _labelColor : table    : { r=number, g=number, b=number, a=number }
-```
+**return:** nil
 
-### addExtraItems(labelText, getValueFunc, _labelColor)
-```
-    labelText    : string   : The label text for this field
-    getValueFunc : function : The function to dynamicaly set values
-    _labelColor  : table    : { r=number, g=number, b=number, a=number }
-```
+### addLabel(getValueFunc, _labelColor)
+Add a label
+
+| Param        | Type                                                                              | Description                                           |
+|--------------|-----------------------------------------------------------------------------------|-------------------------------------------------------|
+| getValueFunc | string\|function                                                                  | Set the label text value directly or using a function |
+| _labelColor  | [Color](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/core/Color.html) | Optionally set the label color                        |
+
+**return:** nil
+
+### addProgress(name, getValueFunc)
+Add a progress bar
+
+| Param        | Type                                                                              | Description                                             |
+|--------------|-----------------------------------------------------------------------------------|---------------------------------------------------------|
+| name         | string                                                                            | The field name to appear on the left                    |
+| getValueFunc | number\|function                                                                  | Set the progress bar value directly or using a function |
+| _labelColor  | [Color](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/core/Color.html) | Optionally set the label color                          |
+
+**return:** nil
+
+### addExtraItems(name, getValueFunc, _labelColor)
+Add extra item icons
+
+| Param        | Type                                                                              | Description                          |
+|--------------|-----------------------------------------------------------------------------------|--------------------------------------|
+| name         | string                                                                            | The field name to appear on the left |
+| getValueFunc | function                                                                          | Set the extra items using a function |
+| _labelColor  | [Color](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/core/Color.html) | Optionally set the label color       |
+
+**return:** nil
 
 ### addSpacer()
-```
-    no param
-```
+No parameter  
+**return:** nil
 
 ___
 
@@ -102,7 +95,7 @@ local function myGetValueFunction(result, item)
     result.color = { r=1.0, g=1.0, b=1.0, a=1.0 } -- Set the value color
     result.labelColor = { r=1.0, g=1.0, b=1.0, a=1.0 } -- Set the label color
 end
-newTooltip:addField("New Field", myGetValueFunction)
+newTooltip:addField("New Field Label", myGetValueFunction)
 ```
 
 ___
@@ -117,31 +110,31 @@ local ItemTooltipAPI = CommunityAPI.Client.ItemTooltip
 local baseAxeTooltip = ItemTooltipAPI.CreateToolTip("Base.Axe")
 
 -- Add extra items
-function extraItems(result, item)
+function getExtraItemsFunc(result, item)
     result.value = { "Base.Axe", "Base.Disc" }
 end
-baseAxeTooltip:addExtraItems("Contains", extraItems)
+baseAxeTooltip:addExtraItems("Contains", getExtraItemsFunc)
 
 -- Add regular field
-local function damageField(result, item)
+local function getDamageFieldFunc(result, item)
     result.value = "+10"
     result.color = { r=0, g=1, b=0, a=1 }
 end
-baseAxeTooltip:addField("Damage", damageField)
+baseAxeTooltip:addField("Damage", getDamageFieldFunc)
 
 -- Add progress field
-local function durabilityProgress(result, item)
+local function getDurabilityProgressFunc(result, item)
     result.value = ItemTooltipAPI.GetRGB(0.5, 1.0)
 end
-baseAxeTooltip:addProgress("Durability", durabilityProgress)
+baseAxeTooltip:addProgress("Durability", getDurabilityProgressFunc)
 
 -- Add spacer
 baseAxeTooltip:addSpacer()
 
 -- Add a text label
-local function textLabel(result, item)
+local function getTextLabelFunc(result, item)
     result.value = "Some text label!"
     result.labelColor = { r=0, g=0, b=1, a=1 }
 end
-baseAxeTooltip:addLabel(textLabel)
+baseAxeTooltip:addLabel(getTextLabelFunc)
 ```
