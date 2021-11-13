@@ -58,11 +58,11 @@ Safely get the square of an IsoObject recursively
 ### GetIsoRange(center, range, fractalOffset)
 Description here
 
-| Param         | Type                                                                                                                                                                                            | Description                                                           |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| center        | [IsoObject] (https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare] ( https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center object                                                     |
-| range         | number                                                                                                                                                                                          | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
-| fractalOffset | number                                                                                                                                                                                          | Fractal offset - spreads out squares by this number                   |
+| Param         | Type                                                                                                                                                                                         | Description                                                           |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center        | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center object                                                     |
+| range         | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
 
 **return:** table<[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)>
 
