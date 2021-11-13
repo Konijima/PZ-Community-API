@@ -51,7 +51,46 @@ local function setToSpawn(spawnFuncType, objectType, x, y, z, funcsToApply, extr
 
 	table.insert(farSquarePendingSpawns[positionID], objToAdd)
 end
+
+---@param square IsoGridSquare
+local function parseSquare(square)
+	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
+
+	if #farSquarePendingSpawns < 1 then
+		return
+	end
+
+	local positionID = StringUtils.SquareToId(square)
+	local positions = farSquarePendingSpawns[positionID]
+
+	if #positions < 1 then
+		return
+	end
+
+	for key, entry in pairs(positions) do
+		if (not entry.spawned) then
+
+			local shiftedSquare = square
+			if entry.processSquare then
+				shiftedSquare = entry.processSquare(shiftedSquare)
+			end
+
+			if shiftedSquare then
+				local spawnFunc = SpawnerAPI["spawn"..entry.spawnFuncType]
+
+				if type(spawnFunc) == "function" then
+					local spawnedObject = spawnFunc(entry.objectType, entry.x, entry.y, entry.z, entry.funcsToApply, entry.extraParam)
+					if not spawnFunc(entry.objectType, entry.x, entry.y, entry.z, entry.funcsToApply, entry.extraParam) then
+						print("SpawnerAPI: ERR: item not spawned: "..entry.objectType.." ("..entry.x..","..entry.y..","..entry.z..")")
+					end
+				end
+			end
+			positions[key] = nil
+		end
+	end
+	farSquarePendingSpawns[positionID] = nil
 end
+Events.LoadGridsquare.Add(parseSquare)
 
 ---@param itemType string
 ---@param x number
@@ -144,45 +183,5 @@ function SpawnerAPI.SpawnZombie(outfitID, x, y, z, extraFunctions, femaleChance,
 		setToSpawn("Zombie", outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
 	end
 end
-
----@param square IsoGridSquare
-local function parseSquare(square)
-	local farSquarePendingSpawns = SpawnerAPI.getOrSetPendingSpawnsList()
-
-	if #farSquarePendingSpawns < 1 then
-		return
-	end
-
-	local positionID = StringUtils.SquareToId(square)
-	local positions = farSquarePendingSpawns[positionID]
-
-	if #positions < 1 then
-		return
-	end
-
-	for key,entry in pairs(positions) do
-		if (not entry.spawned) then
-
-			local shiftedSquare = square
-			if entry.processSquare then
-				shiftedSquare = entry.processSquare(shiftedSquare)
-			end
-
-			if shiftedSquare then
-				local spawnFunc = SpawnerAPI["spawn"..entry.spawnFuncType]
-
-				if spawnFunc then
-					local spawnedObject = spawnFunc(entry.objectType, entry.x, entry.y, entry.z, entry.funcsToApply, entry.extraParam)
-					if not spawnedObject then
-						print("SpawnerAPI: ERR: item not spawned: "..entry.objectType.." ("..entry.x..","..entry.y..","..entry.z..")")
-					end
-				end
-			end
-			positions[key] = nil
-		end
-	end
-	farSquarePendingSpawns[positionID] = nil
-end
-Events.LoadGridsquare.Add(parseSquare)
 
 return SpawnerAPI
