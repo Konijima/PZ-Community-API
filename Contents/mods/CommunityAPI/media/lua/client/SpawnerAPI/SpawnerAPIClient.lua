@@ -10,9 +10,11 @@ local SpawnerAPI = {
 	OnVehicleSpawned = {},
 }
 
+local modData
+
 --- Retrieve the SpawnerAPI global modata
 local function getOrSetPendingSpawnsList()
-	local modData = ModData.getOrCreate("SpawnerAPI")
+	modData = modData or ModData.getOrCreate("SpawnerAPI")
 	if not modData.FarSquarePendingSpawns then modData.FarSquarePendingSpawns = {} end
 	return modData.FarSquarePendingSpawns
 end
@@ -44,8 +46,6 @@ end
 local function parseSquare(square)
 	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
 
-	if #farSquarePendingSpawns == 0 then return; end
-
 	local squareId = StringUtils.SquareToId(square)
 	local spawns = farSquarePendingSpawns[squareId]
 
@@ -60,7 +60,6 @@ local function parseSquare(square)
 				end
 			end
 
-			farSquarePendingSpawns[squareId][key] = nil
 		end
 		farSquarePendingSpawns[squareId] = nil
 
@@ -113,7 +112,7 @@ function SpawnerAPI.SpawnVehicle(vehicleType, x, y, z, _extraData)
 end
 
 --- Spawn a Zombie with a specific outfit ID
----@param outfitID string The outfit ID the zombie will spawn with
+---@param outfitID string The outfit ID the zombie will spawn with, e.g: PoliceState
 ---@param x number The X coordinate to spawn the object at
 ---@param y number The Y coordinate to spawn the object at
 ---@param z number The Z coordinate to spawn the object at
@@ -129,6 +128,7 @@ function SpawnerAPI.SpawnZombie(outfitID, x, y, z, _extraData, _femaleChance)
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
 		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, _femaleChance)
+		print(type(zombies), zombies:size())
 		if zombies and zombies:size() > 0 then
 			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, _extraData)
 		end
