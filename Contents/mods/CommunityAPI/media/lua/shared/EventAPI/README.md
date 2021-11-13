@@ -14,6 +14,7 @@ Add, remove and trigger custom events in your API and Mods.
 | modName   | string   | The mod name        |
 | eventName | string   | The event name      |
 | eventFunc | function | The handler to add  |
+
 **return:** nil
 
 ---
@@ -24,6 +25,7 @@ Add, remove and trigger custom events in your API and Mods.
 | modName   | string   | The mod name          |
 | eventName | string   | The event name        |
 | eventFunc | function | The handler to remove |
+
 **return:** nil
 
 ---
@@ -34,6 +36,7 @@ Add, remove and trigger custom events in your API and Mods.
 | modName   | string | The mod name                                      |
 | eventName | string | The event name                                    |
 | varargs   | any    | Any parameters to call the handlers handlers with |
+
 **return:** nil
 
 ---
