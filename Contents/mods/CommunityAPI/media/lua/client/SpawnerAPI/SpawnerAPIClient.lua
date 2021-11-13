@@ -13,9 +13,9 @@ end
 
 ---@param spawned IsoObject | ArrayList
 ---@param functions table table of functions
-local function processExtraFunctionsOnto(spawned,functions)
+local function processExtraFunctionsOnto(spawned, functions)
 	if spawned and functions and (type(functions)=="table") then
-		for _,func in pairs(functions) do
+		for _, func in pairs(functions) do
 			if func then
 				func(spawned)
 			end
@@ -23,7 +23,7 @@ local function processExtraFunctionsOnto(spawned,functions)
 	end
 end
 
----@param spawnFuncType string This string is concated to the end of 'SpawnerAPI.spawn' to run a corresponding function.
+---@param spawnFuncType string This string is concatenated to the end of 'SpawnerAPI.spawn' to run a corresponding function.
 ---@param objectType string Module.Type for Items and Vehicles, OutfitID for Zombies
 ---@param x number
 ---@param y number
