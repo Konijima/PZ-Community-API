@@ -25,5 +25,8 @@ If applicable, add screenshots to help explain your problem.
 - Mod 2
 - Mod 3
 
-## Additional context
-Add any other context about the problem here.
+## Your latest console.txt when the bug occured
+Found at : `C:\Users\<Username>\Zomboid\console.txt`  
+```
+Paste console.txt content here
+```
