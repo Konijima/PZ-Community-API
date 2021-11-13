@@ -27,8 +27,15 @@ end
 ---@param funcsToApply table Table of functions which gets applied on the results of whatever is spawned.
 local function setToSpawn(spawnFuncType, objectType, x, y, z, funcsToApply, extraParam, processSquare)
 	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
-	table.insert(farSquarePendingSpawns,{ spawnFuncType=spawnFuncType, objectType=objectType, x=x, y=y, z=z,
-										  funcsToApply=funcsToApply, extraParam=extraParam, processSquare=processSquare })
+
+	local positionID = StringUtilis.PositionToId(x, y, z)
+	local positionList = farSquarePendingSpawns[positionID]
+	if not positionList then
+		farSquarePendingSpawns[positionID] = {}
+	end
+
+	table.insert(positionList,{ spawnFuncType=spawnFuncType, objectType=objectType, x=x, y=y, z=z,
+								funcsToApply=funcsToApply, extraParam=extraParam, processSquare=processSquare })
 end
 
 ---@param itemType string
@@ -116,16 +123,21 @@ end
 
 ---@param square IsoGridSquare
 local function parseSquare(square)
-	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
+	local farSquarePendingSpawns = SpawnerAPI.getOrSetPendingSpawnsList()
 
 	if #farSquarePendingSpawns < 1 then
 		return
 	end
 
-	local sqX, sqY, sqZ = square:getX(), square:getY(), square:getZ()
-	for key,entry in pairs(farSquarePendingSpawns) do
-		if (not entry.spawned) and entry.x==sqX and entry.y==sqY and entry.z==sqZ then
+	local positionID = StringUtils.SquareToId(square)
+	local positions = farSquarePendingSpawns[positionID]
 
+	if #positions < 1 then
+		return
+	end
+
+	for key,entry in pairs(positions) do
+		if (not entry.spawned) then
 
 			local shiftedSquare = square
 			if entry.processSquare then
@@ -135,16 +147,17 @@ local function parseSquare(square)
 			if shiftedSquare then
 				local spawnFunc = SpawnerAPI["spawn"..entry.spawnFuncType]
 
-				if type(spawnFunc) == "function" then
-					local spawnedObject = spawnFunc(entry.objectType, sqX, sqY, sqZ, entry.funcsToApply, entry.extraParam)
+				if spawnFunc then
+					local spawnedObject = spawnFunc(entry.objectType, entry.x, entry.y, entry.z, entry.funcsToApply, entry.extraParam)
 					if not spawnedObject then
-						print("SpawnerAPI: ERR: item not spawned: "..entry.objectType.." ("..sqX..","..sqY..","..sqZ..")")
+						print("SpawnerAPI: ERR: item not spawned: "..entry.objectType.." ("..entry.x..","..entry.y..","..entry.z..")")
 					end
 				end
 			end
-			farSquarePendingSpawns[key] = nil
+			positions[key] = nil
 		end
 	end
+	farSquarePendingSpawns[positionID] = nil
 end
 Events.LoadGridsquare.Add(parseSquare)
 
