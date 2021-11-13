@@ -12,6 +12,8 @@
 Utility packages to use in your API and Mods.
 
 ## CommunityAPI.Utils.Inventory
+<details>
+<summary>Click to expand!</summary>
 
 ### `CommunityAPI.Utils.Inventory.FindAllItemInInventoryByTag(inventory, tag)`
 | Param     | Type                                                                                                   | Description                     |
@@ -21,9 +23,13 @@ Utility packages to use in your API and Mods.
 
 **return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
 
+</details>
+
 ---
 
 ## CommunityAPI.Utils.Iso
+<details>
+<summary>Click to expand!</summary>
 
 ### `CommunityAPI.Utils.Iso.RecursiveGetSquare(object)`
 | Param | Type | Description |
@@ -61,9 +67,13 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+</details>
+
 ---
 
 ## CommunityAPI.Utils.Math
+<details>
+<summary>Click to expand!</summary>
 
 ### `CommunityAPI.Utils.Math.GetDistance(x1, y1, x2, y2)`
 | Param | Type | Description |
@@ -74,10 +84,13 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+</details>
 
 ---
 
 ## CommunityAPI.Utils.String
+<details>
+<summary>Click to expand!</summary>
 
 ### `CommunityAPI.Utils.String.SquareToId(square)`
 | Param | Type | Description |
@@ -106,9 +119,13 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+</details>
+
 ---
 
 ## CommunityAPI.Utils.Table
+<details>
+<summary>Click to expand!</summary>
 
 ### `CommunityAPI.Utils.Table.CountTableEntries(targetTable)`
 | Param | Type | Description |
@@ -163,4 +180,5 @@ Utility packages to use in your API and Mods.
 |       |      |             |
 
 **return:** nil
-  
+
+</details>
