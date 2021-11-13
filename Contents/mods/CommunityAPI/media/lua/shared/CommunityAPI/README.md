@@ -69,13 +69,17 @@ Description here
 ---
 
 ### GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+Get all humanoid in fractal range from a center point
 
-**return:** nil
+| Param                 | Type                                                                                                                                                                                         | Description                                                           |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center                | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center object                                                     |
+| range                 | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset         | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
+| lookForType           | string \| nil                                                                                                                                                                                | Get only a specific type                                              |
+| addedBooleanFunctions | table                                                                                                                                                                                        | Table of function(s) must return true to pass                         |
+
+**return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
 ---
 
