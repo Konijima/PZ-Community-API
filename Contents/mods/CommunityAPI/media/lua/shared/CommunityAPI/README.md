@@ -5,6 +5,7 @@
 - [CommunityAPI.Utils.Color](#communityapiutilscolor)  
 - [CommunityAPI.Utils.Inventory](#communityapiutilsinventory)  
 - [CommunityAPI.Utils.Iso](#communityapiutilsiso)  
+- [CommunityAPI.Utils.Json](#communityapiutilsjson)  
 - [CommunityAPI.Utils.Math](#communityapiutilsmath)  
 - [CommunityAPI.Utils.String](#communityapiutilsstring)  
 - [CommunityAPI.Utils.Table](#communityapiutilstable)  
@@ -138,6 +139,35 @@ Get the 2D distance between two squares
 
 <br></details>
 
+
+________________________________________________________________________________________________________________________
+
+
+## CommunityAPI.Utils.Json
+<details>
+<summary>Click to expand!</summary><br>
+
+### Encode(value)
+Encode a value into a json string
+
+| Param | Type | Description                 |
+|-------|------|-----------------------------|
+| value | any  | The value to encode to Json |
+
+**return:** string
+
+<br>
+
+### Decode(jsonStr)
+Decode a json string into an lua value
+
+| Param   | Type   | Description               |
+|---------|--------|---------------------------|
+| jsonStr | string | The json string to decode |
+
+**return:** any
+
+<br></details>
 
 ________________________________________________________________________________________________________________________
 
