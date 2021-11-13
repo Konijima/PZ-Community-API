@@ -1,45 +1,41 @@
 local DEBUG = getCore():getDebug()
 
-local events = {}
-
 local EventAPI = {}
+
+-- Store the added handlers
+local handlers = {}
 
 ---@param modName string
 ---@param eventName string
 ---@param eventFunc string
 function EventAPI.Add(modName, eventName, eventFunc)
-    if not events[modName] then events[modName] = {} end
-    if not events[modName][eventName] then events[modName][eventName] = ArrayList.new() end
-    if not events[modName][eventName]:contains(eventFunc) then
-        events[modName][eventName]:add(eventFunc)
-        if DEBUG then print("CommunityAPI: Event [", eventName,"] added in mod [", modName, "]") end
+    local wrapFunc = function(...)
+        if not pcall(eventFunc, ...) then
+            if DEBUG then print("CommunityAPI: Error in triggered Event [", eventName,"] from mod [", modName, "]") end
+            EventAPI.Remove(modName, eventName, eventFunc)
+        end
     end
+    handlers[eventFunc] = wrapFunc
+    LuaEventManager.AddEvent(modName .. "|" .. eventName)
+    Events[modName .. "|" .. eventName].Add(wrapFunc)
+
+    if DEBUG then print("CommunityAPI: Event [", eventName,"] added in mod [", modName, "]") end
 end
 
 ---@param modName string
 ---@param eventName string
 ---@param eventFunc string
 function EventAPI.Remove(modName, eventName, eventFunc)
-    if events[modName] and events[modName][eventName] and events[modName][eventName]:contains(eventFunc) then
-        events[modName][eventName]:remove(eventFunc)
-        if DEBUG then print("CommunityAPI: Event [", eventName,"] removed from mod [", modName, "]") end
-    end
+    Events[modName .. "|" .. eventName].Remove(handlers[eventFunc])
+    if DEBUG then print("CommunityAPI: Event [", eventName,"] removed from mod [", modName, "]") end
 end
 
 ---@param modName string
 ---@param eventName string
 ---@vararg any
 function EventAPI.Trigger(modName, eventName, ...)
-    if events[modName] and events[modName][eventName] then
-        for i=0, events[modName][eventName]:size()-1 do
-            local handler = events[modName][eventName]:get(i)
-            if DEBUG then print("CommunityAPI: Event [", eventName,"] triggered from mod [", modName, "]") end
-            if not pcall(handler, ...) then
-                if DEBUG then print("CommunityAPI: Error in triggered Event [", eventName,"] from mod [", modName, "]") end
-                EventAPI.Remove(modName, eventName, handler)
-            end
-        end
-    end
+    LuaEventManager.triggerEvent(modName .. "|" .. eventName, ...)
+    if DEBUG then print("CommunityAPI: Event [", eventName,"] triggered from mod [", modName, "]") end
 end
 
 return EventAPI
