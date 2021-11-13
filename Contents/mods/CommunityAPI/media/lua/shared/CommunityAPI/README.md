@@ -111,15 +111,30 @@ ________________________________________________________________________________
 ## CommunityAPI.Utils.Math
 <details>
 <summary>Click to expand!</summary><br>
-  
-### GetDistance(x1, y1, x2, y2)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
 
-**return:** nil
+### GetDistance2DBetweenPoints(x1, y1, x2, y2)
+Get the 2D distance between two point
+
+| Param | Type   | Description                  |
+|-------|--------|------------------------------|
+| x1    | number | X coordinate of first point  |
+| y1    | number | Y coordinate of first point  |
+| x2    | number | X coordinate of second point |
+| y2    | number | Y coordinate of second point |
+
+**return:** number
+
+<br>
+
+### GetDistance2DBetweenSquares(square1, square2)
+Get the 2D distance between two squares
+
+| Param   | Type                                                                                             | Description       |
+|---------|--------------------------------------------------------------------------------------------------|-------------------|
+| square1 | [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The first square  |
+| square2 | [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The second square |
+
+**return:** number
 
 <br></details>
 
