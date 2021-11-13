@@ -242,7 +242,7 @@ Get the base class of an object, optionally choose how deep you want to check
 | tableObject | table  | The table object to get the base class from                                        |
 | _level      | number | Get the deepest base class found if level is higher than the total of base classes |
 
-**return:** table | nil
+**return:** table|nil
 
 <br>
 
@@ -254,7 +254,7 @@ Get list of all derived class from the current to the deepest level
 | tableObject     | table   | The table object to get all base class from               |
 | _excludeCurrent | boolean | Optionally exclude the current object class from the list |
 
-**return:** table<table> | nil
+**return:** table<table>|nil
 
 <br>
 
