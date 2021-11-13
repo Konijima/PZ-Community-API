@@ -40,6 +40,8 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+---
+
 ### `CommunityAPI.Utils.Iso.GetIsoRange(center, range, fractalOffset)`
 | Param | Type | Description |
 |-------|------|-------------|
@@ -49,6 +51,8 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+---
+
 ### `CommunityAPI.Utils.Iso.GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)`
 | Param | Type | Description |
 |-------|------|-------------|
@@ -57,6 +61,8 @@ Utility packages to use in your API and Mods.
 |       |      |             |
 
 **return:** nil
+
+---
 
 ### `CommunityAPI.Utils.Iso.GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)`
 | Param | Type | Description |
@@ -101,6 +107,8 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+---
+
 ### `CommunityAPI.Utils.String.PositionToId(x, y ,z)`
 | Param | Type | Description |
 |-------|------|-------------|
@@ -109,6 +117,8 @@ Utility packages to use in your API and Mods.
 |       |      |             |
 
 **return:** nil
+
+---
 
 ### `CommunityAPI.Utils.String.SplitString(str, delimiter)`
 | Param | Type | Description |
@@ -136,6 +146,8 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+---
+
 ### `CommunityAPI.Utils.Table.GetTableKeys(targetTable)`
 | Param | Type | Description |
 |-------|------|-------------|
@@ -144,6 +156,8 @@ Utility packages to use in your API and Mods.
 |       |      |             |
 
 **return:** nil
+
+---
 
 ### `CommunityAPI.Utils.Table.TableContains(table, value)`
 | Param | Type | Description |
@@ -154,6 +168,8 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+---
+
 ### `CommunityAPI.Utils.Table.GetBaseClass(object, level)`
 | Param | Type | Description |
 |-------|------|-------------|
@@ -163,6 +179,8 @@ Utility packages to use in your API and Mods.
 
 **return:** nil
 
+---
+
 ### `CommunityAPI.Utils.Table.GetAllBaseClasses(object, excludeCurrent)`
 | Param | Type | Description |
 |-------|------|-------------|
@@ -171,6 +189,8 @@ Utility packages to use in your API and Mods.
 |       |      |             |
 
 **return:** nil
+
+---
 
 ### `CommunityAPI.Utils.Table.IsClassChildOf(object, class)`
 | Param | Type | Description |
