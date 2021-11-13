@@ -81,7 +81,7 @@ function SpawnerAPI.SpawnItem(itemType, x, y, z, _extraData)
 
 	local square = getCell():getGridSquare(x, y, z)
 	if square then
-		local item = square:AddWorldInventoryItem(itemType, x, y, z)
+		local item = square:AddWorldInventoryItem(itemType, 0, 0, 0)
 		if item then
 			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, square, _extraData)
 		end
