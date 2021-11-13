@@ -26,7 +26,9 @@ If applicable, add screenshots to help explain your problem.
 - Mod 3
 
 ## Your latest console.txt when the bug occured
-Found at : `C:\Users\<Username>\Zomboid\console.txt`  
+On Windows found at : `C:\Users\<Username>\Zomboid\console.txt`
+
+To quickly go to that location, you can copy `%UserProfile%\Zomboid\` into the address bar on the top of the file explorer.
 ```
 Paste console.txt content here
 ```
