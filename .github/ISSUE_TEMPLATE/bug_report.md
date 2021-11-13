@@ -1,5 +1,5 @@
 ## Project Zomboid Version
-your_current_game_version
+[e.g. 41.56-IWBUMS]
 
 ## Describe the bug  
 A clear and concise description of what the bug is.
