@@ -79,12 +79,12 @@ function SpawnerAPI.SpawnItem(itemType, x, y, z, extraData)
 
 	if not extraData then extraData = {} end
 
-	local currentSquare = getSquare(x, y, z)
-	if currentSquare then
-		x, y, z = currentSquare:getX(), currentSquare:getY(), currentSquare:getZ()
-		local item = currentSquare:AddWorldInventoryItem(itemType, x, y, z)
+	local square = getCell():getGridSquare(x, y, z)
+	if square then
+		x, y, z = square:getX(), square:getY(), square:getZ()
+		local item = square:AddWorldInventoryItem(itemType, x, y, z)
 		if item then
-			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, extraData)
+			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, square, extraData)
 		end
 	else
 		setToSpawn("Item", itemType, x, y, z, extraData)
@@ -102,11 +102,11 @@ function SpawnerAPI.SpawnVehicle(vehicleType, x, y, z, extraData)
 
 	if not extraData then extraData = {} end
 
-	local currentSquare = getSquare(x, y, z)
-	if currentSquare then
-		local vehicle = addVehicleDebug(vehicleType, IsoDirections.getRandom(), nil, currentSquare)
+	local square = getCell():getGridSquare(x, y, z)
+	if square then
+		local vehicle = addVehicleDebug(vehicleType, IsoDirections.getRandom(), nil, square)
 		if vehicle then
-			EventAPI.Trigger("SpawnerAPI", "OnVehicleSpawned", vehicle, extraData)
+			EventAPI.Trigger("SpawnerAPI", "OnVehicleSpawned", vehicle, square, extraData)
 		end
 	else
 		setToSpawn("Vehicle", vehicleType, x, y, z, extraData)
@@ -127,12 +127,12 @@ function SpawnerAPI.SpawnZombie(outfitID, x, y, z, extraData, _femaleChance)
 
 	if not _femaleChance then _femaleChance = 50 end
 
-	local currentSquare = getSquare(x, y, z)
-	if currentSquare then
-		x, y, z = currentSquare:getX(), currentSquare:getY(), currentSquare:getZ()
+	local square = getCell():getGridSquare(x, y, z)
+	if square then
+		x, y, z = square:getX(), square:getY(), square:getZ()
 		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, _femaleChance)
 		if zombies and zombies:size() > 0 then
-			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), extraData)
+			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, extraData)
 		end
 	else
 		setToSpawn("Zombie", outfitID, x, y, z, extraData, _femaleChance)
