@@ -60,7 +60,7 @@ Description here
 
 | Param         | Type                                                                                                                                                                                         | Description                                                           |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| center        | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center object                                                     |
+| center        | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center point object                                               |
 | range         | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
 | fractalOffset | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
 
@@ -68,29 +68,33 @@ Description here
 
 ---
 
-### GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
+### GetIsoGameCharactersInFractalRange(center, range, fractalRange, _lookForType, _addedBooleanFunctions)
 Get all humanoid in fractal range from a center point
 
-| Param                 | Type                                                                                                                                                                                         | Description                                                           |
-|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| center                | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center object                                                     |
-| range                 | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
-| fractalOffset         | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
-| lookForType           | string \| nil                                                                                                                                                                                | Get only a specific type                                              |
-| addedBooleanFunctions | table                                                                                                                                                                                        | Table of function(s) must return true to pass                         |
+| Param                  | Type                                                                                                                                                                                         | Description                                                           |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center                 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center point object                                               |
+| range                  | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset          | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
+| _lookForType           | string \| nil                                                                                                                                                                                | Get only a specific type                                              |
+| _addedBooleanFunctions | table \| nil                                                                                                                                                                                 | Table of function(s) must return true to pass                         |
 
 **return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
 ---
 
-### GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
-| Param | Type | Description |
-|-------|------|-------------|
-|       |      |             |
-|       |      |             |
-|       |      |             |
+### GetIsoGameCharactersInRange(center, range, _lookForType, _addedBooleanFunctions)
+Get all humanoid in range from a center point
 
-**return:** nil
+| Param                  | Type                                                                                                                                                                                         | Description                                                           |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center                 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center point object                                               |
+| range                  | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset          | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
+| _lookForType           | string \| nil                                                                                                                                                                                | Get only a specific type                                              |
+| _addedBooleanFunctions | table \| nil                                                                                                                                                                                 | Table of function(s) must return true to pass                         |
+
+**return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
 
 </details>
 
