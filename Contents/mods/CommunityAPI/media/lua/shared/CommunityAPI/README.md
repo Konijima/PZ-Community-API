@@ -15,7 +15,7 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-### `CommunityAPI.Utils.Inventory.FindAllItemInInventoryByTag(inventory, tag)`
+### FindAllItemInInventoryByTag(inventory, tag)
 | Param     | Type                                                                                                   | Description                     |
 |-----------|--------------------------------------------------------------------------------------------------------|---------------------------------|
 | inventory | [ItemContainer](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/ItemContainer.html) | The item container to search in |
@@ -31,7 +31,7 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-### `CommunityAPI.Utils.Iso.RecursiveGetSquare(object)`
+### RecursiveGetSquare(object)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -42,7 +42,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Iso.GetIsoRange(center, range, fractalOffset)`
+### GetIsoRange(center, range, fractalOffset)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -53,7 +53,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Iso.GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)`
+### GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -64,7 +64,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Iso.GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)`
+### GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -81,7 +81,7 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-### `CommunityAPI.Utils.Math.GetDistance(x1, y1, x2, y2)`
+### GetDistance(x1, y1, x2, y2)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -98,7 +98,7 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-### `CommunityAPI.Utils.String.SquareToId(square)`
+### SquareToId(square)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -109,7 +109,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.String.PositionToId(x, y ,z)`
+### PositionToId(x, y ,z)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -120,7 +120,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.String.SplitString(str, delimiter)`
+### SplitString(str, delimiter)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -137,7 +137,7 @@ Utility packages to use in your API and Mods.
 <details>
 <summary>Click to expand!</summary>
 
-### `CommunityAPI.Utils.Table.CountTableEntries(targetTable)`
+### CountTableEntries(targetTable)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -148,7 +148,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Table.GetTableKeys(targetTable)`
+### GetTableKeys(targetTable)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -159,7 +159,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Table.TableContains(table, value)`
+### TableContains(table, value)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -170,7 +170,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Table.GetBaseClass(object, level)`
+### GetBaseClass(object, level)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -181,7 +181,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Table.GetAllBaseClasses(object, excludeCurrent)`
+### GetAllBaseClasses(object, excludeCurrent)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
@@ -192,7 +192,7 @@ Utility packages to use in your API and Mods.
 
 ---
 
-### `CommunityAPI.Utils.Table.IsClassChildOf(object, class)`
+### IsClassChildOf(object, class)
 | Param | Type | Description |
 |-------|------|-------------|
 |       |      |             |
