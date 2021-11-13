@@ -47,7 +47,7 @@ Safely get the square of an IsoObject recursively
 
 | Param  | Type                                                                                                                                                                                         | Description                       |
 |--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The object to get the square from |
+| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html)\|[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The object to get the square from |
 
 **return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
 
