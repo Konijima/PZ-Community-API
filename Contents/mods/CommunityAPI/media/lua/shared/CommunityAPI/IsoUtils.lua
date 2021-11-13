@@ -1,7 +1,7 @@
 local IsoUtils = {}
 
 --- Safely get the square of an IsoObject recursively
----@param object IsoObject|IsoGridSquare
+---@param object IsoObject|IsoGridSquare The center point object
 ---@return IsoGridSquare
 function IsoUtils.RecursiveGetSquare(object)
     if instanceof(object, "IsoGridSquare") then
@@ -24,10 +24,11 @@ function IsoUtils.RecursiveGetSquare(object)
     return square
 end
 
----@param center IsoObject|IsoGridSquare
----@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
----@param fractalOffset number fractal offset - spreads out squares by this number
----@return table<number, IsoGridSquare>
+
+---@param center IsoObject|IsoGridSquare The center point object
+---@param range number Tiles to scan from center, not including center. ex: range of 1 = 3x3
+---@param fractalOffset number Fractal offset - spreads out squares by this number
+---@return table<number,IsoGridSquare>
 function IsoUtils.GetIsoRange(center, range, fractalOffset)
     center = IsoUtils.RecursiveGetSquare(center)
     if not center then
@@ -94,13 +95,13 @@ function IsoUtils.GetIsoRange(center, range, fractalOffset)
 end
 
 --- Get all humanoid in fractal range from a center point
----@param center IsoObject|IsoGridSquare the center point
----@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
----@param fractalRange number number of rows, made up of `range`, from the center range
----@param lookForType string|nil get only a specific type
----@param addedBooleanFunctions table table of function(s) must return true to pass
----@return table<number, IsoGameCharacter>
-function IsoUtils.GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
+---@param center IsoObject|IsoGridSquare The center point object
+---@param range number Tiles to scan from center, not including center. ex: range of 1 = 3x3
+---@param fractalRange number Number of rows, made up of `range`, from the center range
+---@param _lookForType string|nil Get only a specific type
+---@param _addedBooleanFunctions table|nil Table of function(s) must return true to pass
+---@return table<number,IsoGameCharacter>
+function IsoUtils.GetIsoGameCharactersInFractalRange(center, range, fractalRange, _lookForType, _addedBooleanFunctions)
     center = IsoUtils.RecursiveGetSquare(center)
     if not center then
         return {}
@@ -113,7 +114,7 @@ function IsoUtils.GetIsoGameCharactersInFractalRange(center, range, fractalRange
     ---print("getHumanoidsInFractalRange: centers found: "..#fractalCenters)
     --pass through each "center square" found
     for i=1, #fractalCenters do
-        local objectsFound = IsoUtils.GetIsoGameCharactersInRange(fractalCenters[i], range, lookForType, addedBooleanFunctions)
+        local objectsFound = IsoUtils.GetIsoGameCharactersInRange(fractalCenters[i], range, _lookForType, _addedBooleanFunctions)
         ---print(" fractal center "..i..":  "..#objectsFound)
         --store a list of objectsFound within the fractalObjectsFound list
         table.insert(fractalObjectsFound, objectsFound)
@@ -123,12 +124,12 @@ function IsoUtils.GetIsoGameCharactersInFractalRange(center, range, fractalRange
 end
 
 --- Get all humanoid in range from a center point
----@param center IsoObject|IsoGridSquare the center point
----@param range number tiles to scan from center, not including center. ex: range of 1 = 3x3
----@param lookForType string|nil get only a specific type
----@param addedBooleanFunctions table table of function(s) must return true to pass
+---@param center IsoObject|IsoGridSquare The center point object
+---@param range number Tiles to scan from center, not including center. ex: range of 1 = 3x3
+---@param _lookForType string|nil Get only a specific type
+---@param _addedBooleanFunctions table Table of function(s) must return true to pass
 ---@return table<number, IsoGameCharacter>
-function IsoUtils.GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
+function IsoUtils.GetIsoGameCharactersInRange(center, range, _lookForType, _addedBooleanFunctions)
     center = IsoUtils.RecursiveGetSquare(center)
     if not center then
         return {}
@@ -147,11 +148,11 @@ function IsoUtils.GetIsoGameCharactersInRange(center, range, lookForType, addedB
             ---@type IsoMovingObject|IsoGameCharacter foundObject
             local foundObj = squareContents[i]
 
-            if instanceof(foundObj, "IsoGameCharacter") and (not lookForType or instanceof(foundObj, lookForType)) then
+            if instanceof(foundObj, "IsoGameCharacter") and (not _lookForType or instanceof(foundObj, _lookForType)) then
 
                 local booleanPass = true
-                if addedBooleanFunctions and (#addedBooleanFunctions > 0) then
-                    for k,func in pairs(addedBooleanFunctions) do
+                if _addedBooleanFunctions and (#_addedBooleanFunctions > 0) then
+                    for k,func in pairs(_addedBooleanFunctions) do
                         if not func(foundObj) then
                             booleanPass = false
                         end
