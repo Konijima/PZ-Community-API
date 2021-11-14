@@ -4,7 +4,7 @@ require("Items/ProceduralDistributions")
 
 local MainDistributionTable = {}
 
----@param locationParts table<number, string>
+---@param locationParts table<string>
 local function getLocation(locationParts)
     if type(locationParts) == "table" then
         local partCount = #locationParts
