@@ -1,151 +1,176 @@
----@class SpawnerAPI
-local SpawnerAPI = {}
+require("CommunityAPI")
 
+local EventAPI = CommunityAPI.Shared.Event
+local StringUtils = CommunityAPI.Utils.String
+
+---@class SpawnerAPI
+local SpawnerAPI = {
+	OnItemSpawned = {},
+	OnZombieSpawned = {},
+	OnVehicleSpawned = {},
+}
+
+local modData
+
+--- Retrieve the SpawnerAPI global modata
 local function getOrSetPendingSpawnsList()
-	local modData = ModData.getOrCreate("SpawnerAPI")
+	modData = modData or ModData.getOrCreate("SpawnerAPI")
 	if not modData.FarSquarePendingSpawns then modData.FarSquarePendingSpawns = {} end
 	return modData.FarSquarePendingSpawns
 end
 
----@param spawned IsoObject | ArrayList
----@param functions table table of functions
-local function processExtraFunctionsOnto(spawned,functions)
-	if spawned and functions and (type(functions)=="table") then
-		for _,func in pairs(functions) do
-			if func then
-				func(spawned)
-			end
-		end
-	end
-end
-
----@param spawnFuncType string This string is concated to the end of 'SpawnerAPI.spawn' to run a corresponding function.
----@param objectType string Module.Type for Items and Vehicles, OutfitID for Zombies
----@param x number
----@param y number
----@param z number
----@param funcsToApply table Table of functions which gets applied on the results of whatever is spawned.
-local function setToSpawn(spawnFuncType, objectType, x, y, z, funcsToApply, extraParam, processSquare)
+--- Internal function to set an object to spawn later
+local function setToSpawn(spawnFuncType, objectType, x, y, z, extraData, _femaleChance)
 	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
-	table.insert(farSquarePendingSpawns,{ spawnFuncType=spawnFuncType, objectType=objectType, x=x, y=y, z=z,
-										  funcsToApply=funcsToApply, extraParam=extraParam, processSquare=processSquare })
+
+	local positionID = StringUtils.PositionToId(x, y, z)
+
+	if not farSquarePendingSpawns[positionID] then
+		farSquarePendingSpawns[positionID] = {}
+	end
+
+	local objToAdd = {
+		spawnFuncType = spawnFuncType,
+		objectType = objectType,
+		x = x,
+		y = y,
+		z = z,
+		extraData = extraData,
+		femaleChance = _femaleChance
+	}
+
+	table.insert(farSquarePendingSpawns[positionID], objToAdd)
 end
 
----@param itemType string
----@param x number
----@param y number
----@param z number
----@param extraFunctions table
----@param extraParam any
----@param processSquare function
-function SpawnerAPI.SpawnItem(itemType, x, y, z, extraFunctions, extraParam, processSquare)
-	if not itemType then
-		return
-	end
-
-	local currentSquare = getSquare(x,y,z)
-	if processSquare then
-		currentSquare = processSquare(currentSquare)
-	end
-
-	if currentSquare then
-		x, y, z = currentSquare:getX(), currentSquare:getY(), currentSquare:getZ()
-		local item = currentSquare:AddWorldInventoryItem(itemType, x, y, z)
-		if item then
-			processExtraFunctionsOnto(item,extraFunctions)
-		end
-	else
-		setToSpawn("Item", itemType, x, y, z, extraFunctions, extraParam, processSquare)
-	end
-end
-
----@param vehicleType string
----@param x number
----@param y number
----@param z number
----@param extraFunctions table
----@param extraParam any
----@param processSquare function
-function SpawnerAPI.SpawnVehicle(vehicleType, x, y, z, extraFunctions, extraParam, processSquare)
-	if not vehicleType then
-		return
-	end
-
-	local currentSquare = getSquare(x,y,z)
-	if processSquare then
-		currentSquare = processSquare(currentSquare)
-	end
-
-	if currentSquare then
-		local vehicle = addVehicleDebug(vehicleType, IsoDirections.getRandom(), nil, currentSquare)
-		if vehicle then
-			processExtraFunctionsOnto(vehicle,extraFunctions)
-		end
-	else
-		setToSpawn("Vehicle", vehicleType, x, y, z, extraFunctions, extraParam, processSquare)
-	end
-end
-
----@param outfitID string
----@param x number
----@param y number
----@param z number
----@param extraFunctions table
----@param femaleChance number extraParam for other spawners 0-100
----@param processSquare function
-function SpawnerAPI.SpawnZombie(outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
-	if not outfitID then
-		return
-	end
-
-	local currentSquare = getSquare(x,y,z)
-	if processSquare then
-		currentSquare = processSquare(currentSquare)
-	end
-
-	if currentSquare then
-		x, y, z = currentSquare:getX(), currentSquare:getY(), currentSquare:getZ()
-		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, femaleChance)
-		if zombies and zombies:size()>0 then
-			processExtraFunctionsOnto(zombies,extraFunctions)
-		end
-	else
-		setToSpawn("Zombie", outfitID, x, y, z, extraFunctions, femaleChance, processSquare)
-	end
-end
-
----@param square IsoGridSquare
+--- Internal function to spawn pending objects
 local function parseSquare(square)
 	local farSquarePendingSpawns = getOrSetPendingSpawnsList()
 
-	if #farSquarePendingSpawns < 1 then
-		return
-	end
+	if farSquarePendingSpawns then
 
-	local sqX, sqY, sqZ = square:getX(), square:getY(), square:getZ()
-	for key,entry in pairs(farSquarePendingSpawns) do
-		if (not entry.spawned) and entry.x==sqX and entry.y==sqY and entry.z==sqZ then
+		local squareId = StringUtils.SquareToId(square)
+		local spawns = farSquarePendingSpawns[squareId]
 
-
-			local shiftedSquare = square
-			if entry.processSquare then
-				shiftedSquare = entry.processSquare(shiftedSquare)
-			end
-
-			if shiftedSquare then
-				local spawnFunc = SpawnerAPI["spawn"..entry.spawnFuncType]
+		if spawns and #spawns > 0 then
+			for _, spawn in pairs(spawns) do
+				local spawnFunc = SpawnerAPI["Spawn" .. spawn.spawnFuncType]
 
 				if type(spawnFunc) == "function" then
-					local spawnedObject = spawnFunc(entry.objectType, sqX, sqY, sqZ, entry.funcsToApply, entry.extraParam)
-					if not spawnedObject then
-						print("SpawnerAPI: ERR: item not spawned: "..entry.objectType.." ("..sqX..","..sqY..","..sqZ..")")
+					if not pcall(spawnFunc, spawn.objectType, spawn.x, spawn.y, spawn.z, spawn.extraData, spawn.femaleChance) then
+						print("SpawnerAPI: Error spawning ["..spawn.objectType.."] at ("..spawn.x..", "..spawn.y..", "..spawn.z..")")
 					end
 				end
+
 			end
-			farSquarePendingSpawns[key] = nil
+			farSquarePendingSpawns[squareId] = nil
 		end
 	end
 end
 Events.LoadGridsquare.Add(parseSquare)
+
+--- Spawn an item of type
+---@param itemType string The item type to spawn e.g: Base.Axe
+---@param x number The X coordinate to spawn the object at
+---@param y number The Y coordinate to spawn the object at
+---@param z number The Z coordinate to spawn the object at
+---@param _extraData table|nil Table of extra data returned in the spawned event for custom handling
+function SpawnerAPI.SpawnItem(itemType, x, y, z, _extraData)
+	if not itemType then return; end
+
+	if not _extraData then _extraData = {} end
+
+	local square = getCell():getGridSquare(x, y, z)
+	if square then
+		local item = square:AddWorldInventoryItem(itemType, 0, 0, 0)
+		if item then
+			EventAPI.Trigger("SpawnerAPI", "OnItemSpawned", item, square, _extraData)
+		end
+	else
+		setToSpawn("Item", itemType, x, y, z, _extraData)
+	end
+end
+
+--- Spawn a vehicle of type
+---@param vehicleType string The vehicle type to spawn e.g: Base.Vehicle_PickUpVan
+---@param x number The X coordinate to spawn the object at
+---@param y number The Y coordinate to spawn the object at
+---@param z number The Z coordinate to spawn the object at
+---@param _extraData table|nil Table of extra data returned in the spawned event for custom handling
+function SpawnerAPI.SpawnVehicle(vehicleType, x, y, z, _extraData)
+	if not vehicleType then return; end
+
+	if not _extraData then _extraData = {} end
+
+	local square = getCell():getGridSquare(x, y, z)
+	if square then
+		local vehicle = addVehicleDebug(vehicleType, IsoDirections.getRandom(), nil, square)
+		if vehicle then
+			EventAPI.Trigger("SpawnerAPI", "OnVehicleSpawned", vehicle, square, _extraData)
+		end
+	else
+		setToSpawn("Vehicle", vehicleType, x, y, z, _extraData)
+	end
+end
+
+--- Spawn a Zombie with a specific outfit ID
+---@param outfitID string The outfit ID the zombie will spawn with, e.g: PoliceState
+---@param x number The X coordinate to spawn the object at
+---@param y number The Y coordinate to spawn the object at
+---@param z number The Z coordinate to spawn the object at
+---@param _extraData table|nil Table of extra data returned in the spawned event for custom handling
+---@param _femaleChance number|nil The chance the zombie will be a female between 0 to 100, default: 50
+function SpawnerAPI.SpawnZombie(outfitID, x, y, z, _extraData, _femaleChance)
+	if not outfitID then return; end
+
+	if not _extraData then _extraData = {} end
+
+	if not _femaleChance then _femaleChance = 50 end
+
+	local square = getCell():getGridSquare(x, y, z)
+	if square then
+		local zombies = addZombiesInOutfit(x, y, z, 1, outfitID, _femaleChance)
+		if zombies and zombies:size() > 0 then
+			EventAPI.Trigger("SpawnerAPI", "OnZombieSpawned", zombies:get(0), square, _extraData)
+		end
+	else
+		setToSpawn("Zombie", outfitID, x, y, z, _extraData, _femaleChance)
+	end
+end
+
+--- Add a function handler for when an item has been spawned
+---@param func function The function handler to add
+function SpawnerAPI.OnItemSpawned.Add(func)
+	EventAPI.Add("SpawnerAPI", "OnItemSpawned", func)
+end
+
+--- Remove a function handler previously added
+---@param func function The function handler to remove
+function SpawnerAPI.OnItemSpawned.Remove(func)
+	EventAPI.Remove("SpawnerAPI", "OnItemSpawned", func)
+end
+
+--- Add a function handler for when a vehicle has been spawned
+---@param func function The function handler to add
+function SpawnerAPI.OnVehicleSpawned.Add(func)
+	EventAPI.Add("SpawnerAPI", "OnVehicleSpawned", func)
+end
+
+--- Remove a function handler previously added
+---@param func function The function handler to remove
+function SpawnerAPI.OnVehicleSpawned.Remove(func)
+	EventAPI.Remove("SpawnerAPI", "OnVehicleSpawned", func)
+end
+
+--- Add a function handler for when a zombie has been spawned
+---@param func function The function handler to add
+function SpawnerAPI.OnZombieSpawned.Add(func)
+	EventAPI.Add("SpawnerAPI", "OnZombieSpawned", func)
+end
+
+--- Remove a function handler previously added
+---@param func function The function handler to remove
+function SpawnerAPI.OnZombieSpawned.Remove(func)
+	EventAPI.Remove("SpawnerAPI", "OnZombieSpawned", func)
+end
 
 return SpawnerAPI
