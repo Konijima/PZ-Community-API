@@ -27,7 +27,7 @@ end
 ---@param center IsoObject|IsoGridSquare The center point object
 ---@param range number Tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param fractalOffset number Fractal offset - spreads out squares by this number
----@return table<IsoGridSquare>
+---@return table<number, IsoGridSquare>
 function IsoUtils.GetIsoRange(center, range, fractalOffset)
     center = IsoUtils.RecursiveGetSquare(center)
     if not center then
@@ -99,7 +99,7 @@ end
 ---@param fractalRange number Number of rows, made up of `range`, from the center range
 ---@param _lookForType string|nil Get only a specific type
 ---@param _addedBooleanFunctions table|nil Table of function(s) must return true to pass
----@return table<IsoGameCharacter>
+---@return table<number, IsoGameCharacter>
 function IsoUtils.GetIsoGameCharactersInFractalRange(center, range, fractalRange, _lookForType, _addedBooleanFunctions)
     center = IsoUtils.RecursiveGetSquare(center)
     if not center then
@@ -127,7 +127,7 @@ end
 ---@param range number Tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param _lookForType string|nil Get only a specific type
 ---@param _addedBooleanFunctions table Table of function(s) must return true to pass
----@return table<IsoGameCharacter>
+---@return table<number, IsoGameCharacter>
 function IsoUtils.GetIsoGameCharactersInRange(center, range, _lookForType, _addedBooleanFunctions)
     center = IsoUtils.RecursiveGetSquare(center)
     if not center then
