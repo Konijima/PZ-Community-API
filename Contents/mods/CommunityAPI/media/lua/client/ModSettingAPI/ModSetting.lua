@@ -6,6 +6,7 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 ---@class ModSetting
 ModSetting = {}
 ModSetting.Data = {}
+ModSetting.SettingValuesBuffer = {}
 ModSetting.SettingValues = {}
 
 -- Hook 
@@ -33,6 +34,7 @@ function MainOptions:create()
     ModSetting:loadModSettingPanel(panel)
 end
 
+-- Hook 
 local defaultMainOptions_apply = MainOptions.apply
 function MainOptions:apply(closeAfter)
     ModSetting:saveValues()
@@ -40,24 +42,41 @@ function MainOptions:apply(closeAfter)
     defaultMainOptions_apply(self, closeAfter)
 end
 
+-- Hook 
 local defaultMainOptions_close = MainOptions.close
 function MainOptions:close()
     for modID, _ in pairs(ModSetting.Data) do
-        ModSetting:updateSettings(modID)
+        ModSetting:updateSettingView(modID)
     end
     defaultMainOptions_close(self)
 end
 
+-- Hook
+local defaultMainScreen_onMenuItemMouseDownMainMenu = MainScreen.onMenuItemMouseDownMainMenu
+MainScreen.onMenuItemMouseDownMainMenu = function(item, x, y)
+    ModSetting.listbox.selected = 1
+    if ModSetting.listbox.items[ModSetting.listbox.selected] ~= nil then
+        ModSetting:updateSettingView(ModSetting.listbox.items[ModSetting.listbox.selected].item)    
+    end
+    defaultMainScreen_onMenuItemMouseDownMainMenu(item, x, y)
+end
+
 function ModSetting:saveValues()
+    for modID, data in pairs(ModSetting.SettingValuesBuffer) do
+        for settName, value in pairs(data) do
+            ModSetting.SettingValues[modID][settName] = value
+        end
+    end
     for _, viewObject in ipairs(ModSetting.tabs.viewList) do
         local settDataFromTab = viewObject.view:getSettingValues()
         for settingName, value in pairs(settDataFromTab) do
             ModSetting.SettingValues[viewObject.view.modID][settingName] = value
-            print(settingName, value, "HERE")
+            print(settingName, value)
         end        
 	end
+
     for modID, data in pairs(ModSetting.SettingValues) do
-        local saved_presets = getFileWriter("cAPI_ModSettings_" .. modID .. ".txt", true, false)
+        local saved_presets = getFileWriter("cAPI_ModSettings" .. getFileSeparator() .. modID .. ".txt", true, false)
         saved_presets:write(jsonUtils.Encode(data))
         saved_presets:close()
     end
@@ -74,6 +93,7 @@ function ModSetting:loadModSettingPanel(panel)
     self.listbox.drawBorder = true;
     self.listbox.doDrawItem = ModSetting.modListDrawItem;
     self.listbox:setOnMouseDownFunction(self.panel, ModSetting.onClickOption);
+    self.listbox.selected = 1
     self.panel:addChild(self.listbox);
 
     -- Tabs container panel
@@ -92,13 +112,14 @@ function ModSetting:loadModSettingPanel(panel)
     for modID, _ in pairs(ModSetting.Data) do
         local modInfo = getModInfoByID(modID)
         if modInfo == nil then
-            self.listbox:addItem("IncorrectModID", modID);
+            self.listbox:addItem("IncorrectModID " .. modID, modID);
         else
             self.listbox:addItem(modInfo:getName(), modID);
         end
     end
+
     if self.listbox.items[self.listbox.selected] ~= nil then
-        ModSetting:updateSettings(self.listbox.items[self.listbox.selected].item)    
+        ModSetting:updateSettingView(self.listbox.items[self.listbox.selected].item)    
     end
 end
 
@@ -117,10 +138,20 @@ function ModSetting:modListDrawItem(y, item, alt)
 end
 
 function ModSetting.onClickOption(option)
-    ModSetting:updateSettings(ModSetting.listbox.items[ModSetting.listbox.selected].item)
+    ModSetting:updateSettingView(ModSetting.listbox.items[ModSetting.listbox.selected].item)
 end
 
-function ModSetting:updateSettings(modID)
+function ModSetting:updateSettingView(modID)
+    for _, viewObject in ipairs(ModSetting.tabs.viewList) do
+        local settDataFromTab = viewObject.view:getSettingValues()
+        for settingName, value in pairs(settDataFromTab) do
+            if ModSetting.SettingValuesBuffer[viewObject.view.modID] == nil then
+                ModSetting.SettingValuesBuffer[viewObject.view.modID] = {}
+            end
+            ModSetting.SettingValuesBuffer[viewObject.view.modID][settingName] = value
+        end        
+	end
+
     -- clear old tabs in tab panel
 	for _, viewObject in ipairs(self.tabs.viewList) do
 		self.tabs:removeChild(viewObject.view);

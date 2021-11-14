@@ -5,8 +5,8 @@ require("ModSettingAPI/ModSettingHorizontalLine")
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 
----@class ModSettingTab
-ModSettingTab = ISPanelJoypad:derive("ModSettingTab");
+---@class ModSettingPanel
+ModSettingPanel = ISPanelJoypad:derive("ModSettingPanel");
 
 ---@param settingName string
 ---@param settingCategoryName string|nil
@@ -14,7 +14,7 @@ ModSettingTab = ISPanelJoypad:derive("ModSettingTab");
 ---@param settingValueType ModSettingAPI.ValueType
 ---@param settingDefaultValue string|number|table.RGB|bool|Keyboard.Key_    --- Depends on settingValueType
 ---@param settingData table.Options --- Table with (string)options for ModSettingAPI.ValueType.ComboBox
-function ModSettingTab:addSetting(settingName, settingCategoryName, settingLabelName, settingValueType, settingDefaultValue, settingData)
+function ModSettingPanel:addSetting(settingName, settingCategoryName, settingLabelName, settingValueType, settingDefaultValue, settingData)
     if settingName == nil or settingLabelName == nil or settingValueType == nil then return end
 
     if settingCategoryName == nil then
@@ -34,13 +34,8 @@ function ModSettingTab:addSetting(settingName, settingCategoryName, settingLabel
     end
 end
 
----@param settingName string
-function ModSettingTab:getSettingValue(settingName)
-    return ModSetting.SettingValues[self.modID][settingName]
-end
-
 --- ISPanelJoypad functions ---
-function ModSettingTab:new(modID, tabName)
+function ModSettingPanel:new(modID, tabName)
     local o = {}
 	o = ISPanelJoypad:new(0, 0, 100, 100);
 	setmetatable(o, self)
@@ -66,17 +61,17 @@ function ModSettingTab:new(modID, tabName)
 end
 
 
-function ModSettingTab:initialise()
+function ModSettingPanel:initialise()
 	ISPanelJoypad.initialise(self);
 end
 
-function ModSettingTab:createChildren()
+function ModSettingPanel:createChildren()
     ISPanelJoypad.createChildren(self);
 
     if ModSetting.SettingValues[self.modID] ~= nil then
         for settName, value in pairs(ModSetting.SettingValues[self.modID]) do
             if self.settings[settName] ~= nil then
-                self.settings[settName].value = value    
+                self.settings[settName].value = value   
             end
         end
     end
@@ -226,7 +221,7 @@ function ModSettingTab:createChildren()
     self:setScrollHeight(y + 20)
 end
 
-function ModSettingTab:addCategory(y, catName)
+function ModSettingPanel:addCategory(y, catName)
     y = y + 15;
 
     local sbarWidth = 13
@@ -244,27 +239,27 @@ function ModSettingTab:addCategory(y, catName)
 end
 
 
-function ModSettingTab:onClick(button)
+function ModSettingPanel:onClick(button)
 end
 
-function ModSettingTab:instantiate()
+function ModSettingPanel:instantiate()
     ISPanelJoypad.instantiate(self);
 
     self:setScrollChildren(true)
     self:addScrollBars();
 end
 
-function ModSettingTab:prerender()
+function ModSettingPanel:prerender()
     self:setStencilRect(0,0,self:getWidth(),self:getHeight());
     ISPanelJoypad.prerender(self);
 end
 
-function ModSettingTab:render()
+function ModSettingPanel:render()
     ISPanelJoypad.render(self);
     self:clearStencilRect();
 end
 
-function ModSettingTab:getSettingValues()
+function ModSettingPanel:getSettingValues()
     local valueTable = {}
     for settName, data in pairs(self.settingsData) do
         if data[1] == ModSettingAPI.ValueType.CheckBox then
