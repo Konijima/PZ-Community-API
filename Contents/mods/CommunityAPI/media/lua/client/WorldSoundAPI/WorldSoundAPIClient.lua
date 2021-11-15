@@ -74,7 +74,7 @@ local Sounds = {}
 ---@param x number
 ---@param y number
 ---@param z number
----@param soundList string|table<string>
+---@param soundList string|string[]
 function WorldSoundAPI.AddSoundAt(name, x, y, z, soundList)
     local id = StringUtils.PositionToId(x, y, z)
     if not Sounds[id] then
