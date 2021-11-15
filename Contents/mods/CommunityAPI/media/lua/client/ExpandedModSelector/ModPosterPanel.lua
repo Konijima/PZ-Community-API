@@ -1,8 +1,8 @@
 require("OptionsScreens/ModSelector")
 
-ModPosterPanel = ISPanelJoypad:derive("ModPosterPanel")
+local _ModPosterPanel = ISPanelJoypad:derive("_ModPosterPanel")
 
-function ModPosterPanel:render()
+function _ModPosterPanel:render()
 	ISPanelJoypad.render(self)
 
 	if self.modInfo and (self.modInfo:getPosterCount() > 0) then
@@ -20,14 +20,16 @@ function ModPosterPanel:render()
 	end
 end
 
-function ModPosterPanel:setJoypadFocused(focused)
+function _ModPosterPanel:setJoypadFocused(focused)
 end
 
-function ModPosterPanel:setModInfo(modInfo)
+function _ModPosterPanel:setModInfo(modInfo)
 	self.modInfo = modInfo
 end
 
-function ModPosterPanel:new(x, y, width, height)
+function _ModPosterPanel:new(x, y, width, height)
 	local o = ISPanelJoypad.new(self, x, y, width, height)
 	return o
 end
+
+return _ModPosterPanel

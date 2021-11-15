@@ -8,9 +8,9 @@ local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 local MAP_ICON = getTexture("media/ui/ExpandedModSelector/MapIcon.png")
 local DEFAULT_ICON = getTexture("media/ui/ExpandedModSelector/DefaultIcon.png")
 
-ModListBox = ISScrollingListBox:derive("ModListbox")
+local _ModListBox = ISScrollingListBox:derive("_ModListBox")
 
-function ModListBox:onMouseDown(x, y)
+function _ModListBox:onMouseDown(x, y)
 	-- stop you from changing mods while in mod order UI
 	if not self.parent.modorderui or not self.parent.modorderui:isVisible() then
 		if #self.items == 0 then return end
@@ -25,13 +25,14 @@ function ModListBox:onMouseDown(x, y)
 		if self.mouseOverButton then
 			self.parent:forceActivateMods(self.mouseOverButton.item.modInfo, not self.parent:isModActive(self.mouseOverButton.item.modInfo));
 			self.parent.savedPresets.selected = 1
+			self.parent.modsWasChanged = true
 		else
 			self.selected = row
 		end
 	end
 end
 
-function ModListBox:doDrawItem(y, item, alt)
+function _ModListBox:doDrawItem(y, item, alt)
 	if item.item.visible == nil then return y end
 
 	local modInfo = item.item.modInfo
@@ -130,24 +131,24 @@ function ModListBox:doDrawItem(y, item, alt)
 	return y;
 end
 
-function ModListBox:onJoypadDirRight(joypadData)
+function _ModListBox:onJoypadDirRight(joypadData)
 	self:setJoypadFocused(false, joypadData)
 	joypadData.focus = self.parent.infoPanel
 	updateJoypadFocus(joypadData)
 end
 
-function ModListBox:onJoypadBeforeDeactivate(joypadData)
+function _ModListBox:onJoypadBeforeDeactivate(joypadData)
 	self.parent:onJoypadBeforeDeactivate(joypadData)
 end
 
-function ModListBox:new(x, y, width, height)
+function _ModListBox:new(x, y, width, height)
 	local o = ISScrollingListBox.new(self, x, y, width, height)
 	return o
 end
 
 ----- Filter functions -----
 
-function ModListBox:checkFilter(item)
+function _ModListBox:checkFilter(item)
 	local filterEntry = self.parent.filterEntry
 	local modInfo = item.modInfo
 	local modInfoExtra = item.modInfoExtra
@@ -171,7 +172,7 @@ function ModListBox:checkFilter(item)
 	return false
 end
 
-function ModListBox:updateFilter()
+function _ModListBox:updateFilter()
 	for _, i in ipairs(self.items) do
 		local item = i.item
 
@@ -182,3 +183,5 @@ function ModListBox:updateFilter()
 		end
 	end
 end
+
+return _ModListBox

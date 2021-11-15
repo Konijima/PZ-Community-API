@@ -1,13 +1,9 @@
-require("OptionsScreens/ModSelector")
 
-local FONT_HGT_TITLE = getTextManager():getFontHeight(UIFont.Title)
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
-local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
-local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 
-ModInfoPanel = ISPanelJoypad:derive("ModInfoPanel")
+local _ModInfoPanel = ISPanelJoypad:derive("_ModInfoPanel")
 
-function ModInfoPanel:createChildren()
+function _ModInfoPanel:createChildren()
 	local scrollBarWid = 13
 
 	local panel = ModPosterPanel:new(0, 0, self.width - scrollBarWid, 360)
@@ -155,17 +151,17 @@ function ModInfoPanel:createChildren()
     self.joypadIndex = 1
 end
 
-function ModInfoPanel:onMouseWheel(del)
+function _ModInfoPanel:onMouseWheel(del)
 	self:setYScroll(self:getYScroll() - (del * 40))
 	return true
 end
 
-function ModInfoPanel:prerender()
+function _ModInfoPanel:prerender()
 	self:setStencilRect(0, 0, self:getWidth(), self:getHeight())
 	ISPanelJoypad.prerender(self)
 end
 
-function ModInfoPanel:render()
+function _ModInfoPanel:render()
 	ISPanelJoypad.render(self)
 
 	local x = 200
@@ -184,7 +180,7 @@ function ModInfoPanel:render()
 	end
 end
 
-function ModInfoPanel:setModInfo(modInfo)
+function _ModInfoPanel:setModInfo(modInfo)
 	if modInfo == self.modInfo then return end
 	self.modInfo = modInfo
 
@@ -301,21 +297,23 @@ function ModInfoPanel:setModInfo(modInfo)
 	self:setScrollHeight(self.urlButton:getBottom() + 20)
 end
 
-function ModInfoPanel:onJoypadDirLeft(joypadData)
+function _ModInfoPanel:onJoypadDirLeft(joypadData)
 	self.parent.listbox:setJoypadFocused(true, joypadData)
 end
 
-function ModInfoPanel:onLoseJoypadFocus(joypadData)
+function _ModInfoPanel:onLoseJoypadFocus(joypadData)
 	self:clearJoypadFocus()
 	ISPanelJoypad.onLoseJoypadFocus(self, joypadData)
 end
 
-function ModInfoPanel:onJoypadBeforeDeactivate(joypadData)
+function _ModInfoPanel:onJoypadBeforeDeactivate(joypadData)
 	self.parent:onJoypadBeforeDeactivate(joypadData)
 end
 
-function ModInfoPanel:new(x, y, width, height)
+function _ModInfoPanel:new(x, y, width, height)
 	local o = ISPanelJoypad.new(self, x, y, width, height)
 	o.backgroundColor.a = 1.0
 	return o
 end
+
+return _ModInfoPanel

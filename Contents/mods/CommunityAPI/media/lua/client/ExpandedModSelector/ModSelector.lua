@@ -1,30 +1,36 @@
-require("OptionsScreens/ModSelector")
+require("CommunityAPI")
+local _ModInfoPanel = require("ExpandedModSelector/ModInfoPanel")
+local _ModListBox = require("ExpandedModSelector/ModListBox")
+local _ModPosterPanel = require("ExpandedModSelector/ModPosterPanel")
+local _ModThumbnailPanel = require("ExpandedModSelector/ModThumbnailPanel")
+
+
+local ModSettingAPI = CommunityAPI.Client.ModSetting
 
 local FONT_HGT_TITLE = getTextManager():getFontHeight(UIFont.Title)
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
-local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 
-ModSelector = ISPanelJoypad:derive("ModSelector");
-ModSelector.incompatible = {}
-ModSelector.turnedOnModsOnOpenWindow = {}
+local _ModSelector = ISPanelJoypad:derive("_ModSelector");
+_ModSelector.incompatible = {}
+_ModSelector.turnedOnModsOnOpenWindow = {}
 
-function ModSelector:initialise()
+function _ModSelector:initialise()
     ISPanelJoypad.initialise(self);
 end
 
-function ModSelector:getActiveMods()
+function _ModSelector:getActiveMods()
 	if self.loadGameFolder then
 		return ActiveMods.getById("currentGame")
 	end
 	return ActiveMods.getById(self.isNewGame and "currentGame" or "default")
 end
 
-function ModSelector:isModActive(modInfo)
+function _ModSelector:isModActive(modInfo)
 	return self:getActiveMods():isModActive(modInfo:getId())
 end
 
-function ModSelector:onDblClickMap(item)
+function _ModSelector:onDblClickMap(item)
 	if not self.modorderui or not self.modorderui:isVisible() then
 		if self.listbox:isMouseOverScrollBar() then return end
 		if self.listbox.mouseOverButton then
@@ -34,7 +40,7 @@ function ModSelector:onDblClickMap(item)
 	end
 end
 
-function ModSelector:forceActivateMods(modInfo, activate)
+function _ModSelector:forceActivateMods(modInfo, activate)
 	if modInfo:isAvailable() then
 		self:getActiveMods():setModActive(modInfo:getId(), activate);
 		-- we also activate the required mod if needed
@@ -66,15 +72,15 @@ function ModSelector:forceActivateMods(modInfo, activate)
 	self.mapConflicts = self.mapGroups:checkMapConflicts()
 end
 
-function ModSelector:onModsEnabledTick(option, selected)
+function _ModSelector:onModsEnabledTick(option, selected)
 	getCore():setOptionModsEnabled(selected)
 end
 
 --************************************************************************--
---** ModSelector:instantiate
+--** _ModSelector:instantiate
 --**
 --************************************************************************--
-function ModSelector:instantiate()
+function _ModSelector:instantiate()
     self.javaObject = UIElement.new(self);
     self.javaObject:setX(self.x);
     self.javaObject:setY(self.y);
@@ -84,9 +90,11 @@ function ModSelector:instantiate()
     self.javaObject:setAnchorRight(self.anchorRight);
     self.javaObject:setAnchorTop(self.anchorTop);
     self.javaObject:setAnchorBottom(self.anchorBottom);
+
+	self.modsWasChanged = false
 end
 
-function ModSelector:populateListBox(directories)
+function _ModSelector:populateListBox(directories)
 	self.listbox:clear();
 	local modIDs = {}
 	for _,directory in ipairs(directories) do
@@ -139,7 +147,7 @@ function ModSelector:populateListBox(directories)
 	self.listbox:updateFilter()
 end
 
-function ModSelector:setExistingSavefile(folder)
+function _ModSelector:setExistingSavefile(folder)
 	self.loadGameFolder = folder
 	local info = getSaveInfo(folder)
 	local activeMods = info.activeMods or ActiveMods.getById("default")
@@ -150,7 +158,7 @@ function ModSelector:setExistingSavefile(folder)
 	self.loadGameMapName = info.mapName or 'Muldraugh, KY'
 end
 
-function ModSelector:create()
+function _ModSelector:create()
     local labelHgt = FONT_HGT_SMALL
     self.smallFontHgt = labelHgt
     local buttonHgt = math.max(25, FONT_HGT_SMALL + 3 * 2)
@@ -171,10 +179,10 @@ function ModSelector:create()
     self.listbox:setAnchorBottom(true);
     self.listbox.itemheight = 128;
     self.listbox.drawBorder = true
-    self.listbox:setOnMouseDoubleClick(self, ModSelector.onDblClickMap);
+    self.listbox:setOnMouseDoubleClick(self, _ModSelector.onDblClickMap);
     self:addChild(self.listbox);
 
-    self.backButton = ISButton:new(16, self.height-buttonHgt - 5, 100, buttonHgt, getText("UI_btn_back"), self, ModSelector.onOptionMouseDown);
+    self.backButton = ISButton:new(16, self.height-buttonHgt - 5, 100, buttonHgt, getText("UI_btn_back"), self, _ModSelector.onOptionMouseDown);
     self.backButton.internal = "BACK";
     self.backButton:initialise();
     self.backButton:instantiate();
@@ -189,7 +197,7 @@ function ModSelector:create()
     self:addChild(self.backButton);
 
 	-- Preset combo box
-	self.savedPresets = ISComboBox:new(self.backButton:getRight()+16, self.backButton:getY(), 250, self.backButton:getHeight(), self, ModSelector.loadPreset);
+	self.savedPresets = ISComboBox:new(self.backButton:getRight()+16, self.backButton:getY(), 250, self.backButton:getHeight(), self, _ModSelector.loadPreset);
 	self.savedPresets:setAnchorTop(false);
 	self.savedPresets:setAnchorBottom(true);
 	self.savedPresets.openUpwards = true;
@@ -203,7 +211,7 @@ function ModSelector:create()
 	end
 
 	--- Preset buttons ---
-	self.saveBuildButton = ISButton:new(self.savedPresets:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_btn_save"), self, ModSelector.onOptionMouseDown);
+	self.saveBuildButton = ISButton:new(self.savedPresets:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_btn_save"), self, _ModSelector.onOptionMouseDown);
 	self.saveBuildButton.internal = "SAVE_PRESET"
 	self.saveBuildButton:initialise();
 	self.saveBuildButton:instantiate();
@@ -214,7 +222,7 @@ function ModSelector:create()
 	self.saveBuildButton.borderColor = { r = 1, g = 1, b = 1, a = 0.1 };
 	self:addChild(self.saveBuildButton);
 
-    self.delBuildButton = ISButton:new(self.saveBuildButton:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_btn_delete"), self, ModSelector.onOptionMouseDown);
+    self.delBuildButton = ISButton:new(self.saveBuildButton:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_btn_delete"), self, _ModSelector.onOptionMouseDown);
 	self.delBuildButton.internal = "DELETE_PRESET"
 	self.delBuildButton:initialise();
 	self.delBuildButton:instantiate();
@@ -225,7 +233,7 @@ function ModSelector:create()
 	self.delBuildButton.borderColor = { r = 1, g = 1, b = 1, a = 0.1 };
 	self:addChild(self.delBuildButton);
 
-    self.allBuildButton = ISButton:new(self.delBuildButton:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_EMS_Enable_All"), self, ModSelector.onOptionMouseDown);
+    self.allBuildButton = ISButton:new(self.delBuildButton:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_EMS_Enable_All"), self, _ModSelector.onOptionMouseDown);
 	self.allBuildButton.internal = "TURN_ON_ALL_PRESET"
 	self.allBuildButton:initialise();
 	self.allBuildButton:instantiate();
@@ -236,7 +244,7 @@ function ModSelector:create()
 	self.allBuildButton.borderColor = { r = 1, g = 1, b = 1, a = 0.1 };
 	self:addChild(self.allBuildButton);
 
-    self.noneBuildButton = ISButton:new(self.allBuildButton:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_EMS_Disable_All"), self, ModSelector.onOptionMouseDown);
+    self.noneBuildButton = ISButton:new(self.allBuildButton:getRight() + 10, self.backButton:getY(), 50, 25, getText("UI_EMS_Disable_All"), self, _ModSelector.onOptionMouseDown);
 	self.noneBuildButton.internal = "DISABLE_ALL_PRESET"
 	self.noneBuildButton:initialise();
 	self.noneBuildButton:instantiate();
@@ -250,7 +258,7 @@ function ModSelector:create()
 
     local size = getTextManager():MeasureStringX(UIFont.Small, getText("UI_EMS_Open_Workshop"));
     local size = math.max(size + 10 * 2, 100)
-    self.getModButton = ISButton:new(16, self.topRect.y + 8, size, buttonHgt,  getText("UI_EMS_Open_Workshop"), self, ModSelector.onOptionMouseDown);
+    self.getModButton = ISButton:new(16, self.topRect.y + 8, size, buttonHgt,  getText("UI_EMS_Open_Workshop"), self, _ModSelector.onOptionMouseDown);
     self.getModButton.internal = "OPEN_WORKSHOP";
     self.getModButton:initialise();
     self.getModButton:instantiate();
@@ -281,7 +289,7 @@ function ModSelector:create()
 	end
 	self.filterEntry = entry
 
-	self.acceptButton = ISButton:new(self.width - 16, self.height - buttonHgt - 5, 100, buttonHgt, getText("UI_btn_accept"), self, ModSelector.onOptionMouseDown);
+	self.acceptButton = ISButton:new(self.width - 16, self.height - buttonHgt - 5, 100, buttonHgt, getText("UI_btn_accept"), self, _ModSelector.onOptionMouseDown);
 	self.acceptButton.internal = "DONE";
 	self.acceptButton:initialise();
 	self.acceptButton:instantiate();
@@ -298,7 +306,7 @@ function ModSelector:create()
 	self.acceptButton:setWidth(self.acceptButton.width + 32)
 	self.acceptButton:setX(self.width - 16 - self.acceptButton.width)
 
-	self.modOrderbtn = ISButton:new(self.acceptButton:getRight() - 16 - 100, self.height - buttonHgt - 5, 100, buttonHgt, getText("UI_mods_ModsOrder"), self, ModSelector.onOptionMouseDown);
+	self.modOrderbtn = ISButton:new(self.acceptButton:getRight() - 16 - 100, self.height - buttonHgt - 5, 100, buttonHgt, getText("UI_mods_ModsOrder"), self, _ModSelector.onOptionMouseDown);
 	self.modOrderbtn.internal = "MODSORDER";
 	self.modOrderbtn:initialise();
 	self.modOrderbtn:instantiate();
@@ -341,7 +349,7 @@ function ModSelector:create()
 	self.versionLabel = label
 
 	-- Choose what mods select
-	local combo = ISComboBox:new(self.filterEntry:getX() + self.filterEntry:getWidth() + 16, self.getModButton:getY(), 260, 25, self, ModSelector_onModsModified);
+	local combo = ISComboBox:new(self.filterEntry:getX() + self.filterEntry:getWidth() + 16, self.getModButton:getY(), 260, 25, self, _ModSelector_onModsModified);
 	combo:initialise();
 	combo:addOption(getText("UI_EMS_All_mods"))
     combo:addOption(getText("UI_EMS_Map_mods"))
@@ -354,8 +362,8 @@ function ModSelector:create()
 	self.chooseModCatComboBox = combo
 end
 
-function ModSelector:prerender()
-	ModSelector.instance = self
+function _ModSelector:prerender()
+	_ModSelector.instance = self
 	self:updateButtons();
     self.listbox.mouseOverButton = nil
     ISPanelJoypad.prerender(self);
@@ -383,7 +391,7 @@ function ModSelector:prerender()
     self:drawTextCentre(getText("UI_mods_SelectMods"), self.width / 2, 10, 1, 1, 1, 1, UIFont.Title);
 end
 
-function ModSelector:updateButtons()
+function _ModSelector:updateButtons()
 	local item = self.listbox.items[self.listbox.selected]
 	if item then
 		local modInfo = item.item.modInfo
@@ -420,21 +428,21 @@ function ModSelector:updateButtons()
 	end
 end
 
-function ModSelector:onBack()
+function _ModSelector:onBack()
 	self:populateListBox(getModDirectoryTable())
 
 	for i,k in ipairs(self.listbox.items) do
 		if k.item.isActive then
-			if not ModSelector.turnedOnModsOnOpenWindow[k.item.modInfo:getId()] then
+			if not _ModSelector.turnedOnModsOnOpenWindow[k.item.modInfo:getId()] then
 				self:getActiveMods():setModActive(k.item.modInfo:getId(), false)
 			end
 		else
-			if ModSelector.turnedOnModsOnOpenWindow[k.item.modInfo:getId()] then
+			if _ModSelector.turnedOnModsOnOpenWindow[k.item.modInfo:getId()] then
 				self:getActiveMods():setModActive(k.item.modInfo:getId(), true)
 			end
 		end
 	end
-	ModSelector.turnedOnModsOnOpenWindow = {}
+	_ModSelector.turnedOnModsOnOpenWindow = {}
 
 	if self.modorderui then
 		self.modorderui:removeFromUIManager()
@@ -457,7 +465,7 @@ function ModSelector:onBack()
 	end
 end
 
-function ModSelector:onAccept()
+function _ModSelector:onAccept()
 	if self.modorderui then
 		self.modorderui:removeFromUIManager()
 	end
@@ -516,11 +524,32 @@ function ModSelector:onAccept()
 	end
 end
 
-function ModSelector:onOptionMouseDown(button, x, y)
+function _ModSelector:onOptionMouseDown(button, x, y)
 	if button.internal == "DONE" then
 		self:onAccept()
 	elseif button.internal == "BACK" then
-		self:onBack()
+		if self.modsWasChanged then
+			local w,h = 350,120
+			self.modal = ISModalDialog:new((getCore():getScreenWidth() / 2) - w / 2,
+				(getCore():getScreenHeight() / 2) - h / 2, w, h,
+				getText("UI_optionscreen_ConfirmPrompt"), true, self, function(self, button, x, y)
+					if button.internal == "YES" then
+						self:onAccept()
+					else
+						self:onBack()
+					end
+				end);
+			self.modal:initialise()
+			self.modal:setCapture(true)
+			self.modal:setAlwaysOnTop(true)
+			self.modal:addToUIManager()
+			if self.joyfocus then
+				self.joyfocus.focus = self.modal
+				updateJoypadFocus(self.joyfocus)
+			end
+		else
+			self:onBack()
+		end
 	elseif button.internal == "TOGGLE" then
 		local item = self.listbox.items[self.listbox.selected].item
 		self:forceActivateMods(item.modInfo, not self:isModActive(item.modInfo))
@@ -546,7 +575,7 @@ function ModSelector:onOptionMouseDown(button, x, y)
 		self.modorderui:initialise();
 		self.modorderui:addToUIManager();
 	elseif button.internal == "SAVE_PRESET" then
-		self.inputModal = self:inputModal(true, nil, nil, nil, nil, "", ModSelector.inputModalOnMouseDown, self);
+		self.inputModal = self:inputModal(true, nil, nil, nil, nil, "", _ModSelector.inputModalOnMouseDown, self);
 		self.inputModal.backgroundColor.a = 0.9
 		self.inputModal:setValidateFunction(self, self.saveBuildValidate)
 	elseif button.internal == "DELETE_PRESET" then
@@ -587,7 +616,7 @@ function ModSelector:onOptionMouseDown(button, x, y)
 	end
 end
 
-function ModSelector:onGainJoypadFocus(joypadData)
+function _ModSelector:onGainJoypadFocus(joypadData)
     ISPanelJoypad.onGainJoypadFocus(self, joypadData);
     self.listbox:setISButtonForB(self.backButton);
     self.infoPanel:setISButtonForB(self.backButton);
@@ -596,7 +625,7 @@ function ModSelector:onGainJoypadFocus(joypadData)
     joypadData.focus = self.listbox;
 end
 
-function ModSelector:onResolutionChange(oldw, oldh, neww, newh)
+function _ModSelector:onResolutionChange(oldw, oldh, neww, newh)
 	self.listbox:setWidth(self:getWidth() / 2 - self.listbox:getX())
 	self.listbox:recalcSize()
 	self.listbox.vscroll:setX(self.listbox:getWidth() - 16)
@@ -606,18 +635,18 @@ function ModSelector:onResolutionChange(oldw, oldh, neww, newh)
 	self.infoPanel:setX(urlX)
 end
 
-function ModSelector:onJoypadBeforeDeactivate(joypadData)
+function _ModSelector:onJoypadBeforeDeactivate(joypadData)
 	self.backButton:clearJoypadButton()
 	self.hasJoypadFocus = false
 	-- focus is on listbox or infoPanel
 	self.joyfocus = nil
 end
 
-function ModSelector:new(x, y, width, height)
+function _ModSelector:new(x, y, width, height)
     local o = {}
     --o.data = {}
     o = ISPanelJoypad:new(x, y, width, height);
-    ModSelector.instance = o;
+    _ModSelector.instance = o;
     setmetatable(o, self)
     self.__index = self
     o.x = x;
@@ -639,8 +668,8 @@ function ModSelector:new(x, y, width, height)
     return o
 end
 
-function ModSelector_onModsModified()
-	local self = ModSelector.instance
+function _ModSelector_onModsModified()
+	local self = _ModSelector.instance
 	if self and self.listbox and self:isReallyVisible() then
 		local index = self.listbox.selected
 		self:populateListBox(getModDirectoryTable())
@@ -650,15 +679,15 @@ function ModSelector_onModsModified()
 	end
 end
 
-Events.OnModsModified.Add(ModSelector_onModsModified)
+Events.OnModsModified.Add(_ModSelector_onModsModified)
 
 -----
 
-function ModSelector.showNagPanel()
-	ModSelector.turnedOnModsOnOpenWindow = {}
-	for i,k in ipairs(ModSelector.instance.listbox.items) do
+function _ModSelector.showNagPanel()
+	_ModSelector.turnedOnModsOnOpenWindow = {}
+	for i,k in ipairs(_ModSelector.instance.listbox.items) do
 		if k.item.isActive then
-			ModSelector.turnedOnModsOnOpenWindow[k.item.modInfo:getId()] = true
+			_ModSelector.turnedOnModsOnOpenWindow[k.item.modInfo:getId()] = true
 		end
 	end
 
@@ -667,7 +696,7 @@ function ModSelector.showNagPanel()
 	end
 	getCore():setModsPopupDone(true)
 
-	ModSelector.instance:setVisible(false)
+	_ModSelector.instance:setVisible(false)
 
 	local width = 650
 	local height = 400
@@ -686,7 +715,7 @@ function ModSelector.showNagPanel()
 end
 
 ----- Preset functions
-function ModSelector:loadPreset(box)
+function _ModSelector:loadPreset(box)
 	local preset = box.options[box.selected]
 	if preset == nil then return end
 
@@ -716,9 +745,11 @@ function ModSelector:loadPreset(box)
 	if count_fail > 0 then
 		luautils.okModal("Mods failed to load: "..count_fail.."\n\n"..failed_mods, true);
 	end
+
+	self.modsWasChanged = true
 end
 
-function ModSelector:readSaveFile()
+function _ModSelector:readSaveFile()
 	local retVal = {};
 
 	local saveFile = getFileReader("CAPI_mod_presets.txt", true);
@@ -734,7 +765,7 @@ function ModSelector:readSaveFile()
 	return retVal;
 end
 
-function ModSelector:writeSaveFile(options)
+function _ModSelector:writeSaveFile(options)
 	local saved_presets = getFileWriter("CAPI_mod_presets.txt", true, false)
 	for key,val in pairs(options) do
 		saved_presets:write(key.."="..val.."\n");
@@ -742,7 +773,7 @@ function ModSelector:writeSaveFile(options)
 	saved_presets:close();
 end
 
-function ModSelector:inputModal(_centered, _width, _height, _posX, _posY, _text, _onclick, target, param1, param2) -- {{{
+function _ModSelector:inputModal(_centered, _width, _height, _posX, _posY, _text, _onclick, target, param1, param2) -- {{{
     -- based on luautils.okModal
     local posX = _posX or 0;
     local posY = _posY or 0;
@@ -770,7 +801,7 @@ function ModSelector:inputModal(_centered, _width, _height, _posX, _posY, _text,
     return modal;
 end
 
-function ModSelector:inputModalOnMouseDown(button, joypadData)
+function _ModSelector:inputModalOnMouseDown(button, joypadData)
 	if button.internal == "CANCEL" then
 		button.parent.colorPicker:removeFromUIManager();
 		return
@@ -809,12 +840,12 @@ function ModSelector:inputModalOnMouseDown(button, joypadData)
 	button.parent.colorPicker:removeFromUIManager();
 end
 
-function ModSelector:saveBuildValidate(text)
+function _ModSelector:saveBuildValidate(text)
 	return text ~= "" and not text:contains("/") and not text:contains("\\") and
 		not text:contains(":") and not text:contains(";") and not text:contains('"') and not text:contains('=')
 end
 
-function ModSelector:readInfoExtra(modId)
+function _ModSelector:readInfoExtra(modId)
 	local modInfo = getModInfoByID(modId)
 	local modInfoExtra = {}
 	
@@ -858,33 +889,47 @@ function ModSelector:readInfoExtra(modId)
 	return modInfoExtra
 end
 
-function ModSelector:updateIncompatibility()
+function _ModSelector:updateIncompatibility()
 	for _, i in ipairs(self.listbox.items) do
 		local item = i.item
 
 		if item.modInfoExtra.incompatible ~= nil then
-			if ModSelector.incompatible[item.modInfo:getId()] == nil then
-				ModSelector.incompatible[item.modInfo:getId()] = {}
+			if _ModSelector.incompatible[item.modInfo:getId()] == nil then
+				_ModSelector.incompatible[item.modInfo:getId()] = {}
 			end
 			for _, val in ipairs(item.modInfoExtra.incompatible) do
-				ModSelector.incompatible[item.modInfo:getId()][val] = true
-				if ModSelector.incompatible[val] == nil then
-					ModSelector.incompatible[val] = {}
+				_ModSelector.incompatible[item.modInfo:getId()][val] = true
+				if _ModSelector.incompatible[val] == nil then
+					_ModSelector.incompatible[val] = {}
 				end
-				ModSelector.incompatible[val][item.modInfo:getId()] = true
+				_ModSelector.incompatible[val][item.modInfo:getId()] = true
 			end
 		end
 	end
 end
 
-function ModSelector:isModIncompatible(modId)
-	if ModSelector.incompatible[modId] ~= nil then
-		for val, _ in pairs(ModSelector.incompatible[modId]) do
+function _ModSelector:isModIncompatible(modId)
+	if _ModSelector.incompatible[modId] ~= nil then
+		for val, _ in pairs(_ModSelector.incompatible[modId]) do
 			if self:getActiveMods():isModActive(val) then
 				return true
 			end
 		end
 	end
 	return false
+end
+
+local cAPISettingSection = ModSettingAPI:getSection("CommunityAPI", "Main")
+if cAPISettingSection == nil then
+	cAPISettingSection = ModSettingAPI:createSection("CommunityAPI", "Main")
+end
+cAPISettingSection:addSetting("ExpandedModSelector", "Expanded Mod Selector", "Enable Expanded mod selector", ModSettingAPI.ValueType.CheckBox, true)
+
+if ModSettingAPI:getSettingValue("CommunityAPI", "ExpandedModSelector") then
+	ModSelector = _ModSelector
+	ModInfoPanel = _ModInfoPanel
+	ModListBox = _ModListBox
+	ModPosterPanel = _ModPosterPanel
+	ModThumbnailPanel = _ModThumbnailPanel
 end
 

@@ -1,8 +1,8 @@
 require("OptionsScreens/ModSelector")
 
-ModThumbnailPanel = ISPanelJoypad:derive("ModThumbnailPanel")
+_ModThumbnailPanel = ISPanelJoypad:derive("_ModThumbnailPanel")
 
-function ModThumbnailPanel:render()
+function _ModThumbnailPanel:render()
 	ISPanelJoypad.render(self)
 
 	if self.modInfo and (self.modInfo:getPosterCount() > 0) then
@@ -38,32 +38,32 @@ function ModThumbnailPanel:render()
 	end
 end
 
-function ModThumbnailPanel:onMouseDown(x, y)
+function _ModThumbnailPanel:onMouseDown(x, y)
 	self.index = self:getIndexAt(x, y) + 1
 	self.pressed = true
 end
 
-function ModThumbnailPanel:onMouseUp(x, y)
+function _ModThumbnailPanel:onMouseUp(x, y)
 	self.pressed = false
 end
 
-function ModThumbnailPanel:onMouseUpOutside(x, y)
+function _ModThumbnailPanel:onMouseUpOutside(x, y)
 	self.pressed = false
 end
 
-function ModThumbnailPanel:onMouseMove(dx, dy)
+function _ModThumbnailPanel:onMouseMove(dx, dy)
 	if self.pressed then
 		self:setXScroll(self:getXScroll() + dx)
 	end
 end
 
-function ModThumbnailPanel:onMouseMoveOutside(dx, dy)
+function _ModThumbnailPanel:onMouseMoveOutside(dx, dy)
 	if self.pressed then
 		self:onMouseMove(dx, dy)
 	end
 end
 
-function ModThumbnailPanel:getIndexAt(x, y)
+function _ModThumbnailPanel:getIndexAt(x, y)
 	if not self.modInfo or self.modInfo:getPosterCount() == 0 then
 		return -1
 	end
@@ -75,14 +75,14 @@ function ModThumbnailPanel:getIndexAt(x, y)
 	return index
 end
 
-function ModThumbnailPanel:setJoypadFocused(focused)
+function _ModThumbnailPanel:setJoypadFocused(focused)
 end
 
-function ModThumbnailPanel:setModInfo(modInfo)
+function _ModThumbnailPanel:setModInfo(modInfo)
 	self.modInfo = modInfo
 end
 
-function ModThumbnailPanel:new(x, y, width, height)
+function _ModThumbnailPanel:new(x, y, width, height)
 	local o = ISPanelJoypad.new(self, x, y, width, height)
 	o.padX = 10
 	o.padY = 8
@@ -91,3 +91,5 @@ function ModThumbnailPanel:new(x, y, width, height)
 	o.index = 1
 	return o
 end
+
+return _ModThumbnailPanel
