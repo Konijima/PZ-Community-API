@@ -6,9 +6,9 @@ local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 local MAP_ICON = getTexture("media/ui/ExpandedModSelector/MapIcon.png")
 local DEFAULT_ICON = getTexture("media/ui/ExpandedModSelector/DefaultIcon.png")
 
-local _ModListBox = ISScrollingListBox:derive("_ModListBox")
+local EMS_ModListBox = ISScrollingListBox:derive("EMS_ModListBox")
 
-function _ModListBox:onMouseDown(x, y)
+function EMS_ModListBox:onMouseDown(x, y)
 	-- stop you from changing mods while in mod order UI
 	if not self.parent.modorderui or not self.parent.modorderui:isVisible() then
 		if #self.items == 0 then return end
@@ -30,7 +30,7 @@ function _ModListBox:onMouseDown(x, y)
 	end
 end
 
-function _ModListBox:doDrawItem(y, item, alt)
+function EMS_ModListBox:doDrawItem(y, item, alt)
 	if item.item.visible == nil then return y end
 
 	local modInfo = item.item.modInfo
@@ -129,24 +129,24 @@ function _ModListBox:doDrawItem(y, item, alt)
 	return y;
 end
 
-function _ModListBox:onJoypadDirRight(joypadData)
+function EMS_ModListBox:onJoypadDirRight(joypadData)
 	self:setJoypadFocused(false, joypadData)
 	joypadData.focus = self.parent.infoPanel
 	updateJoypadFocus(joypadData)
 end
 
-function _ModListBox:onJoypadBeforeDeactivate(joypadData)
+function EMS_ModListBox:onJoypadBeforeDeactivate(joypadData)
 	self.parent:onJoypadBeforeDeactivate(joypadData)
 end
 
-function _ModListBox:new(x, y, width, height)
+function EMS_ModListBox:new(x, y, width, height)
 	local o = ISScrollingListBox.new(self, x, y, width, height)
 	return o
 end
 
 ----- Filter functions -----
 
-function _ModListBox:checkFilter(item)
+function EMS_ModListBox:checkFilter(item)
 	local filterEntry = self.parent.filterEntry
 	local modInfo = item.modInfo
 	local modInfoExtra = item.modInfoExtra
@@ -170,7 +170,7 @@ function _ModListBox:checkFilter(item)
 	return false
 end
 
-function _ModListBox:updateFilter()
+function EMS_ModListBox:updateFilter()
 	for _, i in ipairs(self.items) do
 		local item = i.item
 
@@ -182,4 +182,4 @@ function _ModListBox:updateFilter()
 	end
 end
 
-return _ModListBox
+return EMS_ModListBox

@@ -1,9 +1,9 @@
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 
-local _ModInfoPanel = ISPanelJoypad:derive("_ModInfoPanel")
+local EMS_ModInfoPanel = ISPanelJoypad:derive("EMS_ModInfoPanel")
 
-function _ModInfoPanel:createChildren()
+function EMS_ModInfoPanel:createChildren()
 	local scrollBarWid = 13
 
 	local panel = ModPosterPanel:new(0, 0, self.width - scrollBarWid, 360)
@@ -151,17 +151,17 @@ function _ModInfoPanel:createChildren()
     self.joypadIndex = 1
 end
 
-function _ModInfoPanel:onMouseWheel(del)
+function EMS_ModInfoPanel:onMouseWheel(del)
 	self:setYScroll(self:getYScroll() - (del * 40))
 	return true
 end
 
-function _ModInfoPanel:prerender()
+function EMS_ModInfoPanel:prerender()
 	self:setStencilRect(0, 0, self:getWidth(), self:getHeight())
 	ISPanelJoypad.prerender(self)
 end
 
-function _ModInfoPanel:render()
+function EMS_ModInfoPanel:render()
 	ISPanelJoypad.render(self)
 
 	local x = 200
@@ -180,7 +180,7 @@ function _ModInfoPanel:render()
 	end
 end
 
-function _ModInfoPanel:setModInfo(modInfo)
+function EMS_ModInfoPanel:setModInfo(modInfo)
 	if modInfo == self.modInfo then return end
 	self.modInfo = modInfo
 
@@ -297,23 +297,23 @@ function _ModInfoPanel:setModInfo(modInfo)
 	self:setScrollHeight(self.urlButton:getBottom() + 20)
 end
 
-function _ModInfoPanel:onJoypadDirLeft(joypadData)
+function EMS_ModInfoPanel:onJoypadDirLeft(joypadData)
 	self.parent.listbox:setJoypadFocused(true, joypadData)
 end
 
-function _ModInfoPanel:onLoseJoypadFocus(joypadData)
+function EMS_ModInfoPanel:onLoseJoypadFocus(joypadData)
 	self:clearJoypadFocus()
 	ISPanelJoypad.onLoseJoypadFocus(self, joypadData)
 end
 
-function _ModInfoPanel:onJoypadBeforeDeactivate(joypadData)
+function EMS_ModInfoPanel:onJoypadBeforeDeactivate(joypadData)
 	self.parent:onJoypadBeforeDeactivate(joypadData)
 end
 
-function _ModInfoPanel:new(x, y, width, height)
+function EMS_ModInfoPanel:new(x, y, width, height)
 	local o = ISPanelJoypad.new(self, x, y, width, height)
 	o.backgroundColor.a = 1.0
 	return o
 end
 
-return _ModInfoPanel
+return EMS_ModInfoPanel

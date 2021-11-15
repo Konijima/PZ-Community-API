@@ -1,8 +1,8 @@
 require("OptionsScreens/ModSelector")
 
-local _ModThumbnailPanel = ISPanelJoypad:derive("_ModThumbnailPanel")
+local EMS_ModThumbnailPanel = ISPanelJoypad:derive("EMS_ModThumbnailPanel")
 
-function _ModThumbnailPanel:render()
+function EMS_ModThumbnailPanel:render()
 	ISPanelJoypad.render(self)
 
 	if self.modInfo and (self.modInfo:getPosterCount() > 0) then
@@ -38,32 +38,32 @@ function _ModThumbnailPanel:render()
 	end
 end
 
-function _ModThumbnailPanel:onMouseDown(x, y)
+function EMS_ModThumbnailPanel:onMouseDown(x, y)
 	self.index = self:getIndexAt(x, y) + 1
 	self.pressed = true
 end
 
-function _ModThumbnailPanel:onMouseUp(x, y)
+function EMS_ModThumbnailPanel:onMouseUp(x, y)
 	self.pressed = false
 end
 
-function _ModThumbnailPanel:onMouseUpOutside(x, y)
+function EMS_ModThumbnailPanel:onMouseUpOutside(x, y)
 	self.pressed = false
 end
 
-function _ModThumbnailPanel:onMouseMove(dx, dy)
+function EMS_ModThumbnailPanel:onMouseMove(dx, dy)
 	if self.pressed then
 		self:setXScroll(self:getXScroll() + dx)
 	end
 end
 
-function _ModThumbnailPanel:onMouseMoveOutside(dx, dy)
+function EMS_ModThumbnailPanel:onMouseMoveOutside(dx, dy)
 	if self.pressed then
 		self:onMouseMove(dx, dy)
 	end
 end
 
-function _ModThumbnailPanel:getIndexAt(x, y)
+function EMS_ModThumbnailPanel:getIndexAt(x, y)
 	if not self.modInfo or self.modInfo:getPosterCount() == 0 then
 		return -1
 	end
@@ -75,14 +75,14 @@ function _ModThumbnailPanel:getIndexAt(x, y)
 	return index
 end
 
-function _ModThumbnailPanel:setJoypadFocused(focused)
+function EMS_ModThumbnailPanel:setJoypadFocused(focused)
 end
 
-function _ModThumbnailPanel:setModInfo(modInfo)
+function EMS_ModThumbnailPanel:setModInfo(modInfo)
 	self.modInfo = modInfo
 end
 
-function _ModThumbnailPanel:new(x, y, width, height)
+function EMS_ModThumbnailPanel:new(x, y, width, height)
 	local o = ISPanelJoypad.new(self, x, y, width, height)
 	o.padX = 10
 	o.padY = 8
@@ -92,4 +92,4 @@ function _ModThumbnailPanel:new(x, y, width, height)
 	return o
 end
 
-return _ModThumbnailPanel
+return EMS_ModThumbnailPanel
