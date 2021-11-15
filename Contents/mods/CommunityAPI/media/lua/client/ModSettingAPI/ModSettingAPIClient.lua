@@ -14,7 +14,7 @@ ModSettingAPI.ValueType = require("ModSettingAPI/ModSettingValueType")
 ---@param modID string  Mod ID
 ---@param sectionName string  Name of tab panel in MODS tab
 ---@return ModSettingPanel
-function ModSettingAPI:createModSettingSection(modID, sectionName)
+function ModSettingAPI.CreateModSettingSection(modID, sectionName)
     local panel = ModSettingPanel:new(modID, sectionName)
 
     if ModSetting.Data[modID] == nil then
@@ -55,7 +55,7 @@ end
 ---@param modID string  Mod ID
 ---@param sectionName string  Name of tab panel in MODS tab
 ---@return ModSettingPanel|nil
-function ModSettingAPI:getSection(modID, sectionName)
+function ModSettingAPI.GetSection(modID, sectionName)
     if ModSetting.Data[modID] == nil then return end
     return ModSetting.Data[modID][sectionName]
 end
@@ -63,7 +63,7 @@ end
 ---@param modID string  Mod ID
 ---@param settingName string  Setting name
 ---@return string|number|table|boolean|nil
-function ModSettingAPI:getSettingValue(modID, settingName)
+function ModSettingAPI.GetSettingValue(modID, settingName)
     if ModSetting.SettingValues[modID] == nil then
         return nil
     end
@@ -73,7 +73,7 @@ end
 ---@param modID string  Mod ID
 ---@param settingName string  Setting name
 ---@param value string|number|table|boolean|nil  Setting value. Depends on ValueType of setting
-function ModSettingAPI:setSettingValue(modID, settingName, value)
+function ModSettingAPI.SetSettingValue(modID, settingName, value)
     if ModSetting.SettingValues[modID] == nil then
         ModSetting.SettingValues[modID] = {}
     end
@@ -83,7 +83,7 @@ end
 --- Create sandbox setting section (item in list of setting categories). Return sandbox setting section panel
 ---@param sectionName string  Name of section in list of setting categories
 ---@return SandboxSettingPanel
-function ModSettingAPI:createSandboxSection(sectionName)
+function ModSettingAPI.CreateSandboxSection(sectionName)
     ModSandboxSetting.Data[sectionName] = SandboxSettingPanel:new(sectionName)
     return ModSandboxSetting.Data[sectionName]
 end
@@ -91,14 +91,14 @@ end
 --- Get sandbox setting section (item in list of setting categories). Return sandbox setting section panel
 ---@param sectionName string  Name of section in list of setting categories
 ---@return SandboxSettingPanel
-function ModSettingAPI:getSandboxSection(sectionName)
+function ModSettingAPI.GetSandboxSection(sectionName)
     return ModSandboxSetting.Data[sectionName]
 end
 
 ---@param sectionName string  Name of section in list of setting categories
 ---@param settingName string  Setting name
 ---@return string|number|table|boolean|nil
-function ModSettingAPI:getSandboxValue(sectionName, settingName)
+function ModSettingAPI.GetSandboxValue(sectionName, settingName)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
         return nil
     end
@@ -108,7 +108,7 @@ end
 ---@param sectionName string  Name of section in list of setting categories
 ---@param settingName string  Setting name
 ---@param value string|number|table|boolean|nil  Setting value. Depends on ValueType of setting
-function ModSettingAPI:setSandboxValue(sectionName, settingName, value)
+function ModSettingAPI.SetSandboxValue(sectionName, settingName, value)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
         ModSandboxSetting.SettingValues[sectionName] = {}
     end
