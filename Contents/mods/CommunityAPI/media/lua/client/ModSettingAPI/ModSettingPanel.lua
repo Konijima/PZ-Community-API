@@ -11,11 +11,11 @@ local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 local ModSettingPanel = ISPanelJoypad:derive("ModSettingPanel");
 
 ---@param settingName string
----@param settingCategoryName string|nil Can be nil (will be in NIL category)
+---@param settingCategoryName string|nil    Can be nil (will be in NIL category)
 ---@param settingLabelName string
 ---@param settingValueType ModSettingValueType
----@param settingDefaultValue string|number|table.RGB|bool|Keyboard.Key_    --- Depends on settingValueType
----@param settingData table.Options --- Table with (string)options for ModSettingValueType.ComboBox
+---@param settingDefaultValue string|number|table|boolean|nil   Depends on settingValueType
+---@param settingData table    Table with (string)options for ModSettingValueType.ComboBox
 function ModSettingPanel:addSetting(settingName, settingCategoryName, settingLabelName, settingValueType, settingDefaultValue, settingData)
     if settingName == nil or settingLabelName == nil or settingValueType == nil then return end
 

@@ -62,7 +62,7 @@ end
 
 ---@param modID string
 ---@param settingName string
----@return string|number|tableColor|bool|Keyboard.Key_|nil
+---@return string|number|table|boolean|nil
 function ModSettingAPI:getSettingValue(modID, settingName)
     if ModSetting.SettingValues[modID] == nil then
         return nil
@@ -72,7 +72,7 @@ end
 
 ---@param modID string
 ---@param settingName string
----@param value string|number|tableColor|bool|Keyboard.Key_
+---@param value string|number|table|boolean|nil
 function ModSettingAPI:setSettingValue(modID, settingName, value)
     if ModSetting.SettingValues[modID] == nil then
         ModSetting.SettingValues[modID] = {}
@@ -92,7 +92,7 @@ end
 
 ---@param sectionName string
 ---@param settingName string
----@return string|number|tableColor|bool|Keyboard.Key_
+---@return string|number|table|boolean|nil
 function ModSettingAPI:getSandboxValue(sectionName, settingName)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
         return nil
@@ -102,7 +102,7 @@ end
 
 ---@param sectionName string
 ---@param settingName string
----@param value string|number|tableColor|bool|Keyboard.Key_
+---@param value string|number|table|boolean|nil
 function ModSettingAPI:setSandboxValue(sectionName, settingName, value)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
         ModSandboxSetting.SettingValues[sectionName] = {}
