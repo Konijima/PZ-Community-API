@@ -1,6 +1,6 @@
-# ItemTooltipAPI
+# GameEventAPI
 **Developer:** Eggon  
-**Contributors:**  -  
+**Contributors:** -  
 **Package:** CommunityAPI.Client.GameEvent
 
 <br>
