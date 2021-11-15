@@ -1,6 +1,6 @@
 
 ---@class ModSetKeyBindDialog
-ModSetKeyBindDialog = ISPanel:derive("ModSetKeyBindDialog")
+local ModSetKeyBindDialog = ISPanel:derive("ModSetKeyBindDialog")
 
 function ModSetKeyBindDialog:createChildren()
 	local btnWid = 200
@@ -63,4 +63,6 @@ function ModSetKeyBindDialog:new(keybindName)
 	o:setWantKeyEvents(true)
 	return o
 end
+
+return ModSetKeyBindDialog
 

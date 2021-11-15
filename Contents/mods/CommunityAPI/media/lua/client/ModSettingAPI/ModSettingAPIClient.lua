@@ -1,16 +1,14 @@
-require("ModSettingAPI/ModSetting")
-require("ModSettingAPI/ModSettingPanel")
-local jsonUtils = require("CommunityAPI/JsonUtils")
+require("CommunityAPI")
+local ModSettingPanel = require("ModSettingAPI/ModSettingPanel")
+local ModSandboxSetting = require("ModSettingAPI/ModSandboxSetting")
+local ModSetting = require("ModSettingAPI/ModSetting")
+local SandboxSettingPanel = require("ModSettingAPI/SandboxSettingPanel")
+
+local JsonAPI = CommunityAPI.Utils.Json
 
 ---@class ModSettingAPI
-ModSettingAPI = {}
-ModSettingAPI.ValueType = {}
-ModSettingAPI.ValueType.CheckBox = "CHECKBOX"
-ModSettingAPI.ValueType.ComboBox = "COMBOBOX"
-ModSettingAPI.ValueType.ColorPicker = "COLORPICKER"
-ModSettingAPI.ValueType.VolumeControl = "VOLUMECONTROL"
-ModSettingAPI.ValueType.EntryBox = "ENTRYBOX"
-ModSettingAPI.ValueType.KeyBind = "KEYBIND"
+local ModSettingAPI = {}
+ModSettingAPI.ValueType = require("ModSettingAPI/ModSettingValueType")
 
 ---@param modID string
 ---@param sectionName string
@@ -33,7 +31,7 @@ function ModSettingAPI:createSection(modID, sectionName)
         local line = configFile:readLine()
         local config = nil
         if line ~= nil then
-            config = jsonUtils.Decode(line)    
+            config = JsonAPI.Decode(line)    
         end
         configFile:close()
         

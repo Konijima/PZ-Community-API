@@ -1,7 +1,9 @@
-local jsonUtils = require("CommunityAPI/JsonUtils")
+require("CommunityAPI")
+
+local JsonAPI = CommunityAPI.Utils.Json
 
 ---@class ModSandboxSetting
-ModSandboxSetting = {}
+local ModSandboxSetting = {}
 ModSandboxSetting.Data = {}
 ModSandboxSetting.SettingValuesBuffer = {}
 ModSandboxSetting.SettingValues = {}
@@ -101,7 +103,7 @@ end
 function ModSandboxSetting.loadSandboxOptionsAtGameStart()
     if ModSandboxSetting.needSaveData then
         local fileWriter = getFileWriter("cAPI_SandboxSettings" .. getFileSeparator() .. getSaveInfo(getWorld():getWorld()).saveName .. ".txt", true, false)
-        fileWriter:write(jsonUtils.Encode(ModSandboxSetting.SettingValues))
+        fileWriter:write(JsonAPI.Encode(ModSandboxSetting.SettingValues))
         fileWriter:close()
     else
         -- NEED FOR CREATE cAPI_SandboxSettings folder!
@@ -113,7 +115,7 @@ function ModSandboxSetting.loadSandboxOptionsAtGameStart()
         local line = fileReader:readLine()
         local config = nil
         if line ~= nil then
-            config = jsonUtils.Decode(line)   
+            config = JsonAPI.Decode(line)   
         end
         fileReader:close()
 
@@ -126,5 +128,6 @@ function ModSandboxSetting.loadSandboxOptionsAtGameStart()
         end
     end
 end
-
 Events.OnGameTimeLoaded.Add(ModSandboxSetting.loadSandboxOptionsAtGameStart)
+
+return ModSandboxSetting

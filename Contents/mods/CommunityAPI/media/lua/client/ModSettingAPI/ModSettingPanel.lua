@@ -1,19 +1,21 @@
-require("ModSettingAPI/ModSetting")
-require("ModSettingAPI/ModSettingHorizontalLine")
+local ModSetting = require("ModSettingAPI/ModSetting")
+local ModSettingHorizontalLine = require("ModSettingAPI/ModSettingHorizontalLine")
+local ModSetKeyBindDialog = require("ModSettingAPI/ModSetKeyBindDialog")
+local ModSettingValueType = require("ModSettingAPI/ModSettingValueType")
 
 -- Constants
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 
 ---@class ModSettingPanel
-ModSettingPanel = ISPanelJoypad:derive("ModSettingPanel");
+local ModSettingPanel = ISPanelJoypad:derive("ModSettingPanel");
 
 ---@param settingName string
 ---@param settingCategoryName string|nil
 ---@param settingLabelName string
----@param settingValueType ModSettingAPI.ValueType
+---@param settingValueType ModSettingValueType
 ---@param settingDefaultValue string|number|table.RGB|bool|Keyboard.Key_    --- Depends on settingValueType
----@param settingData table.Options --- Table with (string)options for ModSettingAPI.ValueType.ComboBox
+---@param settingData table.Options --- Table with (string)options for ModSettingValueType.ComboBox
 function ModSettingPanel:addSetting(settingName, settingCategoryName, settingLabelName, settingValueType, settingDefaultValue, settingData)
     if settingName == nil or settingLabelName == nil or settingValueType == nil then return end
 
@@ -91,7 +93,7 @@ function ModSettingPanel:createChildren()
             y = self:addCategory(y, catName)    
         end
         for _, settingData in ipairs(data) do
-            if settingData.valueType == ModSettingAPI.ValueType.CheckBox then
+            if settingData.valueType == ModSettingValueType.CheckBox then
                 local label = ISLabel:new(x, y + 3, FONT_HGT_SMALL, settingData.labelName, 1, 1, 1, 1, UIFont.Small, false)
                 label:initialise()
                 self:addChild(label)
@@ -106,10 +108,10 @@ function ModSettingPanel:createChildren()
                     tickBox:setSelected(1, true)
                 end
 
-                self.settingsData[settingData.settingName] = { ModSettingAPI.ValueType.CheckBox , tickBox }
+                self.settingsData[settingData.settingName] = { ModSettingValueType.CheckBox , tickBox }
                 y = y + FONT_HGT_SMALL + 4 + 10
             end
-            if settingData.valueType == ModSettingAPI.ValueType.ComboBox then
+            if settingData.valueType == ModSettingValueType.ComboBox then
                 local label = ISLabel:new(x, y + 3, FONT_HGT_SMALL, settingData.labelName, 1, 1, 1, 1, UIFont.Small, false)
                 label:initialise()
                 self:addChild(label)
@@ -124,10 +126,10 @@ function ModSettingPanel:createChildren()
                 comboBox.selected = settingData.value;
                 self:addChild(comboBox);
                 
-                self.settingsData[settingData.settingName] = { ModSettingAPI.ValueType.ComboBox , comboBox }
+                self.settingsData[settingData.settingName] = { ModSettingValueType.ComboBox , comboBox }
                 y = y + FONT_HGT_SMALL + 4 + 10
             end
-            if settingData.valueType == ModSettingAPI.ValueType.ColorPicker then
+            if settingData.valueType == ModSettingValueType.ColorPicker then
                 local colorPicker = ISColorPicker:new(0, 16)
                 colorPicker:initialise()
                 colorPicker.resetFocusTo = self
@@ -155,10 +157,10 @@ function ModSettingPanel:createChildren()
                 label:initialise()
                 self:addChild(label)
 
-                self.settingsData[settingData.settingName] = { ModSettingAPI.ValueType.ColorPicker , colorButton }
+                self.settingsData[settingData.settingName] = { ModSettingValueType.ColorPicker , colorButton }
                 y = y + FONT_HGT_SMALL + 4 + 10
             end
-            if settingData.valueType == ModSettingAPI.ValueType.VolumeControl then
+            if settingData.valueType == ModSettingValueType.VolumeControl then
                 local label = ISLabel:new(x, y + 3, FONT_HGT_SMALL, settingData.labelName, 1, 1, 1, 1, UIFont.Small, false)
                 label:initialise()
                 self:addChild(label)
@@ -168,10 +170,10 @@ function ModSettingPanel:createChildren()
                 volumeControl:setVolume(settingData.value)
                 self:addChild(volumeControl)
 
-                self.settingsData[settingData.settingName] = { ModSettingAPI.ValueType.VolumeControl, volumeControl }
+                self.settingsData[settingData.settingName] = { ModSettingValueType.VolumeControl, volumeControl }
                 y = y + FONT_HGT_SMALL + 4 + 10
             end
-            if settingData.valueType == ModSettingAPI.ValueType.EntryBox then
+            if settingData.valueType == ModSettingValueType.EntryBox then
                 local label = ISLabel:new(x, y + 3, FONT_HGT_SMALL, settingData.labelName, 1, 1, 1, 1, UIFont.Small, false)
                 label:initialise()
                 self:addChild(label)
@@ -184,10 +186,10 @@ function ModSettingPanel:createChildren()
                 entry:setSelectable(true)
  
 
-                self.settingsData[settingData.settingName] = { ModSettingAPI.ValueType.EntryBox, entry }
+                self.settingsData[settingData.settingName] = { ModSettingValueType.EntryBox, entry }
                 y = y + FONT_HGT_SMALL + 4 + 10
             end
-            if settingData.valueType == ModSettingAPI.ValueType.KeyBind then
+            if settingData.valueType == ModSettingValueType.KeyBind then
                 local label = ISLabel:new(x, y + 3, FONT_HGT_SMALL, settingData.labelName, 1, 1, 1, 1, UIFont.Small, false)
                 label:initialise()
                 self:addChild(label)
@@ -213,7 +215,7 @@ function ModSettingPanel:createChildren()
                 btn:instantiate();
                 self:addChild(btn);
 
-                self.settingsData[settingData.settingName] = { ModSettingAPI.ValueType.KeyBind, btn }
+                self.settingsData[settingData.settingName] = { ModSettingValueType.KeyBind, btn }
                 y = y + FONT_HGT_SMALL + 4 + 10
             end
         end
@@ -262,24 +264,26 @@ end
 function ModSettingPanel:getSettingValues()
     local valueTable = {}
     for settName, data in pairs(self.settingsData) do
-        if data[1] == ModSettingAPI.ValueType.CheckBox then
+        if data[1] == ModSettingValueType.CheckBox then
             valueTable[settName] = data[2]:isSelected(1)
         end
-        if data[1] == ModSettingAPI.ValueType.ComboBox then
+        if data[1] == ModSettingValueType.ComboBox then
             valueTable[settName] = data[2].selected
         end
-        if data[1] == ModSettingAPI.ValueType.ColorPicker then
+        if data[1] == ModSettingValueType.ColorPicker then
             valueTable[settName] = data[2].backgroundColor
         end
-        if data[1] == ModSettingAPI.ValueType.VolumeControl then
+        if data[1] == ModSettingValueType.VolumeControl then
             valueTable[settName] = data[2]:getVolume()
         end
-        if data[1] == ModSettingAPI.ValueType.EntryBox then
+        if data[1] == ModSettingValueType.EntryBox then
             valueTable[settName] = data[2]:getInternalText() or ""
         end
-        if data[1] == ModSettingAPI.ValueType.KeyBind then
+        if data[1] == ModSettingValueType.KeyBind then
             valueTable[settName] = data[2].key
         end
     end
     return valueTable
 end
+
+return ModSettingPanel

@@ -1,6 +1,6 @@
 
 ---@class ModSettingHorizontalLine
-ModSettingHorizontalLine = ISPanel:derive("ModSettingHorizontalLine")
+local ModSettingHorizontalLine = ISPanel:derive("ModSettingHorizontalLine")
 
 function ModSettingHorizontalLine:prerender()
 end
@@ -13,3 +13,5 @@ function ModSettingHorizontalLine:new(x, y, width)
 	local o = ISPanel.new(self, x, y, width, 2)
 	return o
 end
+
+return ModSettingHorizontalLine

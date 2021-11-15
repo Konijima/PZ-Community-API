@@ -1,10 +1,12 @@
-local jsonUtils = require("CommunityAPI/JsonUtils")
+require("CommunityAPI")
+
+local JsonAPI = CommunityAPI.Utils.Json
 
 -- Constants
 local FONT_HGT_LARGE = getTextManager():getFontHeight(UIFont.Large)
 
 ---@class ModSetting
-ModSetting = {}
+local ModSetting = {}
 ModSetting.Data = {}
 ModSetting.SettingValuesBuffer = {}
 ModSetting.SettingValues = {}
@@ -77,7 +79,7 @@ function ModSetting:saveValues()
 
     for modID, data in pairs(ModSetting.SettingValues) do
         local saved_presets = getFileWriter("cAPI_ModSettings" .. getFileSeparator() .. modID .. ".txt", true, false)
-        saved_presets:write(jsonUtils.Encode(data))
+        saved_presets:write(JsonAPI.Encode(data))
         saved_presets:close()
     end
 end
@@ -172,3 +174,5 @@ function ModSetting:updateSettingView(modID)
         end
     end
 end
+
+return ModSetting
