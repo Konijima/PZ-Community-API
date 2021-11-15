@@ -1,6 +1,6 @@
 require("OptionsScreens/ModSelector")
 
-_ModThumbnailPanel = ISPanelJoypad:derive("_ModThumbnailPanel")
+local _ModThumbnailPanel = ISPanelJoypad:derive("_ModThumbnailPanel")
 
 function _ModThumbnailPanel:render()
 	ISPanelJoypad.render(self)
