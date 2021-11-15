@@ -1,56 +1,329 @@
-# Utilities
-Utility packages to use in API and Mods.
+# Utils
+
+**Contributors:** Shurutsue, Konijima, Chuck, Aiteron  
+**Packages:**  
+- [CommunityAPI.Utils.Color](#communityapiutilscolor)  
+- [CommunityAPI.Utils.Inventory](#communityapiutilsinventory)  
+- [CommunityAPI.Utils.Iso](#communityapiutilsiso)  
+- [CommunityAPI.Utils.Json](#communityapiutilsjson)  
+- [CommunityAPI.Utils.Math](#communityapiutilsmath)  
+- [CommunityAPI.Utils.String](#communityapiutilsstring)  
+- [CommunityAPI.Utils.Table](#communityapiutilstable)  
+
+## Description
+
+Utility packages to use in your API and Mods.
+
+<br>
+
+# Packages
+
+## CommunityAPI.Utils.Color
+<details><summary>Click to expand!</summary><br>
+
+
+
+<br></details>
+
+
+________________________________________________________________________________________________________________________
+
+
+## CommunityAPI.Utils.Inventory
+<details><summary>Click to expand!</summary><br>
   
-## How to use
-```lua
-require("CommunityAPI")
+### FindAllItemInInventoryByTag(container, tag)
+Retrieve all items in a container from a tag
 
-local StringUtils = CommunityAPI.Utils.String
-StringUtils.SplitString("Hello world", " ")
-```
+| Param     | Type                                                                                                   | Description                     |
+|-----------|--------------------------------------------------------------------------------------------------------|---------------------------------|
+| container | [ItemContainer](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/ItemContainer.html) | The item container to search in |
+| tag       | string                                                                                                 | The tag to search for           |
+
+**return:** [ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)<[InventoryItem](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/inventory/InventoryItem.html)>
+
+<br></details>
+
   
-### CommunityAPI.Utils.Inventory
-```lua
-FindAllItemInInventoryByTag(inventory, tag)
-```
+________________________________________________________________________________________________________________________
+
   
-### CommunityAPI.Utils.Iso
-```lua
-RecursiveGetSquare(object)
-
-GetIsoRange(center, range, fractalOffset)
-
-GetIsoGameCharactersInFractalRange(center, range, fractalRange, lookForType, addedBooleanFunctions)
-
-GetIsoGameCharactersInRange(center, range, lookForType, addedBooleanFunctions)
-```
+## CommunityAPI.Utils.Iso
+<details><summary>Click to expand!</summary><br>
   
-### CommunityAPI.Utils.Math
-```lua
-GetDistance(x1, y1, x2, y2)
-```
+### RecursiveGetSquare(object)
+Safely get the square of an IsoObject recursively
+
+| Param  | Type                                                                                                                                                                                         | Description                       |
+|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| object | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The object to get the square from |
+
+**return:** [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)
+
+<br>
+
+### GetIsoRange(center, range, fractalOffset)
+Description here
+
+| Param         | Type                                                                                                                                                                                         | Description                                                           |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center        | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center point object                                               |
+| range         | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
+
+**return:** table<[IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html)>
+
+<br>
+
+### GetIsoGameCharactersInFractalRange(center, range, fractalRange, _lookForType, _addedBooleanFunctions)
+Get all humanoid in fractal range from a center point
+
+| Param                  | Type                                                                                                                                                                                         | Description                                                           |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center                 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center point object                                               |
+| range                  | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset          | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
+| _lookForType           | string \| nil                                                                                                                                                                                | Get only a specific type                                              |
+| _addedBooleanFunctions | table \| nil                                                                                                                                                                                 | Table of function(s) must return true to pass                         |
+
+**return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
+
+<br>
+
+### GetIsoGameCharactersInRange(center, range, _lookForType, _addedBooleanFunctions)
+Get all humanoid in range from a center point
+
+| Param                  | Type                                                                                                                                                                                         | Description                                                           |
+|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| center                 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The center point object                                               |
+| range                  | number                                                                                                                                                                                       | Tiles to scan from center, not including center. ex: range of 1 = 3x3 |
+| fractalOffset          | number                                                                                                                                                                                       | Fractal offset - spreads out squares by this number                   |
+| _lookForType           | string \| nil                                                                                                                                                                                | Get only a specific type                                              |
+| _addedBooleanFunctions | table \| nil                                                                                                                                                                                 | Table of function(s) must return true to pass                         |
+
+**return:** table<[IsoGameCharacter](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/characters/IsoGameCharacter.html)>
+
+<br></details>
+
+
+________________________________________________________________________________________________________________________
+
+
+## CommunityAPI.Utils.Math
+<details>
+<summary>Click to expand!</summary><br>
+
+### GetDistanceFromTo(x1, y1, x2, y2)
+Get the distance between two point
+
+| Param | Type   | Description                  |
+|-------|--------|------------------------------|
+| x1    | number | X coordinate of first point  |
+| y1    | number | Y coordinate of first point  |
+| x2    | number | X coordinate of second point |
+| y2    | number | Y coordinate of second point |
+
+**return:** number
+
+<br>
+
+### GetDistance3DFromTo(x1, y1, z1, x2, y2, z2)
+Get the distance including height between two point
+
+| Param | Type   | Description                  |
+|-------|--------|------------------------------|
+| x1    | number | X coordinate of first point  |
+| y1    | number | Y coordinate of first point  |
+| z1    | number | Z coordinate of first point  |
+| x2    | number | X coordinate of second point |
+| y2    | number | Y coordinate of second point |
+| z2    | number | Z coordinate of second point |
+
+**return:** number
+
+<br>
+
+### GetDistanceBetweenObjects(object1, object2)
+Get the distance between two objects
+
+| Param   | Type                                                                                                                                                                                         | Description                 |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| object1 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The first object or square  |
+| object2 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The second object or square |
+
+**return:** number
+
+<br>
+
+### GetDistance3DBetweenObjects(object1, object2)
+Get the distance including height between two objects
+
+| Param   | Type                                                                                                                                                                                         | Description                 |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| object1 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The first object or square  |
+| object2 | [IsoObject](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoObject.html) \| [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The second object or square |
+
+**return:** number
+
+<br></details>
+
+
+________________________________________________________________________________________________________________________
+
+
+## CommunityAPI.Utils.Json
+<details>
+<summary>Click to expand!</summary><br>
+
+### Encode(value)
+Encode a value into a json string
+
+| Param | Type | Description                 |
+|-------|------|-----------------------------|
+| value | any  | The value to encode to Json |
+
+**return:** string
+
+<br>
+
+### Decode(jsonStr)
+Decode a json string into an lua value
+
+| Param   | Type   | Description               |
+|---------|--------|---------------------------|
+| jsonStr | string | The json string to decode |
+
+**return:** any
+
+<br></details>
+
+________________________________________________________________________________________________________________________
+
+
+## CommunityAPI.Utils.String
+<details><summary>Click to expand!</summary><br>
   
-### CommunityAPI.Utils.String
-```lua
-SquareToId(square)
+### SquareToId(square)
+Transform a square position into a unique string
 
-PositionToId(x, y ,z)
+| Param  | Type                                                                                             | Description                         |
+|--------|--------------------------------------------------------------------------------------------------|-------------------------------------|
+| square | [IsoGridSquare](https://quarantin.github.io/zomboid-javadoc/41.56/zombie/iso/IsoGridSquare.html) | The square to get the position from |
 
-SplitString(str, delimiter)
-```
-  
-### CommunityAPI.Utils.Table
-```lua
-CountTableEntries(targetTable)
+**return:** string
 
-GetTableKeys(targetTable)
+<br>
 
-TableContains(table, value)
+### PositionToId(x, y ,z)
+Transform a position into a unique string
 
-GetBaseClass(object, level)
+| Param | Type   | Description |
+|-------|--------|-------------|
+| x     | number | X position  |
+| y     | number | Y position  |
+| z     | number | Z position  |
 
-GetAllBaseClasses(object, excludeCurrent)
+**return:** string
 
-IsClassChildOf(object, class)
-```
-  
+<br>
+
+### SplitString(str, delimiter)
+Split a string by a delimiter string
+
+| Param     | Type   | Description              |
+|-----------|--------|--------------------------|
+| str       | string | The string to split      |
+| delimiter | string | The string to split with |
+
+**return:** table<string>
+
+<br>
+
+### NumberToDecimalString(value, _decimal)
+Format a number into string with decimal
+
+| Param    | Type        | Description                   |
+|----------|-------------|-------------------------------|
+| value    | number      | The number value to format    |
+| _decimal | number\|nil | Amount of decimal, default: 2 |
+
+**return:** string
+
+<br></details>
+
+
+________________________________________________________________________________________________________________________
+
+
+## CommunityAPI.Utils.Table
+<details><summary>Click to expand!</summary><br>
+
+### CountTableEntries(targetTable)
+Get the total count of entry in a table
+
+| Param       | Type   | Description                         |
+|-------------|--------|-------------------------------------|
+| targetTable | number | The table to count total of entries |
+
+**return:** number
+
+<br>
+
+### GetTableKeys(targetTable)
+Get all the keys of a lua table
+
+| Param       | Type  | Description                    |
+|-------------|-------|--------------------------------|
+| targetTable | table | The table to get the keys from |
+
+**return:** table<string>
+
+<br>
+
+### TableContains(table, value)
+Check if a value is found in a table
+
+| Param       | Type  | Description                 |
+|-------------|-------|-----------------------------|
+| targetTable | table | The table to search in      |
+| targetValue | any   | The value to find the table |
+
+**return:** boolean
+
+<br>
+
+### GetBaseClass(object, level)
+Get the base class of an object, optionally choose how deep you want to check
+
+| Param       | Type        | Description                                  |
+|-------------|-------------|----------------------------------------------|
+| tableObject | table       | The table object to get the base class from  |
+| _level      | number\|nil | Get the deepest base class found, default: 1 |
+
+**return:** table|nil
+
+<br>
+
+### GetAllBaseClasses(object, excludeCurrent)
+Get list of all derived class from the current to the deepest level
+
+| Param           | Type    | Description                                                               |
+|-----------------|---------|---------------------------------------------------------------------------|
+| tableObject     | table   | The table object to get all base class from                               |
+| _excludeCurrent | boolean | Optionally exclude the current object class from the list, default: false |
+
+**return:** table|nil
+
+<br>
+
+### IsClassChildOf(object, class)
+Check if table object derive from this class
+
+| Param       | Type          | Description               |
+|-------------|---------------|---------------------------|
+| tableObject | table         | The table object to check |
+| tableClass  | table\|string | The class to compare with |
+
+**return:** boolean
+
+<br></details>

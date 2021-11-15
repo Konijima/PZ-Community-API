@@ -1,6 +1,7 @@
 # Distribution API
 **Developer:** Konijima  
 **Contributors:** -  
+**Package:** CommunityAPI.Server.Distribution
   
 ## Description
 Add your new items to the distribution tables in a safer and more effective way.
@@ -12,37 +13,45 @@ Also help the users to know which mod adds what to each tables.
   
 ## How to use
   
-1) Create your distribution file in `mods\YourMod\media\lua\server\MyServerDistributionFile.lua` as usual.  
+1) Create your distribution file in `media\lua\server\MyModName\Server_Distribution.lua`.  
 2) Use one of the example below to suit your preference.
 3) Add `require=CommunityAPI` to your `mod.info` to make sure the API is enabled as well.
   
 Only paths to `SuburbsDistributions` and `ProceduralDistributions` works and must be written with dots in between.  
   
 ## Methods
-```lua
-CreateLocation(locationPath, distributionTable)
+### CreateLocation(locationPath, distributionTable)
 ```
-```lua
-Add(modName, distributionTable)
+    locationPath : string : The path to the distribution table
+    distributionTable : table : The table with the items to add to the location
 ```
 
-### Example 1
+### Add(modName, distributionTable)
+```
+    modName : string : The mod name adding the items
+    distributionTable : table : The table with the items to add to the location
+```
+
+## Example 1
 ```lua
 require("CommunityAPI")
 
 local DistributionAPI = CommunityAPI.Server.Distribution
 
 local modName = "My_Mod_Name"
-local distributionTable = {}
+local distributionTable = {} -- Create a table to add your items
 
 local CrateCompactDiscs = DistributionAPI.CreateLocation("ProceduralDistributions.list.CrateCompactDiscs.items", distributionTable)
 CrateCompactDiscs:AddItem("Base.Screwdriver", 6)
 CrateCompactDiscs:AddItem("Base.Disc", 4)
 
+local CashRegister = DistributionAPI.CreateLocation("SuburbsDistributions.all.cashregister.items", distributionTable)
+CashRegister:AddItem("Base.Axe", 1)
+
 DistributionAPI.Add(modName, distributionTable)
 ```
 
-### Example 2
+## Example 2
 ```lua
 require("CommunityAPI")
 
@@ -54,6 +63,13 @@ local distributionTable = {
         items = {
             { "Base.Screwdriver", 6 },
             { "Base.Disc", 4 },
+        }
+    },
+
+    {
+        location = "SuburbsDistributions.all.cashregister.items",
+        items = {
+            { "Base.Axe", 1 },
         }
     },
 

@@ -5,13 +5,15 @@ CommunityAPI.Utils = {
     Color = require("CommunityAPI/ColorUtils"),
     Inventory = require("CommunityAPI/InventoryUtils"),
     Iso = require("CommunityAPI/IsoUtils"),
+    Json = require("CommunityAPI/JsonUtils"),
     Math = require("CommunityAPI/MathUtils"),
     String = require("CommunityAPI/StringUtils"),
     Table = require("CommunityAPI/TableUtils"),
 }
 
 CommunityAPI.Shared = {
-    BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared")
+    BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared"),
+    Event = require("EventAPI/EventAPIShared"),
 }
 
 -----------------------------------------------------------------------------------

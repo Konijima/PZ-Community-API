@@ -1,6 +1,8 @@
 name=Community API
 id=CommunityAPI
-description=
+description=Community API is a team effort to centralize & give mod creators optimized tools for creating quality mods. For mod compatibility and efficiency, working as a team ensure that the API is updated and optimized for the long term.
 poster=poster.png
-author=PZ Modder Community
+icon=icon.png
+author=ZomboidModders
 pzversion=41.56-IWBUMS
+url=https://github.com/Konijima/PZ-Community-API
