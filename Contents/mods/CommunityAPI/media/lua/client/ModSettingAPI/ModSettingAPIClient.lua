@@ -55,7 +55,7 @@ end
 ---@param modID string  Mod ID
 ---@param sectionName string  Name of tab panel in MODS tab
 ---@return ModSettingPanel|nil
-function ModSettingAPI.GetSection(modID, sectionName)
+function ModSettingAPI.GetModSettingSection(modID, sectionName)
     if ModSetting.Data[modID] == nil then return end
     return ModSetting.Data[modID][sectionName]
 end
@@ -63,7 +63,7 @@ end
 ---@param modID string  Mod ID
 ---@param settingName string  Setting name
 ---@return string|number|table|boolean|nil
-function ModSettingAPI.GetSettingValue(modID, settingName)
+function ModSettingAPI.GetModSettingValue(modID, settingName)
     if ModSetting.SettingValues[modID] == nil then
         return nil
     end
@@ -73,7 +73,7 @@ end
 ---@param modID string  Mod ID
 ---@param settingName string  Setting name
 ---@param value string|number|table|boolean|nil  Setting value. Depends on ValueType of setting
-function ModSettingAPI.SetSettingValue(modID, settingName, value)
+function ModSettingAPI.SetModSettingValue(modID, settingName, value)
     if ModSetting.SettingValues[modID] == nil then
         ModSetting.SettingValues[modID] = {}
     end
