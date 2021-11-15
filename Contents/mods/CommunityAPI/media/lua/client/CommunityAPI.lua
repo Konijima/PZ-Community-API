@@ -1,6 +1,7 @@
 require("CommunityAPIShared")
 
 CommunityAPI.Client = {
+    GameEvent = require("GameEventAPI/GameEventAPIClient"),
     ItemTooltip = require("ItemTooltipAPI/ItemTooltipAPIClient"),
     Light = require("LightAPI/LightAPIClient"),
     ModSetting = require("ModSettingAPI/ModSettingAPIClient"),
