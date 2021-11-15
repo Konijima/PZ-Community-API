@@ -10,8 +10,10 @@ local JsonAPI = CommunityAPI.Utils.Json
 local ModSettingAPI = {}
 ModSettingAPI.ValueType = require("ModSettingAPI/ModSettingValueType")
 
+--- Create setting section (tab panel) in mods tab. Returned section
 ---@param modID string
 ---@param sectionName string
+---@return ModSettingPanel
 function ModSettingAPI:createSection(modID, sectionName)
     local panel = ModSettingPanel:new(modID, sectionName)
 
@@ -49,8 +51,10 @@ function ModSettingAPI:createSection(modID, sectionName)
     return panel
 end
 
+--- Get setting section (tab panel)
 ---@param modID string
 ---@param sectionName string
+---@return ModSettingPanel|nil
 function ModSettingAPI:getSection(modID, sectionName)
     if ModSetting.Data[modID] == nil then return end
     return ModSetting.Data[modID][sectionName]
@@ -58,6 +62,7 @@ end
 
 ---@param modID string
 ---@param settingName string
+---@return string|number|tableColor|bool|Keyboard.Key_|nil
 function ModSettingAPI:getSettingValue(modID, settingName)
     if ModSetting.SettingValues[modID] == nil then
         return nil
@@ -75,7 +80,9 @@ function ModSettingAPI:setSettingValue(modID, settingName, value)
     ModSetting.SettingValues[modID][settingName] = value
 end
 
+--- Create sandbox setting section (item in list of setting categories). Return sandbox setting panel
 ---@param sectionName string
+---@return SandboxSettingPanel
 function ModSettingAPI:getOrCreateSandboxSection(sectionName)
     if ModSandboxSetting.Data[sectionName] == nil then
         ModSandboxSetting.Data[sectionName] = SandboxSettingPanel:new(sectionName)
@@ -85,6 +92,7 @@ end
 
 ---@param sectionName string
 ---@param settingName string
+---@return string|number|tableColor|bool|Keyboard.Key_
 function ModSettingAPI:getSandboxValue(sectionName, settingName)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
         return nil
