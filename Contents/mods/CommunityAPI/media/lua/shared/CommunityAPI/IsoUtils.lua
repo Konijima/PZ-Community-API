@@ -24,6 +24,7 @@ function IsoUtils.RecursiveGetSquare(object)
     return square
 end
 
+
 ---@param center IsoObject|IsoGridSquare The center point object
 ---@param range number Tiles to scan from center, not including center. ex: range of 1 = 3x3
 ---@param fractalOffset number Fractal offset - spreads out squares by this number
