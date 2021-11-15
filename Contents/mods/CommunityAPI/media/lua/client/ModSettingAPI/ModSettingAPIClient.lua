@@ -10,11 +10,11 @@ local JsonAPI = CommunityAPI.Utils.Json
 local ModSettingAPI = {}
 ModSettingAPI.ValueType = require("ModSettingAPI/ModSettingValueType")
 
---- Create setting section (tab panel) in mods tab. Returned section
----@param modID string
----@param sectionName string
+--- Create mod setting section (tab panel) in mods tab in global settings. Return mod setting section panel
+---@param modID string  Mod ID
+---@param sectionName string  Name of tab panel in MODS tab
 ---@return ModSettingPanel
-function ModSettingAPI:createSection(modID, sectionName)
+function ModSettingAPI:createModSettingSection(modID, sectionName)
     local panel = ModSettingPanel:new(modID, sectionName)
 
     if ModSetting.Data[modID] == nil then
@@ -51,17 +51,17 @@ function ModSettingAPI:createSection(modID, sectionName)
     return panel
 end
 
---- Get setting section (tab panel)
----@param modID string
----@param sectionName string
+--- Get mod setting section panel
+---@param modID string  Mod ID
+---@param sectionName string  Name of tab panel in MODS tab
 ---@return ModSettingPanel|nil
 function ModSettingAPI:getSection(modID, sectionName)
     if ModSetting.Data[modID] == nil then return end
     return ModSetting.Data[modID][sectionName]
 end
 
----@param modID string
----@param settingName string
+---@param modID string  Mod ID
+---@param settingName string  Setting name
 ---@return string|number|table|boolean|nil
 function ModSettingAPI:getSettingValue(modID, settingName)
     if ModSetting.SettingValues[modID] == nil then
@@ -70,9 +70,9 @@ function ModSettingAPI:getSettingValue(modID, settingName)
     return ModSetting.SettingValues[modID][settingName]
 end
 
----@param modID string
----@param settingName string
----@param value string|number|table|boolean|nil
+---@param modID string  Mod ID
+---@param settingName string  Setting name
+---@param value string|number|table|boolean|nil  Setting value. Depends on ValueType of setting
 function ModSettingAPI:setSettingValue(modID, settingName, value)
     if ModSetting.SettingValues[modID] == nil then
         ModSetting.SettingValues[modID] = {}
@@ -80,18 +80,23 @@ function ModSettingAPI:setSettingValue(modID, settingName, value)
     ModSetting.SettingValues[modID][settingName] = value
 end
 
---- Create sandbox setting section (item in list of setting categories). Return sandbox setting panel
----@param sectionName string
+--- Create sandbox setting section (item in list of setting categories). Return sandbox setting section panel
+---@param sectionName string  Name of section in list of setting categories
 ---@return SandboxSettingPanel
-function ModSettingAPI:getOrCreateSandboxSection(sectionName)
-    if ModSandboxSetting.Data[sectionName] == nil then
-        ModSandboxSetting.Data[sectionName] = SandboxSettingPanel:new(sectionName)
-    end
+function ModSettingAPI:createSandboxSection(sectionName)
+    ModSandboxSetting.Data[sectionName] = SandboxSettingPanel:new(sectionName)
     return ModSandboxSetting.Data[sectionName]
 end
 
----@param sectionName string
----@param settingName string
+--- Get sandbox setting section (item in list of setting categories). Return sandbox setting section panel
+---@param sectionName string  Name of section in list of setting categories
+---@return SandboxSettingPanel
+function ModSettingAPI:getSandboxSection(sectionName)
+    return ModSandboxSetting.Data[sectionName]
+end
+
+---@param sectionName string  Name of section in list of setting categories
+---@param settingName string  Setting name
 ---@return string|number|table|boolean|nil
 function ModSettingAPI:getSandboxValue(sectionName, settingName)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
@@ -100,9 +105,9 @@ function ModSettingAPI:getSandboxValue(sectionName, settingName)
     return ModSandboxSetting.SettingValues[sectionName][settingName]
 end
 
----@param sectionName string
----@param settingName string
----@param value string|number|table|boolean|nil
+---@param sectionName string  Name of section in list of setting categories
+---@param settingName string  Setting name
+---@param value string|number|table|boolean|nil  Setting value. Depends on ValueType of setting
 function ModSettingAPI:setSandboxValue(sectionName, settingName, value)
     if ModSandboxSetting.SettingValues[sectionName] == nil then
         ModSandboxSetting.SettingValues[sectionName] = {}
