@@ -20,6 +20,7 @@ local GameEventAPI = {
         OnApplyBandageStart = GameEvent:new(),
         OnApplyBandageStop = GameEvent:new(),
         OnApplyBandagePerform = GameEvent:new(),
+        OnAfterItemTransfer = GameEvent:new(),
         OnBeforeItemTransfer = GameEvent:new()
     }
 }
