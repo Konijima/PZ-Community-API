@@ -919,13 +919,13 @@ function EMS_ModSelector:isModIncompatible(modId)
 	return false
 end
 
-local cAPISettingSection = ModSettingAPI:getSection("CommunityAPI", "Main")
+local cAPISettingSection = ModSettingAPI.GetModSettingSection("CommunityAPI", "Main")
 if cAPISettingSection == nil then
-	cAPISettingSection = ModSettingAPI:createSection("CommunityAPI", "Main")
+	cAPISettingSection = ModSettingAPI.CreateModSettingSection("CommunityAPI", "Main")
 end
 cAPISettingSection:addSetting("ExpandedModSelector", "Expanded Mod Selector", "Enable Expanded mod selector", ModSettingAPI.ValueType.CheckBox, true)
 
-if ModSettingAPI:getSettingValue("CommunityAPI", "ExpandedModSelector") then
+if ModSettingAPI.GetModSettingValue("CommunityAPI", "ExpandedModSelector") then
 	ModSelector = EMS_ModSelector
 	ModInfoPanel = EMS_ModInfoPanel
 	ModListBox = EMS_ModListBox
