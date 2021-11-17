@@ -26,8 +26,11 @@ end
 ---@param eventName string
 ---@param eventFunc string
 function EventAPI.Remove(modName, eventName, eventFunc)
-    Events[modName .. "|" .. eventName].Remove(handlers[eventFunc])
-    if DEBUG then print("CommunityAPI: Event [", eventName,"] removed from mod [", modName, "]") end
+    if handlers[eventFunc] then
+        Events[modName .. "|" .. eventName].Remove(handlers[eventFunc])
+        handlers[eventFunc] = nil
+        if DEBUG then print("CommunityAPI: Event [", eventName,"] removed from mod [", modName, "]") end
+    end
 end
 
 ---@param modName string
