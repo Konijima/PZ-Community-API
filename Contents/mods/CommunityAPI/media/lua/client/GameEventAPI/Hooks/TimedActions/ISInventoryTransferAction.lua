@@ -15,7 +15,7 @@ function ISInventoryTransferAction:waitToStart(...)
     if eventData.cancel then
         self.maxTime = -1
         self.destContainer = self.srcContainer
-        self.hasBeenCancelled = true
+        self.hasBeenCancelled = true -- is required for OnAfterItemTransfer
         return false
     end
     self.destContainer = eventData.destContainer or self.destContainer
