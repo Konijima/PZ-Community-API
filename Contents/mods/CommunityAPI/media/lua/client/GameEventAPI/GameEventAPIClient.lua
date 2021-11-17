@@ -21,4 +21,26 @@ for category, _ in pairs(GameEventAPI) do
     end
 end
 
+--- TEST
+
+local test = true
+if test then
+    print("GameEventAPI Test mode enabled!")
+    for categoryName, _ in pairs(GameEventAPI) do
+        for eventName, event in pairs(GameEventAPI[categoryName]) do
+
+            local function testHandler(...)
+                local args = {...}
+                for k, v in pairs(args) do
+                    print("Event [", eventName,"] Params [", k," = ", v,"]")
+                end
+            end
+
+            print("GameEventAPI Test mode watching for event [", eventName,"]!")
+            event.Remove(testHandler)
+            event.Add(testHandler)
+        end
+    end
+end
+
 return GameEventAPI
