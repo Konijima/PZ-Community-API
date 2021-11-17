@@ -1,0 +1,12 @@
+UI_EN = {
+	UI_EMS_Open_Workshop = "Open Workshop",
+	UI_EMS_All_mods = "All mods",
+	UI_EMS_Map_mods = "Map mods",
+	UI_EMS_Activated_mods = "Activated mods",
+	UI_EMS_Enable_All = "Enable all",
+	UI_EMS_Disable_All = "Disable all",
+	UI_EMS_CopyLink = "Copy link"
+	UI_EMS_CopyLocation = "Copy location",
+	UI_EMS_CopyID = "Copy ID",
+	UI_EMS_CopyWorkshopID = "Copy Workshop ID"
+}

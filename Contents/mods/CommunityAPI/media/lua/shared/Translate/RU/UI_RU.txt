@@ -1,0 +1,12 @@
+UI_RU = {
+	UI_EMS_Open_Workshop = "Открыть Workshop",
+	UI_EMS_All_mods = "Все моды",
+	UI_EMS_Map_mods = "Карты",
+	UI_EMS_Activated_mods = "Активные моды",
+	UI_EMS_Enable_All = "Включить все",
+	UI_EMS_Disable_All = "Выключить все",
+	UI_EMS_CopyLink = "Копировать ссылку"
+	UI_EMS_CopyLocation = "Копировать расположение",
+	UI_EMS_CopyID = "Копировать ID",
+	UI_EMS_CopyWorkshopID = "Копировать Workshop ID"
+}
