@@ -3,22 +3,32 @@ require("CommunityAPI")
 local original_ISInventoryTransferAction_waitToStart = ISInventoryTransferAction.waitToStart
 
 function ISInventoryTransferAction:waitToStart(...)
-    local eventData = {
-        cancel = false,
-        character = self.character,
-        destContainer = self.destContainer,
-        item = self.item,
-        srcContainer = self.srcContainer
-    }
-    CommunityAPI.Shared.Event.Trigger("GameEventAPI", "OnBeforeItemTransfer", eventData)
+    local cancel = false
+    local function cancelEvent()
+        cancel = true
+    end
+    local changedContainer
+    local function setDestinationContainer(customContainer)
+        changedContainer = customContainer
+    end
+    CommunityAPI.Shared.Event.Trigger(
+        "GameEventAPI",
+        "OnBeforeItemTransfer",
+        self.character,
+        self.item,
+        self.srcContainer,
+        self.destContainer,
+        cancelEvent,
+        setDestinationContainer
+    )
 
-    if eventData.cancel then
+    if cancel then
         self.maxTime = -1
         self.destContainer = self.srcContainer
         self.hasBeenCancelled = true -- is required for OnAfterItemTransfer
         return false
     end
-    self.destContainer = eventData.destContainer or self.destContainer
+    self.destContainer = changedContainer or self.destContainer
 
     -- VANILLA OBJECT DOES NOT HAVE waitToStart at the moment
     if original_ISInventoryTransferAction_waitToStart then
@@ -50,3 +60,11 @@ function ISInventoryTransferAction:perform(...)
         original_ISInventoryTransferAction_perform(self, ...)
     end
 end
+
+local function handler(a, b, c, d, cancelFn, changedContainerFn)
+    print("Handler triggered")
+    cancelFn()
+end
+-- CommunityAPI.Client.GameEvent.TimedActions.OnBeforeItemTransfer.Add(handler)
+
+Events["GameEventAPI|OnBeforeItemTransfer"].Add(handler)
