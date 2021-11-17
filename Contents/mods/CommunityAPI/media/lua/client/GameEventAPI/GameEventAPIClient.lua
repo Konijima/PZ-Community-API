@@ -20,7 +20,8 @@ local GameEventAPI = {
         OnApplyBandageStart = GameEvent:new(),
         OnApplyBandageStop = GameEvent:new(),
         OnApplyBandagePerform = GameEvent:new(),
-    },
+        OnBeforeItemTransfer = GameEvent:new()
+    }
 }
 
 -- Automated Events Add/Remove setup
