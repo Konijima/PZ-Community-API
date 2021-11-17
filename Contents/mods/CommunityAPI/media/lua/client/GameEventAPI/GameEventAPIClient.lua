@@ -1,11 +1,25 @@
+---@class GameEvent
+local GameEvent = {}
+function GameEvent:new()
+    local o = {}
+    setmetatable(o, {})
+    ---@param func function
+    function o.Add(func) end
+
+    ---@param func function
+    function o.Remove(func) end
+    return o
+end
+
+---@class GameEventAPI
 local GameEventAPI = {
-    MyEventCategory = {
-        OnDisplaySomething = {},
-    },
+    --MyEventCategory = {
+    --    OnDisplaySomething = GameEvent:new(),
+    --},
     TimedActions = {
-        OnApplyBandageStarted = {},
-        OnApplyBandageStop = {},
-        OnApplyBandagePerform = {},
+        OnApplyBandageStart = GameEvent:new(),
+        OnApplyBandageStop = GameEvent:new(),
+        OnApplyBandagePerform = GameEvent:new(),
     },
 }
 
