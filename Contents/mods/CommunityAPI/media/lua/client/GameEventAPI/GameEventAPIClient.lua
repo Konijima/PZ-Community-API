@@ -4,10 +4,12 @@ function GameEvent:new()
     local o = {}
     setmetatable(o, {})
     ---@param func function
-    function o.Add(func) end
+    function o.Add(func)
+    end
 
     ---@param func function
-    function o.Remove(func) end
+    function o.Remove(func)
+    end
     return o
 end
 
@@ -21,7 +23,8 @@ local GameEventAPI = {
         OnApplyBandageStop = GameEvent:new(),
         OnApplyBandagePerform = GameEvent:new(),
         OnAfterItemTransfer = GameEvent:new(),
-        OnBeforeItemTransfer = GameEvent:new()
+        OnBeforeItemTransfer = GameEvent:new(),
+        OnHotbarItemAttached = GameEvent:new()
     }
 }
 
