@@ -15,20 +15,13 @@ end
 
 ---@class GameEventAPI
 local GameEventAPI = {
-    --MyEventCategory = {
-    --    OnDisplaySomething = GameEvent:new(),
-    --},
-    Render = {
-        OnBeforeFirstInventoryTooltipDisplay = GameEvent:new()
-    },
-    TimedActions = {
-        OnApplyBandageStart = GameEvent:new(),
-        OnApplyBandageStop = GameEvent:new(),
-        OnApplyBandagePerform = GameEvent:new(),
-        OnAfterItemTransfer = GameEvent:new(),
-        OnBeforeItemTransfer = GameEvent:new(),
-        OnHotbarItemAttached = GameEvent:new()
-    }
+    OnApplyBandageStart = GameEvent:new(),
+    OnApplyBandageStop = GameEvent:new(),
+    OnApplyBandagePerform = GameEvent:new(),
+    OnAfterItemTransfer = GameEvent:new(),
+    OnBeforeFirstInventoryTooltipDisplay = GameEvent:new(),
+    OnBeforeItemTransfer = GameEvent:new(),
+    OnHotbarItemAttached = GameEvent:new()
 }
 
 --- Automatically set GameEvent found in GameEventAPI
