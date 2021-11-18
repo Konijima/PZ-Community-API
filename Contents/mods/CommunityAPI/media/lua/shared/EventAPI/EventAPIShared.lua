@@ -37,8 +37,8 @@ end
 ---@param eventName string
 ---@vararg any
 function EventAPI.Trigger(modName, eventName, ...)
+    if DEBUG then print("CommunityAPI: Event [", eventName,"] trigger from mod [", modName, "]") end
     LuaEventManager.triggerEvent(modName .. "|" .. eventName, ...)
-    if DEBUG then print("CommunityAPI: Event [", eventName,"] triggered from mod [", modName, "]") end
 end
 
 return EventAPI
