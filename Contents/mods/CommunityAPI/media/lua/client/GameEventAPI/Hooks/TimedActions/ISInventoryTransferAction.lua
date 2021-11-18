@@ -60,11 +60,3 @@ function ISInventoryTransferAction:perform(...)
         original_ISInventoryTransferAction_perform(self, ...)
     end
 end
-
-local function handler(a, b, c, d, cancelFn, changedContainerFn)
-    print("Handler triggered")
-    cancelFn()
-end
--- CommunityAPI.Client.GameEvent.TimedActions.OnBeforeItemTransfer.Add(handler)
-
-Events["GameEventAPI|OnBeforeItemTransfer"].Add(handler)
