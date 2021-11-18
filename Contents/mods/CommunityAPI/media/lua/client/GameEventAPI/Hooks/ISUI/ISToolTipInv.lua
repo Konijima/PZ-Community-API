@@ -9,11 +9,3 @@ function ISToolTipInv:render(...)
     end
     original_ISToolTipInv_render(self, ...)
 end
-
-local function test()
-    print("test triggered")
-end
-
-CommunityAPI.Client.GameEvent.Render.OnBeforeFirstInventoryTooltipDisplay.Add(test)
-
--- Events["GameEventAPI|OnBeforeFirstInventoryTooltipDisplay"].Add(test)
