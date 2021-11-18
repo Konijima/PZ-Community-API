@@ -18,6 +18,9 @@ local GameEventAPI = {
     --MyEventCategory = {
     --    OnDisplaySomething = GameEvent:new(),
     --},
+    Render = {
+        OnBeforeFirstInventoryTooltipDisplay = GameEvent:new()
+    },
     TimedActions = {
         OnApplyBandageStart = GameEvent:new(),
         OnApplyBandageStop = GameEvent:new(),
