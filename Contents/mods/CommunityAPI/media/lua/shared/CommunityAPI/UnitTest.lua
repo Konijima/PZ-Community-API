@@ -105,6 +105,7 @@ function UnitTestInstance:isMetatableOf(testDescription, expectedResult, method,
         local methodResult
         if type(method) == "function" then methodResult = method(...)
         else methodResult = method end
+        if type(methodResult) == "table" and (type(expectedResult) == "table" and getmetatable(methodResult) == expectedResult) or (type(expectedResult) == "string" and getmetatable(methodResult).Type == expectedResult) then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
         else
