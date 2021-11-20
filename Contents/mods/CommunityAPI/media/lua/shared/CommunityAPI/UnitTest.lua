@@ -16,6 +16,7 @@ local instances = {}
 
 ---@class UnitTestInstance
 local UnitTestInstance = {}
+UnitTestInstance.Type = "UnitTestInstance"
 
 function UnitTestInstance:new(name)
     local o = {}
@@ -34,15 +35,16 @@ end
 --- Test a method return a lua type
 ---@param testDescription string Description of the expected behavior
 ---@param expectedResult string The string representation of the type of value
----@param method function The method to test
+---@param method function|any The method or value to test
 ---@vararg any
 function UnitTestInstance:typeOf(testDescription, expectedResult, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnType() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if type(methodResult) == expectedResult then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -63,15 +65,16 @@ end
 --- Test a method return a java instance type
 ---@param testDescription string Description of the expected behavior
 ---@param expectedResult string The string representation of the type of value
----@param method function The method to test
+---@param method function|any The method or value to test
 ---@vararg any
 function UnitTestInstance:instanceOf(testDescription, expectedResult, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnInstanceOf() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if type(methodResult) == "userdata" and instanceof(methodResult, expectedResult) then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -92,16 +95,16 @@ end
 --- Test a method return an other with a specific metatable
 ---@param testDescription string Description of the expected behavior
 ---@param expectedResult table The expected metatable table
----@param method function The method to test
+---@param method function|table The method or value to test
 ---@vararg any
 function UnitTestInstance:isMetatableOf(testDescription, expectedResult, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnInstanceOf() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
-        if type(methodResult) == "table" and getmetatable(methodResult) == expectedResult then
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
         else
@@ -121,15 +124,16 @@ end
 --- Test a method return a desired value
 ---@param testDescription string Description of the expected behavior
 ---@param expectedResult any The expected return value
----@param method function The method to test
+---@param method function|any The method or value to test
 ---@vararg any
 function UnitTestInstance:equalTo(testDescription, expectedResult, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnValue() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if methodResult == expectedResult then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -149,16 +153,17 @@ end
 
 --- Test a method return a number greater than
 ---@param testDescription string Description of the expected behavior
----@param expectedResult any The expected return value
----@param method function The method to test
+---@param expectedResult number The expected return value
+---@param method function|number The method or value to test
 ---@vararg any
 function UnitTestInstance:greaterThan(testDescription, expectedResult, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnGreaterThan() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if type(methodResult) == "number" and methodResult > expectedResult then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -178,16 +183,17 @@ end
 
 --- Test a method return a number lesser than
 ---@param testDescription string Description of the expected behavior
----@param expectedResult any The expected return value
----@param method function The method to test
+---@param expectedResult number The expected return value
+---@param method function|number The method or value to test
 ---@vararg any
 function UnitTestInstance:lesserThan(testDescription, expectedResult, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnGreaterThan() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if type(methodResult) == "number" and methodResult < expectedResult then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -207,15 +213,16 @@ end
 
 --- Test a method return nil
 ---@param testDescription string Description of the expected behavior
----@param method function The method to test
+---@param method function|any The method or value to test
 ---@vararg any
 function UnitTestInstance:isNil(testDescription, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnGreaterThan() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if type(methodResult) == type(nil) then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -235,15 +242,16 @@ end
 
 --- Test a method return not nil
 ---@param testDescription string Description of the expected behavior
----@param method function The method to test
+---@param method function|any The method or value to test
 ---@vararg any
 function UnitTestInstance:isNotNil(testDescription, method, ...)
     if not enabled then return; end
-    if type(method) ~= "function" then error("UnitTest Error: testMethodReturnGreaterThan() must have a function to test!") end
 
     local result = "UNTESTED"
     local function test(...)
-        local methodResult = method(...)
+        local methodResult
+        if type(method) == "function" then methodResult = method(...)
+        else methodResult = method end
         if type(methodResult) ~= type(nil) then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
@@ -263,6 +271,7 @@ end
 
 ---@class UnitTest
 local UnitTest = {}
+UnitTest.Type = "UnitTest"
 
 ---@param name string The test name
 ---@return UnitTestInstance
