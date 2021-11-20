@@ -216,7 +216,7 @@ function UnitTestInstance:isNil(testDescription, method, ...)
     local result = "UNTESTED"
     local function test(...)
         local methodResult = method(...)
-        if type(methodResult) == "nil" and methodResult < expectedResult then
+        if type(methodResult) == type(nil) then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
         else
@@ -244,7 +244,7 @@ function UnitTestInstance:isNotNil(testDescription, method, ...)
     local result = "UNTESTED"
     local function test(...)
         local methodResult = method(...)
-        if type(methodResult) ~= "nil" then
+        if type(methodResult) ~= type(nil) then
             result = "PASSED"
             self.counts.passed = self.counts.passed + 1
         else
