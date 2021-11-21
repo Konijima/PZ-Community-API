@@ -21,6 +21,9 @@ local GameEventAPI = {
     OnAfterItemTransfer = GameEvent:new(),
     OnBeforeFirstInventoryTooltipDisplay = GameEvent:new(),
     OnBeforeItemTransfer = GameEvent:new(),
+    OnDisplayContainerContents = GameEvent:new(),
+    OnDisplayInventoryContainerContents = GameEvent:new(),
+    OnDisplayLootContainerContents = GameEvent:new(),
     OnHotbarItemAttached = GameEvent:new()
 }
 
