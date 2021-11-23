@@ -1,13 +1,15 @@
 require("CommunityAPI")
 local ModNewsAPI = CommunityAPI.Client.ModNews
+local ModNewsPanel = require("ModNewsAPI/ModNewsPanel")
 
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 
 local function renderModNewsButton(self)
     ISButton.render(self)
-    
+
+    local Data = ModNewsAPI.GetAll()
     local isNewArticles = false
-    for _, modData in pairs(ModNewsAPI.Data) do
+    for _, modData in pairs(Data) do
         for _, articleData in pairs(modData) do
             if articleData.isViewed == false then
                 isNewArticles = true
@@ -25,18 +27,18 @@ end
 local function onClickModNews(self)
     local w = self.width * 0.8
     local h = self.height * 0.8
-    local modNewsPanel = ModNewsPanel:new((self.width - w)/2, (self.height - h)/2, w, h)
-    modNewsPanel.backgroundColor = {r=0, g=0, b=0, a=0.95}
-	modNewsPanel.borderColor = {r=1, g=1, b=1, a=0.5}
-    modNewsPanel:initialise()
-    modNewsPanel:instantiate()
-    modNewsPanel:setCapture(true)
-    modNewsPanel:setAlwaysOnTop(true)
-    modNewsPanel:setAnchorRight(true)
-	modNewsPanel:setAnchorLeft(true)
-	modNewsPanel:setAnchorBottom(true)
-	modNewsPanel:setAnchorTop(true)
-    modNewsPanel:addToUIManager()
+    local newsPanel = ModNewsPanel:new((self.width - w)/2, (self.height - h)/2, w, h)
+    newsPanel.backgroundColor = {r=0, g=0, b=0, a=0.95}
+    newsPanel.borderColor = {r=1, g=1, b=1, a=0.5}
+    newsPanel:initialise()
+    newsPanel:instantiate()
+    newsPanel:setCapture(true)
+    newsPanel:setAlwaysOnTop(true)
+    newsPanel:setAnchorRight(true)
+    newsPanel:setAnchorLeft(true)
+    newsPanel:setAnchorBottom(true)
+    newsPanel:setAnchorTop(true)
+    newsPanel:addToUIManager()
 end
 
 -- Hook
