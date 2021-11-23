@@ -5,7 +5,7 @@ local ModNewsAPI = {}
 local Data = {}
 
 --- Load the data
-local function ModNewsAPILoadData()
+local function loadData()
     local fileReader = getFileReader("CAPI_modNewsData.txt", true)
     if not fileReader then return end
     local line = fileReader:readLine()
@@ -27,7 +27,7 @@ local function ModNewsAPILoadData()
         end
     end
 end
-Events.OnGameBoot.Add(ModNewsAPILoadData)
+Events.OnGameBoot.Add(loadData)
 
 --- Add a new Article for your mod
 ---@param modID string The mod ID
