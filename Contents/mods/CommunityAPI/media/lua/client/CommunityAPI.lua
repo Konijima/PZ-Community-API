@@ -4,6 +4,7 @@ CommunityAPI.Client = {
     ItemTooltip = require("ItemTooltipAPI/ItemTooltipAPIClient"),
     Light = require("LightAPI/LightAPIClient"),
     ModSetting = require("ModSettingAPI/ModSettingAPIClient"),
+    Moodle = require("MoodleAPI/MoodleAPIClient"),
     Spawner = require("SpawnerAPI/SpawnerAPIClient"),
     WorldSound = require("WorldSoundAPI/WorldSoundAPIClient"),
 }
