@@ -3,8 +3,12 @@
 **Contributors:** -  
 **Package:** CommunityAPI.Client.ModNews
 
+<br>
+
 ## Description
 Add news article for your mod updates.
+
+<br>
 
 ## Methods
 
@@ -17,6 +21,8 @@ Add a new Article for your mod
 | articleName     | string | The article Name                                                                                                    |
 | articleTextName | string | Article text name from Translate                                                                                    |
 | lastUpdateDate  | string | String with date of last update. If you changed article and want to notify that article updated - change this param |
+
+<br>
 
 ## Examples
 ```lua
