@@ -116,8 +116,8 @@ function ModNewsPanel:modListBoxItemDraw(y, item)
     self:drawRectBorder(0, y, self:getWidth(), self.itemheight, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
     
     for _, data in pairs(item.item) do
-        local article = ModNewsAPI.GetArticle(data.modID, data.articleName)
-        if article and article.isViewed == false then
+        local isViewed = ModNewsAPI.GetArticleIsViewed(data.modID, data.articleName)
+        if isViewed == false then
             self:drawText("[!!!]", self.width - 50, y + dy, 0, 1, 0, 1, UIFont.Medium)
         end
     end
@@ -129,8 +129,8 @@ function ModNewsPanel:modArticleItemDraw(y, item)
 	self:drawText(item.text, 16, y + dy, 1, 1, 1, 1, UIFont.Medium)
 	self:drawRectBorder(0, y, self:getWidth(), self.itemheight, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
 
-    local article = ModNewsAPI.GetArticle(item.item.modID, item.item.articleName)
-    if article and article.isViewed == false then
+    local isViewed = ModNewsAPI.GetArticleIsViewed(item.item.modID, item.item.articleName)
+    if isViewed == false then
         self:drawText("[!!!]", self.width - 50, y + dy, 0, 1, 0, 1, UIFont.Medium)
     end
 
