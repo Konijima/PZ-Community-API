@@ -63,14 +63,22 @@ function ModNewsAPI.GetArticle(modID, articleName)
     end
 end
 
---- Set an article as read
+--- Check if an article is viewed already
 ---@param modID string The mod ID
 ---@param articleName string The article Name
----@return boolean True if success
+---@return boolean True if viewed
+function ModNewsAPI.GetArticleIsViewed(modID, articleName)
+    if Data[modID] and Data[modID][articleName] then
+        return Data[modID][articleName].isViewed
+    end
+end
+
+--- Set an article as viewed
+---@param modID string The mod ID
+---@param articleName string The article Name
 function ModNewsAPI.SetArticleAsViewed(modID, articleName)
     if Data[modID] and Data[modID][articleName] then
         Data[modID][articleName].isViewed = true
-        return true
     end
 end
 
