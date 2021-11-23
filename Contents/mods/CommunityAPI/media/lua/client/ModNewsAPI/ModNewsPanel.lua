@@ -2,7 +2,7 @@ require("CommunityAPI")
 local ModNewsAPI = CommunityAPI.Client.ModNews
 local JsonAPI = CommunityAPI.Utils.Json
 
-ModNewsPanel = ISPanelJoypad:derive("ModNewsPanel")
+local ModNewsPanel = ISPanelJoypad:derive("ModNewsPanel")
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
@@ -79,7 +79,7 @@ end
 function ModNewsPanel:onArcticleListClick()
     local item = self.modArticleList.items[self.modArticleList.selected].item
     self:updateSettingView(item)
-    ModNewsAPI.Data[item.modID][item.articleName].isViewed = true
+    ModNewsAPI.SetArticleAsRead(item.modID, item.articleName)
 end
 
 function ModNewsPanel:updateSettingView(item)
@@ -99,7 +99,8 @@ end
 function ModNewsPanel:populateModList()
 	self.modListBox:clear()
 
-    for modID, modArticleData in pairs(ModNewsAPI.Data) do
+    local Data = ModNewsAPI.GetAll()
+    for modID, modArticleData in pairs(Data) do
         local modInfo = getModInfoByID(modID)
         if modInfo == nil then
             self.modListBox:addItem("IncorrectModID - " .. modID, modArticleData)
@@ -115,7 +116,8 @@ function ModNewsPanel:modListBoxItemDraw(y, item)
     self:drawRectBorder(0, y, self:getWidth(), self.itemheight, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
     
     for _, data in pairs(item.item) do
-        if ModNewsAPI.Data[data.modID][data.articleName].isViewed == false then
+        local article = ModNewsAPI.GetArticle(data.modID, data.articleName)
+        if article and article.isViewed == false then
             self:drawText("[!!!]", self.width - 50, y + dy, 0, 1, 0, 1, UIFont.Medium)
         end
     end
@@ -127,7 +129,8 @@ function ModNewsPanel:modArticleItemDraw(y, item)
 	self:drawText(item.text, 16, y + dy, 1, 1, 1, 1, UIFont.Medium)
 	self:drawRectBorder(0, y, self:getWidth(), self.itemheight, 0.5, self.borderColor.r, self.borderColor.g, self.borderColor.b)
 
-    if ModNewsAPI.Data[item.item.modID][item.item.articleName].isViewed == false then
+    local article = ModNewsAPI.GetArticle(item.item.modID, item.item.articleName)
+    if article and article.isViewed == false then
         self:drawText("[!!!]", self.width - 50, y + dy, 0, 1, 0, 1, UIFont.Medium)
     end
 
@@ -139,8 +142,9 @@ function ModNewsPanel:onOptionMouseDown(button, x, y)
 		self:setVisible(false)
         self:removeFromUIManager()
 
+        local Data = ModNewsAPI.GetAll()
         local fileWriter = getFileWriter("CAPI_modNewsData.txt", true, false)
-        fileWriter:write(JsonAPI.Encode(ModNewsAPI.Data))
+        fileWriter:write(JsonAPI.Encode(Data))
         fileWriter:close()
 	end
 end
@@ -175,3 +179,5 @@ function ModNewsPanel:new(x, y, width, height)
 
 	return o
 end
+
+return ModNewsPanel
