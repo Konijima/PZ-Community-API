@@ -1,23 +1,77 @@
+local JsonAPI = require("CommunityAPI/JsonUtils")
 
 ---@class ModNewsAPI
 local ModNewsAPI = {}
-ModNewsAPI.Data = {}
+local Data = {}
 
----@param modID string  
----@param articleName string  
+--- Load the data
+local function ModNewsAPILoadData()
+    local fileReader = getFileReader("CAPI_modNewsData.txt", true)
+    if not fileReader then return end
+    local line = fileReader:readLine()
+    local modNewsData = nil
+    if line ~= nil then
+        modNewsData = JsonAPI.Decode(line)
+    end
+    fileReader:close()
+
+    if modNewsData ~= nil and type(modNewsData) == "table" then
+        for modID, modData in pairs(modNewsData) do
+            for articleName, data in pairs(modData) do
+                if Data[modID] ~= nil and Data[modID][articleName] ~= nil then
+                    if data.isViewed and data.lastUpdateDate == Data[modID][articleName].lastUpdateDate then
+                        Data[modID][articleName].isViewed = true
+                    end
+                end
+            end
+        end
+    end
+end
+Events.OnGameBoot.Add(ModNewsAPILoadData)
+
+--- Add a new Article for your mod
+---@param modID string The mod ID
+---@param articleName string The article Name
 ---@param articleTextName string  Article text name from Translate
 ---@param lastUpdateDate string  String with date of last update. If you changed article and want to notify that article updated - change this param
 ---@return nil
 function ModNewsAPI.AddArticle(modID, articleName, articleTextName, lastUpdateDate)
-    if ModNewsAPI.Data[modID] == nil then
-        ModNewsAPI.Data[modID] = {}
+    if Data[modID] == nil then
+        Data[modID] = {}
     end
-    ModNewsAPI.Data[modID][articleName] = {}
-    ModNewsAPI.Data[modID][articleName].modID = modID
-    ModNewsAPI.Data[modID][articleName].articleName = articleName
-    ModNewsAPI.Data[modID][articleName].articleTextName = articleTextName
-    ModNewsAPI.Data[modID][articleName].lastUpdateDate = lastUpdateDate
-    ModNewsAPI.Data[modID][articleName].isViewed = false
+    Data[modID][articleName] = {}
+    Data[modID][articleName].modID = modID
+    Data[modID][articleName].articleName = articleName
+    Data[modID][articleName].articleTextName = articleTextName
+    Data[modID][articleName].lastUpdateDate = lastUpdateDate
+    Data[modID][articleName].isViewed = false
+end
+
+--- Get all Data (readonly)
+---@return table
+function ModNewsAPI.GetAll()
+    return copyTable(Data)
+end
+
+--- Get a specific mod article (readonly)
+---@param modID string The mod ID
+---@param articleName string The article Name
+---@return table
+function ModNewsAPI.GetArticle(modID, articleName)
+    if Data[modID] and Data[modID][articleName] then
+        return copyTable(Data[modID][articleName])
+    end
+end
+
+--- Set an article as read
+---@param modID string The mod ID
+---@param articleName string The article Name
+---@return boolean True if success
+function ModNewsAPI.SetArticleAsViewed(modID, articleName)
+    if Data[modID] and Data[modID][articleName] then
+        Data[modID][articleName].isViewed = true
+        return true
+    end
 end
 
 return ModNewsAPI
