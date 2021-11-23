@@ -79,7 +79,7 @@ end
 function ModNewsPanel:onArcticleListClick()
     local item = self.modArticleList.items[self.modArticleList.selected].item
     self:updateSettingView(item)
-    ModNewsAPI.SetArticleAsRead(item.modID, item.articleName)
+    ModNewsAPI.SetArticleAsViewed(item.modID, item.articleName)
 end
 
 function ModNewsPanel:updateSettingView(item)
