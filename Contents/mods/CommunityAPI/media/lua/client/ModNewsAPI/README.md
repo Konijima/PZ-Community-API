@@ -30,6 +30,7 @@ ModNewsAPI.AddArticle(
         "The article text here\nwith line breaks if desired",
         "November 1st, 2021");
 
+--- Add a translatable article for your mod
 ModNewsAPI.AddArticle(
         "MyModId",
         getText("Translate_Article_Name"),
