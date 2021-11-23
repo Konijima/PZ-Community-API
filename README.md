@@ -33,7 +33,9 @@ ___
 - Shurutsue ([Steam](https://steamcommunity.com/id/Shurutsue/myworkshopfiles/?appid=108600) | [Github](https://github.com/Shurutsue))  
 - Chuck ([Steam](https://steamcommunity.com/id/Chuckleberry_Finn/myworkshopfiles/?appid=108600) | [Github](https://github.com/ChuckTheSheep))  
 - co ([Steam](https://steamcommunity.com/profiles/76561198056536755/myworkshopfiles/?appid=108600) | [Github](https://github.com/quarantin))  
-- Aiteron ([Steam](https://steamcommunity.com/profiles/76561198211669377/myworkshopfiles/?appid=108600) | [Github](https://github.com/aiteron))
+- Aiteron ([Steam](https://steamcommunity.com/profiles/76561198211669377/myworkshopfiles/?appid=108600) | [Github](https://github.com/aiteron))  
+- Eggon ([Steam](https://steamcommunity.com/profiles/76561198093590691/myworkshopfiles/?appid=108600) | [Github](https://github.com/Eggon-666))  
+- Tchernobill ([Steam](https://steamcommunity.com/profiles/76561198329871201/myworkshopfiles/?appid=108600))  
   
 **3D Modeling & Animations**  
 - shark ([Steam](https://steamcommunity.com/profiles/76561198004947199/myworkshopfiles/?appid=108600) | [Github](https://github.com/sharkster91))  
@@ -61,10 +63,11 @@ Make complex custom item tooltip for your new items.
 - **LightAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/LightAPI))  
 Add persistent light anywhere in the world.  
   
+- **ModSettingAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/dev/Contents/mods/CommunityAPI/media/lua/client/ModSettingAPI))  
+Add and manage your mod settings.  
   
 - **SpawnerAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/SpawnerAPI) | [Server](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/server/SpawnerAPI))  
 Spawn vehicles, items and zombies anywhere in the world.
-  
   
 - **WorldSoundAPI** ([Client](https://github.com/Konijima/PZ-Community-API/tree/master/Contents/mods/CommunityAPI/media/lua/client/WorldSoundAPI))  
 Add persistent sounds anywhere in the world.  
