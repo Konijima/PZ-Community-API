@@ -37,4 +37,25 @@ function StringUtils.NumberToDecimalString(value, _decimal)
     return string.format("%.".._decimal.."f", value);
 end
 
+---Parse each line of site html file by parseLineFunc
+---@param url string Url ("https://" or "http://")
+---@param parseLineFunc function Get line and return useful data item (not empty string or any object) else nil or empty string
+---@return table any List with all useful data items
+function StringUtils.ParseSite(url, parseLineFunc)
+    local siteData = getUrlInputStream(url)
+    local resultData = {}
+    
+    if siteData ~= nil then
+        local currentLine = siteData:readLine()
+        while currentLine ~= nil do     
+            local dataItem = parseLineFunc(currentLine)
+            if dataItem ~= nil and dataItem ~= "" then
+                table.insert(resultData, dataItem)
+            end
+            currentLine = siteData:readLine()
+        end
+    end
+    return resultData
+end
+
 return StringUtils
