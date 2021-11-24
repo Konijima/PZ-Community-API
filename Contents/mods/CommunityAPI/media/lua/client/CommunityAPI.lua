@@ -3,7 +3,6 @@ require("CommunityAPIShared")
 CommunityAPI.Client = {
     ItemTooltip = require("ItemTooltipAPI/ItemTooltipAPIClient"),
     Light = require("LightAPI/LightAPIClient"),
-    ModNews = require("ModNewsAPI/ModNewsAPIClient"),
     ModSetting = require("ModSettingAPI/ModSettingAPIClient"),
     Spawner = require("SpawnerAPI/SpawnerAPIClient"),
     WorldSound = require("WorldSoundAPI/WorldSoundAPIClient"),

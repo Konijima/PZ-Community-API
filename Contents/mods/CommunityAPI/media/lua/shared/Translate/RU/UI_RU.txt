@@ -8,8 +8,5 @@ UI_RU = {
 	UI_EMS_CopyLink = "Копировать ссылку"
 	UI_EMS_CopyLocation = "Копировать расположение",
 	UI_EMS_CopyID = "Копировать ID",
-	UI_EMS_CopyWorkshopID = "Копировать Workshop ID",
-	
-	UI_modNews_button = "Мод Инфо",
-	UI_modNews_articleLabel = "Статьи"
+	UI_EMS_CopyWorkshopID = "Копировать Workshop ID"
 }
