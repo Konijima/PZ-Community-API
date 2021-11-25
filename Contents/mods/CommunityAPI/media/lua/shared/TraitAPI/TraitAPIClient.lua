@@ -1,6 +1,5 @@
 ---@class Trait
 local Trait = {}
-Trait.__index = Trait
 
 ---@param name string
 ---@return table

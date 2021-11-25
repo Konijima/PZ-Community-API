@@ -1,6 +1,5 @@
 ---@class Profession
 local Profession = {}
-Profession.__index = Profession
 
 ---@param name string
 ---@return table
