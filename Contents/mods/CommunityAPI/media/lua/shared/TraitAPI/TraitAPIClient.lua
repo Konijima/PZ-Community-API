@@ -153,4 +153,3 @@ function TraitAPI.AddSpecificItem(traitName, itemName, cost)
 end
 
 return TraitAPI
-
