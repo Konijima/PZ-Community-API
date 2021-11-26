@@ -257,7 +257,7 @@ function EMS_ModSelector:create()
 	--- ---
 
     local size = getTextManager():MeasureStringX(UIFont.Small, getText("UI_EMS_Open_Workshop"));
-    local size = math.max(size + 10 * 2, 100)
+    size = math.max(size + 10 * 2, 100)
     self.getModButton = ISButton:new(16, self.topRect.y + 8, size, buttonHgt,  getText("UI_EMS_Open_Workshop"), self, EMS_ModSelector.onOptionMouseDown);
     self.getModButton.internal = "OPEN_WORKSHOP";
     self.getModButton:initialise();
@@ -270,8 +270,8 @@ function EMS_ModSelector:create()
     self.getModButton.backgroundColor = {r=0, g=0.5, b=0.75, a=1.0};
     self.getModButton.backgroundColorMouseOver = {r=0, g=0.65, b=0.85, a=1.0};
     self.getModButton:setFont(UIFont.Small);
-    self.getModButton:ignoreWidthChange();
-    self.getModButton:ignoreHeightChange();
+    --self.getModButton:ignoreWidthChange();
+    --self.getModButton:ignoreHeightChange();
 	if not getSteamModeActive() then
 		self.getModButton.tooltip = getText("UI_mods_WorkshopRequiresSteam")
 	end
