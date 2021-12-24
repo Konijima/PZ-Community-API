@@ -14,6 +14,9 @@ CommunityAPI.Utils = {
 CommunityAPI.Shared = {
     BodyLocations = require("BodyLocationsAPI/BodyLocationsAPIShared"),
     Event = require("EventAPI/EventAPIShared"),
+    Perk = require("PerkAPI/PerkAPIClient"),
+    Profession = require("ProfessionAPI/ProfessionAPIClient"),
+    Trait = require("TraitAPI/TraitAPIClient"),
 }
 
 -----------------------------------------------------------------------------------
