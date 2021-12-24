@@ -5,6 +5,7 @@ CommunityAPI.Client = {
     Light = require("LightAPI/LightAPIClient"),
     ModNews = require("ModNewsAPI/ModNewsAPIClient"),
     ModSetting = require("ModSettingAPI/ModSettingAPIClient"),
+    Moodle = require("MoodleAPI/MoodleAPIClient"),
     Spawner = require("SpawnerAPI/SpawnerAPIClient"),
     WorldSound = require("WorldSoundAPI/WorldSoundAPIClient"),
 }
